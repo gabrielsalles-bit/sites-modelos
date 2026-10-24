@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Search, ShieldCheck, ArrowDown } from 'lucide-react';
 import { Button } from '../ui/Button';
-import HeroVideoScrub from './HeroVideoScrub';
 
 export function HeroSection({ onSearch, categories }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,19 +18,35 @@ export function HeroSection({ onSearch, categories }) {
   };
 
   return (
-    <HeroVideoScrub>
-      <div className="max-w-5xl mx-auto text-center space-y-8">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* Background Glows & Aesthetics */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-600/15 via-emerald-500/10 to-indigo-600/15 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.15),rgba(255,255,255,0))] pointer-events-none" />
+
+      {/* Grid Pattern Sutil */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
+
+      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
         {/* Badge Flutuante de Credibilidade */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-blue-500/30 text-blue-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg shadow-blue-950/40 animate-fade-in">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span>Showroom Certificado com Perícia Cautelar Digital</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
         </div>
 
         {/* Título Principal de Alto Impacto */}
         <div className="space-y-4">
           <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
-            Encontre o seu próximo carro com <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-emerald-400 bg-clip-text text-transparent">garantia e procedência total</span>.
+            Encontre o seu próximo carro com{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-emerald-400 bg-clip-text text-transparent">
+              garantia e procedência total
+            </span>.
           </h1>
           <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
             Mais de 100 veículos seminovos rigorosamente avaliados, 100% aprovados em laudo cautelar e prontos para rodar.
@@ -112,7 +127,7 @@ export function HeroSection({ onSearch, categories }) {
           </a>
         </div>
       </div>
-    </HeroVideoScrub>
+    </section>
   );
 }
 
