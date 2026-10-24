@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "vite --port 5173",
     "dev:dealership": "npm --workspace=auto-dealership run dev",
+    "dev:luxury": "npm --workspace=luxury-dealership run dev",
+    "dev:popular": "npm --workspace=popular-dealership run dev",
     "build": "node scripts/build-all.mjs",
     "build:hub": "vite build",
-    "build:dealership": "npm --workspace=auto-dealership run build",
     "preview": "vite preview"
   },
   "dependencies": {

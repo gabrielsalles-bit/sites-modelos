@@ -1,55 +1,56 @@
-﻿export const modelsList = [
+export const modelsList = [
   {
     id: 'auto-dealership',
     title: 'AutoElite Motors',
-    tagline: 'Concessionária & Revenda de Seminovos',
-    category: 'Automotivo',
-    description: 'Showroom digital de alto padrão com vídeo cinematográfico interativo controlado por rolagem (GSAP ScrollTrigger), visualizador multi-ângulo, simulador de financiamento e avaliação de troca via WhatsApp.',
-    status: 'available', // 'available' | 'in_development' | 'planned'
+    tagline: 'Concessionária de Seminovos Selecionados',
+    category: 'Seminovos & Perícia',
+    description: 'Showroom cinematográfico interativo com vídeo scrub GSAP ScrollTrigger em 4 cenas, galeria 360°, laudo cautelar aprovado e garantia estendida.',
+    status: 'available',
     badge: 'Disponível Ao Vivo',
     path: 'auto-dealership/',
     previewImage: 'auto-dealership/images/hero-video-poster.jpg',
     features: [
       'Hero cinematográfica com ScrollTrigger',
-      'Catálogo de veículos com filtros avançados',
-      'Simulador de financiamento em tempo real',
-      'Garantia e perícia cautelar certificada',
-      'Design 100% responsivo e acessível'
+      'Catálogo completo com filtros avançados',
+      'Simulador de financiamento e troca',
+      'Perícia cautelar 100% aprovada'
     ],
-    techStack: ['React 18', 'GSAP ScrollTrigger', 'Tailwind CSS', 'Vite', 'Lucide Icons']
+    techStack: ['React 18', 'GSAP ScrollTrigger', 'Tailwind CSS', 'Vite']
   },
   {
-    id: 'modelo-02',
-    title: 'Modelo 02',
-    tagline: 'Em Desenvolvimento',
-    category: 'Em Breve',
-    description: 'Segundo modelo de site profissional de alta conversão. Estrutura modular reservada e pronta para desenvolvimento do próximo nicho.',
-    status: 'in_development',
-    badge: 'Em Construção',
-    path: '#',
+    id: 'luxury-dealership',
+    title: 'Apex Luxury Motors',
+    tagline: 'Carros Esportivos, Exóticos & Blindados',
+    category: 'Supercarros & Luxo',
+    description: 'Design ultra-premium minimalista com acervo exclusivo de superesportivos, veículos com blindagem certificada nível III-A e agendamento de concierge VIP.',
+    status: 'available',
+    badge: 'Disponível Ao Vivo',
+    path: 'luxury-dealership/',
     previewImage: null,
     features: [
-      'Arquitetura isolada no monorepo',
-      'Layout moderno e focado em conversão',
-      'Pipeline de build automatizado no GitHub Actions'
+      'Estética Dark & Gold de alta fidelidade',
+      'Acervo VIP de superesportivos',
+      'Curadoria de blindados nível III-A',
+      'Atendimento e concierge personalizado'
     ],
-    techStack: ['React 18', 'Tailwind CSS', 'Vite']
+    techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
   },
   {
-    id: 'modelo-03',
-    title: 'Modelo 03',
-    tagline: 'Planejado',
-    category: 'Planejamento',
-    description: 'Terceiro modelo comercial para fechamento do catálogo de sites modelos de alto impacto.',
-    status: 'planned',
-    badge: 'Planejado',
-    path: '#',
+    id: 'popular-dealership',
+    title: 'DriveNow Motors',
+    tagline: 'Multimarcas com Financiamento Rápido',
+    category: 'Alta Conversão',
+    description: 'Template comercial agressivo focado em aprovação de crédito ágil, simulador interativo de parcelas em tempo real e negociação de Troca com Troco.',
+    status: 'available',
+    badge: 'Disponível Ao Vivo',
+    path: 'popular-dealership/',
     previewImage: null,
     features: [
-      'Estrutura reservada para expansão',
-      'Deploy automático integrado ao Hub',
-      'Padrões de acessibilidade e performance'
+      'Simulador de parcelas dinâmico em tempo real',
+      'Aprovação facilitada sem burocracia',
+      'Módulo de Troca com Troco no Pix',
+      'Conversão direta para atendimento WhatsApp'
     ],
-    techStack: ['React 18', 'Tailwind CSS', 'Vite']
+    techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
   }
 ];
