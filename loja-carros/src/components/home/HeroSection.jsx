@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Search, ShieldCheck, Sparkles, ChevronRight, ArrowDown } from 'lucide-react';
+import { Search, ShieldCheck, ArrowDown } from 'lucide-react';
 import { Button } from '../ui/Button';
+import HeroVideoScrub from './HeroVideoScrub';
 
 export function HeroSection({ onSearch, categories }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,19 +19,8 @@ export function HeroSection({ onSearch, categories }) {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background com Efeito Radial e Imagem Automotiva */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80"
-          alt="Showroom Automotivo"
-          className="w-full h-full object-cover object-center filter brightness-[0.25] contrast-125"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080c14] via-[#080c14]/70 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/15 via-transparent to-transparent" />
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+    <HeroVideoScrub>
+      <div className="max-w-5xl mx-auto text-center space-y-8">
         {/* Badge Flutuante de Credibilidade */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-blue-500/30 text-blue-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg shadow-blue-950/40 animate-fade-in">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -112,7 +102,7 @@ export function HeroSection({ onSearch, categories }) {
         </div>
 
         {/* Indicador de Rolagem */}
-        <div className="pt-6">
+        <div className="pt-4">
           <a
             href="#estoque"
             className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
@@ -122,6 +112,8 @@ export function HeroSection({ onSearch, categories }) {
           </a>
         </div>
       </div>
-    </section>
+    </HeroVideoScrub>
   );
 }
+
+export default HeroSection;
