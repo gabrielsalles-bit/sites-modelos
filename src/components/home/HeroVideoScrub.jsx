@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+﻿import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
  * 
  * Acessibilidade e Desempenho:
  * - Suporte nativo a prefers-reduced-motion (exibe apenas o poster estático).
+ * - Seleção inteligente de resolução: 720p (4.49MB) em mobile/tablet (<768px) e 1080p (13.5MB) em desktop.
  * - Sincronização via requestAnimationFrame + guarda seeking.
  * - Leitura zero de layout no loop de rolagem.
  * - aria-hidden="true", muted, playsInline no elemento <video>.
@@ -27,8 +28,25 @@ export const HeroVideoScrub = ({ children }) => {
 
   const rawBase = import.meta.env.BASE_URL || '/';
   const baseUrl = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
-  const videoSrc = `${baseUrl}videos/hero-scrub.mp4`;
   const posterSrc = `${baseUrl}images/hero-video-poster.jpg`;
+
+  // Seleção de vídeo responsivo (720p para mobile / 1080p para desktop)
+  const [videoSrc, setVideoSrc] = useState(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    return `${baseUrl}videos/${isMobile ? 'hero-scrub-720.mp4' : 'hero-scrub.mp4'}`;
+  });
+
+  // Atualização responsiva no resize
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      const targetSrc = `${baseUrl}videos/${isMobile ? 'hero-scrub-720.mp4' : 'hero-scrub.mp4'}`;
+      setVideoSrc((prev) => (prev !== targetSrc ? targetSrc : prev));
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [baseUrl]);
 
   // Detectar prefers-reduced-motion
   useEffect(() => {
@@ -93,7 +111,7 @@ export const HeroVideoScrub = ({ children }) => {
       if (rafId) cancelAnimationFrame(rafId);
       ctx.revert();
     };
-  }, [reducedMotion, hasError, isReady]);
+  }, [reducedMotion, hasError, isReady, videoSrc]);
 
   // Se o usuário preferir movimento reduzido, renderiza layout estático com o poster
   if (reducedMotion) {
@@ -141,7 +159,7 @@ export const HeroVideoScrub = ({ children }) => {
             }`}
           />
 
-          {/* Vídeo scrubbable */}
+          {/* Vídeo scrubbable responsivo */}
           {!hasError && (
             <video
               ref={videoRef}
