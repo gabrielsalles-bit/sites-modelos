@@ -1,17 +1,21 @@
 {
-  "name": "autodealership-model",
+  "name": "sites-modelos-monorepo",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "workspaces": [
+    "sites/*"
+  ],
   "scripts": {
-    "dev": "vite --port 5174",
-    "build": "vite build",
+    "dev": "vite --port 5173",
+    "dev:dealership": "npm --workspace=auto-dealership run dev",
+    "build": "node scripts/build-all.mjs",
+    "build:hub": "vite build",
+    "build:dealership": "npm --workspace=auto-dealership run build",
     "preview": "vite preview"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "framer-motion": "^12.38.0",
-    "gsap": "^3.15.0",
     "lucide-react": "^0.577.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -22,7 +26,6 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.27",
-    "caniuse-lite": "^1.0.30001819",
     "postcss": "^8.5.8",
     "tailwindcss": "^3.4.17",
     "vite": "^5.4.11"
