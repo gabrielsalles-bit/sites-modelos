@@ -1,56 +1,59 @@
-export const modelsList = [
+﻿export const modelsList = [
   {
     id: 'auto-dealership',
     title: 'AutoElite Motors',
     tagline: 'Concessionária de Seminovos Selecionados',
-    category: 'Seminovos & Perícia',
-    description: 'Showroom cinematográfico interativo com vídeo scrub GSAP ScrollTrigger em 4 cenas, galeria 360°, laudo cautelar aprovado e garantia estendida.',
+    tier: 'Básico',
+    category: 'Tier 1 • Básico',
+    description: 'Site vitrine elegante e direto ao ponto. Hero rápida com busca, vitrine de seleção da semana, catálogo com modal de detalhes, galeria expandida com miniaturas e formulário de contato integrado com WhatsApp.',
     status: 'available',
-    badge: 'Disponível Ao Vivo',
+    badge: 'Tier 1 • Básico',
     path: 'auto-dealership/',
-    previewImage: 'auto-dealership/images/hero-video-poster.jpg',
+    previewImage: 'auto-dealership/images/FotoChevroletTracker.jpg',
     features: [
-      'Hero cinematográfica com ScrollTrigger',
-      'Catálogo completo com filtros avançados',
-      'Simulador de financiamento e troca',
-      'Perícia cautelar 100% aprovada'
+      'Vitrine de Destaques e Ofertas da Semana',
+      'Formulário de Contato Completo com WhatsApp',
+      'Galeria de Fotos Expandida com Miniaturas Clicáveis',
+      'Catálogo de Seminovos Periciados (4 Páginas)'
     ],
-    techStack: ['React 18', 'GSAP ScrollTrigger', 'Tailwind CSS', 'Vite']
+    techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
   },
   {
     id: 'luxury-dealership',
     title: 'Apex Luxury Motors',
-    tagline: 'Carros Esportivos, Exóticos & Blindados',
-    category: 'Supercarros & Luxo',
-    description: 'Design ultra-premium minimalista com acervo exclusivo de superesportivos, veículos com blindagem certificada nível III-A e agendamento de concierge VIP.',
+    tagline: 'Superesportivos, Exóticos & Blindados VIP',
+    tier: 'Intermediário',
+    category: 'Tier 2 • Intermediário',
+    description: 'Experiência imersiva com Hero Cinematográfica controlada por ScrollTrigger (GSAP), Visualizador 360° interativo com drag, filtros avançados no showroom, simulador de financiamento private, avaliação de troca e serviço de Concierge.',
     status: 'available',
-    badge: 'Disponível Ao Vivo',
+    badge: 'Tier 2 • Intermediário',
     path: 'luxury-dealership/',
-    previewImage: null,
+    previewImage: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80',
     features: [
-      'Estética Dark & Gold de alta fidelidade',
-      'Acervo VIP de superesportivos',
-      'Curadoria de blindados nível III-A',
-      'Atendimento e concierge personalizado'
+      'Tudo do Tier Básico + Hero Cinematográfica GSAP',
+      'Visualizador 360° Interativo com Rotação Drag',
+      'Filtros Avançados (Marca, Câmbio, Blindagem III-A)',
+      'Simulador Private Banking & Avaliação de Troca (7 Páginas)'
     ],
-    techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
+    techStack: ['React 18', 'GSAP ScrollTrigger', 'Tailwind CSS', 'Vite']
   },
   {
     id: 'popular-dealership',
     title: 'DriveNow Motors',
-    tagline: 'Multimarcas com Financiamento Rápido',
-    category: 'Alta Conversão',
-    description: 'Template comercial agressivo focado em aprovação de crédito ágil, simulador interativo de parcelas em tempo real e negociação de Troca com Troco.',
+    tagline: 'Plataforma Completa com IA & Comparador',
+    tier: 'Completo',
+    category: 'Tier 3 • Mais Completo',
+    description: 'O ecossistema definitivo de concessionária digital: Consultor Virtual com Inteligência Artificial, Comparador de Veículos lado a lado, Calculadora TCO (custo total de posse), Dossiê Oficial de histórico/leilão, sistema de Favoritos e Alertas de Preço.',
     status: 'available',
-    badge: 'Disponível Ao Vivo',
+    badge: 'Tier 3 • Mais Completo',
     path: 'popular-dealership/',
-    previewImage: null,
+    previewImage: 'popular-dealership/images/FotoCorollaCross.jpg',
     features: [
-      'Simulador de parcelas dinâmico em tempo real',
-      'Aprovação facilitada sem burocracia',
-      'Módulo de Troca com Troco no Pix',
-      'Conversão direta para atendimento WhatsApp'
+      'Tudo dos Tiers Básico e Intermediário +',
+      'Consultor Virtual com Inteligência Artificial (Chatbot)',
+      'Comparador Técnico de Veículos Lado a Lado',
+      'Calculadora de TCO Anual, Dossiê & Favoritos (9 Páginas)'
     ],
-    techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
+    techStack: ['React 18', 'AI Engine', 'Local Storage', 'Tailwind CSS', 'Vite']
   }
 ];

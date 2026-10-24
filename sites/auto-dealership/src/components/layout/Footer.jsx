@@ -1,7 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import { 
   Car, ShieldCheck, MapPin, Phone, Mail, Clock, 
-  ArrowUp, MessageCircle, ChevronRight 
+  ArrowUp, MessageCircle, ChevronRight, ArrowLeft 
 } from 'lucide-react';
 import { dealershipInfo } from '../../data/dealershipInfo';
 import { buildGeneralWhatsappLink } from '../../utils/whatsapp';
@@ -15,8 +15,6 @@ export function Footer({ onNavigate }) {
     { id: 'home', label: 'Página Inicial' },
     { id: 'estoque', label: 'Estoque Completo' },
     { id: 'destaques', label: 'Destaques da Semana' },
-    { id: 'simulador', label: 'Simulador de Financiamento' },
-    { id: 'troca', label: 'Avalie seu Usado na Troca' },
     { id: 'sobre-contato', label: 'Sobre Nós & Contato' }
   ];
 
@@ -61,6 +59,15 @@ export function Footer({ onNavigate }) {
                   </button>
                 </li>
               ))}
+              <li className="pt-2 border-t border-slate-900">
+                <a
+                  href="/sites-modelos/"
+                  className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Voltar ao Hub de Modelos</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -111,7 +118,7 @@ export function Footer({ onNavigate }) {
               }}
               className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-semibold pt-1"
             >
-              <span>Ver mapa e fotos do showroom ↗</span>
+              <span>Ver mapa e fotos do showroom →</span>
             </button>
           </div>
         </div>
@@ -123,7 +130,7 @@ export function Footer({ onNavigate }) {
           </p>
 
           <div className="flex items-center gap-6">
-            <span className="text-slate-500">AutoElite Motors — Excelência em Seminovos</span>
+            <span className="text-slate-500">AutoElite Motors — Modelo 01 (Básico)</span>
             <button
               onClick={scrollToTop}
               className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-800"

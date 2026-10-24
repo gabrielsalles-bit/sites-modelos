@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
 import { InventoryPage } from './pages/InventoryPage';
 import { FeaturedPage } from './pages/FeaturedPage';
-import { FinancingPage } from './pages/FinancingPage';
-import { TradeInPage } from './pages/TradeInPage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
 import { vehiclesData } from './data/vehicles';
@@ -16,7 +14,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedVehicleForModal, setSelectedVehicleForModal] = useState(null);
   const [searchFilter, setSearchFilter] = useState({ term: '', category: 'todos' });
-  const [financingPreselectedVehicle, setFinancingPreselectedVehicle] = useState(null);
 
   const navigateTo = (page, params = {}) => {
     setCurrentPage(page);
@@ -28,23 +25,19 @@ export default function App() {
       });
     }
 
-    if (params.vehicle) {
-      setFinancingPreselectedVehicle(params.vehicle);
-    }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenFinancingFromModal = (vehicle) => {
+  const handleOpenContactFromModal = (vehicle) => {
     setSelectedVehicleForModal(null);
-    navigateTo('simulador', { vehicle });
+    navigateTo('sobre-contato');
   };
 
   const floatingWhatsappUrl = buildGeneralWhatsappLink();
 
   return (
     <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white relative">
-      {/* Barra de Navegação no Topo com Abas */}
+      {/* Barra de Navegação no Topo com 4 Abas (Modelo Básico) */}
       <Navbar currentPage={currentPage} onNavigate={navigateTo} />
 
       {/* Conteúdo Dinâmico da Página Ativa */}
@@ -74,17 +67,6 @@ export default function App() {
           />
         )}
 
-        {currentPage === 'simulador' && (
-          <FinancingPage
-            vehicles={vehiclesData}
-            preselectedVehicle={financingPreselectedVehicle}
-          />
-        )}
-
-        {currentPage === 'troca' && (
-          <TradeInPage vehicles={vehiclesData} />
-        )}
-
         {currentPage === 'sobre-contato' && (
           <AboutContactPage />
         )}
@@ -93,12 +75,12 @@ export default function App() {
       {/* Rodapé com Links entre Páginas */}
       <Footer onNavigate={navigateTo} />
 
-      {/* Modal Global de Detalhes & Laudo Cautelar */}
+      {/* Modal Global de Detalhes & Galeria Expandida */}
       {selectedVehicleForModal && (
         <VehicleDetailModal
           vehicle={selectedVehicleForModal}
           onClose={() => setSelectedVehicleForModal(null)}
-          onOpenFinancing={handleOpenFinancingFromModal}
+          onContact={handleOpenContactFromModal}
         />
       )}
 

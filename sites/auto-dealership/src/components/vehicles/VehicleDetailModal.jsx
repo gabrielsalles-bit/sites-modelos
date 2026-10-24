@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { 
   X, ShieldCheck, CheckCircle2, MessageCircle, Calendar, 
-  Gauge, Cog, Fuel, Award, FileText, ChevronRight, Share2 
+  Gauge, Cog, Fuel, Award, ChevronLeft, ChevronRight, Share2, Mail 
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -9,13 +9,14 @@ import { InspectionBadge } from './InspectionBadge';
 import { formatCurrency, formatKm } from '../../utils/formatters';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
-export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
-  const [activeImg, setActiveImg] = useState(vehicle?.imagemPrincipal || '');
+export function VehicleDetailModal({ vehicle, onClose, onContact }) {
+  const images = vehicle?.imagens && vehicle.imagens.length > 0 ? vehicle.imagens : [vehicle?.imagemPrincipal || ''];
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('laudo'); // 'laudo' | 'ficha' | 'opcionais'
 
   useEffect(() => {
     if (vehicle) {
-      setActiveImg(vehicle.imagemPrincipal);
+      setCurrentIndex(0);
       setActiveTab('laudo');
     }
   }, [vehicle]);
@@ -24,14 +25,25 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowRight') handleNextImage();
+      if (e.key === 'ArrowLeft') handlePrevImage();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [onClose, currentIndex, images.length]);
 
   if (!vehicle) return null;
 
+  const handleNextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   const whatsappUrl = buildVehicleWhatsappLink(vehicle);
+  const currentImage = images[currentIndex] || vehicle.imagemPrincipal;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/80 backdrop-blur-md animate-fade-in">
@@ -49,7 +61,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
           <button
             onClick={onClose}
             className="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
-            title="Fechar"
+            title="Fechar (Esc)"
           >
             <X className="w-5 h-5" />
           </button>
@@ -76,37 +88,62 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
               <span className="font-heading text-2xl sm:text-3xl font-black text-white">
                 {formatCurrency(vehicle.preco)}
               </span>
-              {vehicle.parcela && (
-                <p className="text-xs text-blue-400 mt-0.5">
-                  ou entrada + 48x de {formatCurrency(vehicle.parcela.valor)}
-                </p>
-              )}
+              <p className="text-xs text-emerald-400 mt-0.5 font-medium">
+                Pronta entrega no Showroom
+              </p>
             </div>
           </div>
 
-          {/* Galeria de Fotos */}
+          {/* Galeria Expandida de Fotos */}
           <div className="space-y-3">
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group">
               <img
-                src={activeImg}
-                alt={vehicle.nome}
-                onError={() => setActiveImg('/images/placeholder-carro.jpg')}
+                src={currentImage}
+                alt={`${vehicle.nome} - Foto ${currentIndex + 1}`}
                 className="w-full h-full object-cover transition-all duration-300"
               />
+
+              {/* Controles de Navegação Anterior / Próxima */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/70 hover:bg-slate-900 text-white flex items-center justify-center backdrop-blur-sm border border-slate-700/60 shadow-lg opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
+                    title="Foto anterior"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/70 hover:bg-slate-900 text-white flex items-center justify-center backdrop-blur-sm border border-slate-700/60 shadow-lg opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
+                    title="Próxima foto"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+
+                  {/* Contador de Fotos */}
+                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-700 text-xs font-semibold text-white">
+                    Foto {currentIndex + 1} de {images.length}
+                  </div>
+                </>
+              )}
             </div>
 
-            {/* Thumbnails */}
-            {vehicle.imagens && vehicle.imagens.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-1">
-                {vehicle.imagens.map((img, idx) => (
+            {/* Fila de Miniaturas (Thumbnails) */}
+            {images.length > 1 && (
+              <div className="flex gap-2.5 overflow-x-auto pb-1 pt-0.5">
+                {images.map((img, idx) => (
                   <button
                     key={idx}
-                    onClick={() => setActiveImg(img)}
-                    className={`relative w-20 h-14 shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
-                      activeImg === img ? 'border-blue-500 scale-105' : 'border-slate-800 opacity-60 hover:opacity-100'
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`relative w-20 sm:w-24 h-14 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                      currentIndex === idx 
+                        ? 'border-blue-500 ring-2 ring-blue-500/30 scale-105 shadow-md shadow-blue-500/20' 
+                        : 'border-slate-800 opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                    <img src={img} alt={`Miniatura ${idx + 1}`} className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -296,19 +333,21 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
           </div>
 
           <div className="flex items-center gap-2.5 w-full sm:w-auto">
-            {onOpenFinancing && (
+            {onContact && (
               <Button
                 variant="outline"
                 size="md"
+                icon={Mail}
                 onClick={() => {
                   onClose();
-                  onOpenFinancing(vehicle);
+                  onContact(vehicle);
                 }}
                 className="flex-1 sm:flex-none"
               >
-                Simular Financiamento
+                Formulário de Contato
               </Button>
             )}
+
             <Button
               variant="whatsapp"
               size="md"
@@ -318,7 +357,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
               rel="noopener noreferrer"
               className="flex-1 sm:flex-none"
             >
-              Negociar no WhatsApp
+              Tenho Interesse no WhatsApp
             </Button>
           </div>
         </div>
