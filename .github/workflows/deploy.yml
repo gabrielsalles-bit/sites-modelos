@@ -27,7 +27,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -D @rollup/rollup-linux-x64-gnu
+          cd sites/auto-dealership && npm install -D @rollup/rollup-linux-x64-gnu && cd ../..
 
       - name: Build
         run: npm run build
