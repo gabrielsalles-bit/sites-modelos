@@ -14,6 +14,13 @@
     "dev:popular": "npm --workspace=popular-dealership run dev",
     "build": "node scripts/build-all.mjs",
     "build:portal": "npm --workspace=portal run build",
-    "preview": "npm --workspace=portal run preview"
-  }
+    "preview": "npm --workspace=portal run preview",
+    "build:auto": "npm --workspace=auto-dealership run build",
+    "build:luxury": "npm --workspace=luxury-dealership run build",
+    "build:popular": "npm --workspace=popular-dealership run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "Monorepo com 3 modelos de sites para concessionárias + portal"
 }

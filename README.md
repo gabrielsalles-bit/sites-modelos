@@ -1,67 +1,92 @@
-# Ecossistema de Sites para Concessionárias — Monorepo
+# Sites Modelos — Concessionárias
 
-> Repositório monorepo 100% modular contendo **3 modelos de sites especializados para o mercado automotivo** e uma **vitrine/portal central**.
+Monorepo com **3 modelos de site para concessionárias de veículos** (do básico ao completo) e um **portal** que reúne todos em uma vitrine. Serve como catálogo de modelos para apresentar a clientes e como base para sites sob medida.
 
-🌐 **Portal Hub Online (GitHub Pages):**  
-👉 **[https://gabrielsalles-bit.github.io/sites-modelos/](https://gabrielsalles-bit.github.io/sites-modelos/)**
+## Índice
+- [Modelos](#modelos)
+- [Stack](#stack)
+- [Começando](#começando)
+- [Comandos](#comandos)
+- [Estrutura](#estrutura)
+- [Build e deploy](#build-e-deploy)
+- [Fluxo de trabalho](#fluxo-de-trabalho)
+- [Solução de problemas](#solução-de-problemas)
 
----
+## Modelos
 
-## 🏎️ Aplicações Integradas (em `sites/`)
+| Pasta | Modelo | Nível | Destaques | Porta |
+|---|---|---|---|---|
+| `sites/portal` | Portal Hub | — | Vitrine com links e métricas dos 3 modelos | 5173 |
+| `sites/auto-dealership` | AutoElite Motors | Básico | Seminovos, hero estática, destaques, contato, galeria | 5174 |
+| `sites/luxury-dealership` | Apex Luxury Motors | Intermediário | Hero GSAP, visualizador 360°, simulador de financiamento, avaliação de troca, concierge VIP | 5175 |
+| `sites/popular-dealership` | DriveNow Motors | Completo | Consultor de IA, comparador, favoritos, calculadora de TCO, dossiê, alertas de preço, troca com troco | 5176 |
 
-| Aplicação / Pasta | Nicho & Função | Link de Acesso |
-|---|---|---|
-| **`sites/portal/`** | **Vitrine Central / Portal Hub**: Catálogo responsivo com links e métricas dos 3 modelos. | [Acessar Vitrine](https://gabrielsalles-bit.github.io/sites-modelos/) |
-| **`sites/auto-dealership/`** | **Modelo 01: AutoElite Motors**: Concessionária de seminovos com vídeo interativo GSAP ScrollTrigger. | [Acessar Modelo 01](https://gabrielsalles-bit.github.io/sites-modelos/auto-dealership/) |
-| **`sites/luxury-dealership/`** | **Modelo 02: Apex Luxury Motors**: Superesportivos, blindados certificados e concierge VIP. | [Acessar Modelo 02](https://gabrielsalles-bit.github.io/sites-modelos/luxury-dealership/) |
-| **`sites/popular-dealership/`** | **Modelo 03: DriveNow Motors**: Multimarcas com simulador de crédito dinâmico e Troca com Troco. | [Acessar Modelo 03](https://gabrielsalles-bit.github.io/sites-modelos/popular-dealership/) |
+## Stack
+React 18 · Vite 5 · Tailwind CSS 3 · GSAP · Framer Motion · Lucide Icons · npm workspaces
 
----
+## Começando
 
-## 🏛️ Estrutura de Pastas do Monorepo
+**Requisitos:** Node.js 20+ (há um `.nvmrc`; com nvm: `nvm use`) e Git.
+
+```bash
+git clone https://github.com/gabrielsalles-bit/sites-modelos.git
+cd sites-modelos
+npm install
+npm run dev          # abre o portal em http://localhost:5173
+```
+
+Novo no projeto? Leia o [guia de contribuição](CONTRIBUTING.md) e o [onboarding](docs/ONBOARDING.md).
+
+## Comandos
+
+| Comando | O que faz |
+|---|---|
+| `npm run dev` / `dev:portal` | Portal (5173) |
+| `npm run dev:dealership` | Modelo 1 — Básico (5174) |
+| `npm run dev:luxury` | Modelo 2 — Intermediário (5175) |
+| `npm run dev:popular` | Modelo 3 — Completo (5176) |
+| `npm run build` | Compila tudo em `dist/` |
+| `npm run build:portal` · `build:auto` · `build:luxury` · `build:popular` | Compila um site isolado |
+| `npm run preview` | Pré-visualiza o build do portal |
+
+## Estrutura
 
 ```
 sites-modelos/
-├── .github/workflows/deploy.yml   # CI/CD automatizado no GitHub Actions
-├── scripts/build-all.mjs          # Script orquestrador de build multi-sites
-│
-├── sites/                         # TODAS as aplicações ficam aqui dentro!
-│   ├── portal/                    # Vitrine / Catálogo central (Hub)
-│   ├── auto-dealership/           # Modelo 01: Seminovos Selecionados
-│   ├── luxury-dealership/         # Modelo 02: Exóticos & Luxo
-│   └── popular-dealership/        # Modelo 03: Multimarcas & Financiamento
-│
-├── package.json                   # Gerenciador geral de workspaces
-├── package-lock.json              # Trava de dependências
-├── .gitignore                     # Proteção de arquivos locais
-└── README.md                      # Manual do repositório
+├── .github/
+│   ├── workflows/ci.yml         # build em cada Pull Request
+│   ├── workflows/deploy.yml     # deploy no GitHub Pages (push na main)
+│   ├── ISSUE_TEMPLATE/          # modelos de bug e tarefa
+│   ├── pull_request_template.md
+│   ├── CODEOWNERS
+│   └── dependabot.yml
+├── docs/ONBOARDING.md
+├── scripts/build-all.mjs        # orquestra o build de todos os sites
+├── sites/
+│   ├── portal/
+│   ├── auto-dealership/
+│   ├── luxury-dealership/
+│   └── popular-dealership/
+├── CONTRIBUTING.md
+└── package.json                 # workspaces
 ```
 
----
+Cada site é independente: tem seu `package.json`, `vite.config.js`, `tailwind.config.js` e `src/` (`components/`, `pages/`, `data/`).
 
-## 💻 Comandos de Desenvolvimento Local
+## Build e deploy
+- `npm run build` gera `dist/` com o portal na raiz e cada modelo em `dist/<nome-do-site>/`.
+- O `base` do Vite de cada site e os links `/sites-modelos/...` dependem do **nome do repositório** (`sites-modelos`). Se renomear o repositório, atualize esses caminhos.
+- O workflow `deploy.yml` publica no GitHub Pages a cada push na `main`. O Pages só funciona em repositório público (ou plano pago); em repositório privado esse job falha, e isso é esperado.
 
-```bash
-# Instalar dependências de todos os projetos de uma só vez
-npm install
+## Fluxo de trabalho
+1. Crie uma branch a partir da `main`: `feat/...`, `fix/...`, `docs/...`, `chore/...`.
+2. Commits no padrão `tipo(escopo): descrição`, por exemplo `feat(luxury-dealership): adiciona galeria 360`.
+3. Abra um Pull Request para a `main`; o CI roda `npm run build`.
+4. Faça o merge (squash) com o CI verde. A branch é apagada automaticamente.
 
-# Iniciar a Vitrine Central / Portal Hub (Porta 5173)
-npm run dev
+Evite commits diretos na `main`. Detalhes em [CONTRIBUTING.md](CONTRIBUTING.md).
 
-# Iniciar o Modelo 1: Seminovos (Porta 5174)
-npm run dev:dealership
-
-# Iniciar o Modelo 2: Luxo & Exóticos (Porta 5175)
-npm run dev:luxury
-
-# Iniciar o Modelo 3: Financiamento Rápido (Porta 5176)
-npm run dev:popular
-
-# Compilar todas as aplicações para produção
-npm run build
-```
-
----
-
-## 🤝 Contribuindo
-Veja o [guia de contribuição](CONTRIBUTING.md) e o [onboarding de novos integrantes](docs/ONBOARDING.md).
+## Solução de problemas
+- **Erro de `@rollup/rollup-*` no build:** apague `node_modules` e `package-lock.json` e rode `npm install` (acontece ao trocar de sistema operacional).
+- **Porta em uso:** feche o processo que a ocupa ou ajuste a porta no script `dev` do site.
+- **Links quebrados após deploy:** confira se o nome do repositório bate com o `base` em `vite.config.js`.
