@@ -3,7 +3,15 @@ import { VehicleCard } from '../components/vehicles/VehicleCard';
 import { Sparkles, Crown, ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
-export function FeaturedPage({ vehicles, onNavigate, onSelectVehicle }) {
+export function FeaturedPage({
+  vehicles,
+  onNavigate,
+  onSelectVehicle,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const featured = vehicles.filter(v => v.destaque);
 
   return (
@@ -27,7 +35,15 @@ export function FeaturedPage({ vehicles, onNavigate, onSelectVehicle }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featured.map(v => (
-            <VehicleCard key={v.id} vehicle={v} onSelect={onSelectVehicle} />
+            <VehicleCard
+              key={v.id}
+              vehicle={v}
+              onSelect={onSelectVehicle}
+              isFavorite={isFavorite ? isFavorite(v.id) : false}
+              onToggleFavorite={onToggleFavorite}
+              isComparing={isComparing ? isComparing(v.id) : false}
+              onToggleCompare={onToggleCompare}
+            />
           ))}
         </div>
 

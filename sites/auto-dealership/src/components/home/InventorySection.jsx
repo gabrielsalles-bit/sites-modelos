@@ -2,7 +2,17 @@ import React, { useState, useMemo } from 'react';
 import { Search, SlidersHorizontal, ArrowUpDown, Car, FilterX } from 'lucide-react';
 import { VehicleCard } from '../vehicles/VehicleCard';
 
-export function InventorySection({ vehicles, onSelectVehicle, searchFilter, onClearFilter, hideHeader = false }) {
+export function InventorySection({
+  vehicles,
+  onSelectVehicle,
+  searchFilter,
+  onClearFilter,
+  hideHeader = false,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const [selectedCategory, setSelectedCategory] = useState(searchFilter?.category || 'todos');
   const [searchQuery, setSearchQuery] = useState(searchFilter?.term || '');
   const [sortBy, setSortBy] = useState('destaque'); // 'destaque' | 'preco-asc' | 'preco-desc' | 'ano-desc' | 'km-asc'
@@ -174,6 +184,10 @@ export function InventorySection({ vehicles, onSelectVehicle, searchFilter, onCl
               key={vehicle.id}
               vehicle={vehicle}
               onSelect={onSelectVehicle}
+              isFavorite={isFavorite ? isFavorite(vehicle.id) : false}
+              onToggleFavorite={onToggleFavorite}
+              isComparing={isComparing ? isComparing(vehicle.id) : false}
+              onToggleCompare={onToggleCompare}
             />
           ))}
         </div>

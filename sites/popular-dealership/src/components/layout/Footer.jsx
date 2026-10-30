@@ -20,6 +20,7 @@ export function Footer({ onNavigate }) {
     { id: 'troca', label: 'Troca com Troco no Pix' },
     { id: 'comparador', label: 'Comparador de Veículos' },
     { id: 'favoritos', label: 'Meus Veículos Salvos' },
+    { id: 'concierge', label: 'Consultor Dedicado' },
     { id: 'sobre-contato', label: 'Sobre Nós & Contato' }
   ];
 

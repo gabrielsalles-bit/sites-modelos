@@ -9,7 +9,15 @@ import {
   Crown, Shield, ChevronDown, RotateCw 
 } from 'lucide-react';
 
-export function HomePage({ vehicles, onNavigate, onSelectVehicle }) {
+export function HomePage({
+  vehicles,
+  onNavigate,
+  onSelectVehicle,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const topVehicles = vehicles.filter(v => v.destaque).slice(0, 3);
 
   return (
@@ -105,6 +113,10 @@ export function HomePage({ vehicles, onNavigate, onSelectVehicle }) {
               key={vehicle.id}
               vehicle={vehicle}
               onSelect={onSelectVehicle}
+              isFavorite={isFavorite ? isFavorite(vehicle.id) : false}
+              onToggleFavorite={onToggleFavorite}
+              isComparing={isComparing ? isComparing(vehicle.id) : false}
+              onToggleCompare={onToggleCompare}
             />
           ))}
         </div>

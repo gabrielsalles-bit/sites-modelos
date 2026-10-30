@@ -17,6 +17,9 @@ export function Footer({ onNavigate }) {
     { id: 'destaques', label: 'Destaques da Semana' },
     { id: 'simulador', label: 'Simulador de Financiamento' },
     { id: 'troca', label: 'Troca Fácil' },
+    { id: 'comparador', label: 'Comparador de Veículos' },
+    { id: 'favoritos', label: 'Meus Veículos Salvos' },
+    { id: 'concierge', label: 'Consultor Dedicado' },
     { id: 'sobre-contato', label: 'Sobre Nós & Contato' }
   ];
 

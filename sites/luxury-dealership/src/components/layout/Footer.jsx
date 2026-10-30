@@ -17,6 +17,8 @@ export function Footer({ onNavigate }) {
     { id: 'destaques', label: 'Acervo em Destaque' },
     { id: 'simulador', label: 'Simulador Private Banking' },
     { id: 'troca', label: 'Avaliação de Superesportivos' },
+    { id: 'comparador', label: 'Comparador de Veículos' },
+    { id: 'favoritos', label: 'Meus Veículos Salvos' },
     { id: 'concierge', label: 'Serviço de Concierge' },
     { id: 'sobre-contato', label: 'Showroom Privativo & Contato' }
   ];

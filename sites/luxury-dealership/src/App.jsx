@@ -2,15 +2,21 @@
 import { MessageCircle } from 'lucide-react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { ComparisonFloatingBar } from './components/layout/ComparisonFloatingBar';
 import { HomePage } from './pages/HomePage';
 import { InventoryPage } from './pages/InventoryPage';
 import { FeaturedPage } from './pages/FeaturedPage';
 import { FinancingPage } from './pages/FinancingPage';
 import { TradeInPage } from './pages/TradeInPage';
+import { FavoritesPage } from './pages/FavoritesPage';
+import { ComparatorPage } from './pages/ComparatorPage';
 import { ConciergePage } from './pages/ConciergePage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
+import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
 import { vehiclesData } from './data/vehicles';
+import { useFavorites } from './hooks/useFavorites';
+import { useComparator } from './hooks/useComparator';
 import { buildGeneralWhatsappLink } from './utils/whatsapp';
 import { useTheme } from './hooks/useTheme';
 
@@ -18,7 +24,25 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedVehicleForModal, setSelectedVehicleForModal] = useState(null);
   const [financingPreselectedVehicle, setFinancingPreselectedVehicle] = useState(null);
+  const [comparatorModalOpen, setComparatorModalOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  const {
+    favoriteIds,
+    toggleFavorite,
+    isFavorite,
+    favoritesCount,
+    favoriteVehicles
+  } = useFavorites(vehiclesData);
+
+  const {
+    comparedIds,
+    toggleCompare,
+    isComparing,
+    clearCompared,
+    comparedCount,
+    comparedVehicles
+  } = useComparator(vehiclesData);
 
   const navigateTo = (page, params = {}) => {
     setCurrentPage(page);
@@ -39,8 +63,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface-page text-slate-100 flex flex-col font-sans selection:bg-amber-500 selection:text-black relative">
-      {/* Barra de Navegação no Topo (7 Abas) */}
-      <Navbar currentPage={currentPage} onNavigate={navigateTo} theme={theme} onToggleTheme={toggleTheme} />
+      {/* Barra de Navegação no Topo */}
+      <Navbar
+        currentPage={currentPage}
+        onNavigate={navigateTo}
+        favoritesCount={favoritesCount}
+        comparedCount={comparedCount}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
 
       {/* Conteúdo Dinâmico da Página Ativa */}
       <main className="flex-1">
@@ -49,6 +80,10 @@ export default function App() {
             vehicles={vehiclesData}
             onNavigate={navigateTo}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            isFavorite={isFavorite}
+            onToggleFavorite={toggleFavorite}
+            isComparing={isComparing}
+            onToggleCompare={toggleCompare}
           />
         )}
 
@@ -56,6 +91,10 @@ export default function App() {
           <InventoryPage
             vehicles={vehiclesData}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            isFavorite={isFavorite}
+            onToggleFavorite={toggleFavorite}
+            isComparing={isComparing}
+            onToggleCompare={toggleCompare}
           />
         )}
 
@@ -64,6 +103,10 @@ export default function App() {
             vehicles={vehiclesData}
             onNavigate={navigateTo}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            isFavorite={isFavorite}
+            onToggleFavorite={toggleFavorite}
+            isComparing={isComparing}
+            onToggleCompare={toggleCompare}
           />
         )}
 
@@ -78,6 +121,27 @@ export default function App() {
           <TradeInPage vehicles={vehiclesData} />
         )}
 
+        {currentPage === 'comparador' && (
+          <ComparatorPage
+            comparedVehicles={comparedVehicles}
+            onRemoveFromCompare={toggleCompare}
+            onNavigate={navigateTo}
+            onOpenFinancing={handleOpenFinancingFromModal}
+          />
+        )}
+
+        {currentPage === 'favoritos' && (
+          <FavoritesPage
+            favoriteVehicles={favoriteVehicles}
+            onNavigate={navigateTo}
+            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            isFavorite={isFavorite}
+            onToggleFavorite={toggleFavorite}
+            isComparing={isComparing}
+            onToggleCompare={toggleCompare}
+          />
+        )}
+
         {currentPage === 'concierge' && (
           <ConciergePage />
         )}
@@ -90,11 +154,29 @@ export default function App() {
       {/* Rodapé com Links entre Páginas */}
       <Footer onNavigate={navigateTo} />
 
+      {/* Barra Flutuante de Comparação Ativa */}
+      {currentPage !== 'comparador' && (
+        <ComparisonFloatingBar
+          comparedVehicles={comparedVehicles}
+          onOpenComparator={() => setComparatorModalOpen(true)}
+          onClear={clearCompared}
+        />
+      )}
+
       {/* Modal Global de Detalhes & Experiência 360° */}
       {selectedVehicleForModal && (
         <VehicleDetailModal
           vehicle={selectedVehicleForModal}
           onClose={() => setSelectedVehicleForModal(null)}
+          onOpenFinancing={handleOpenFinancingFromModal}
+        />
+      )}
+
+      {/* Modal de Comparação Lado a Lado */}
+      {comparatorModalOpen && (
+        <VehicleComparatorModal
+          vehicles={comparedVehicles}
+          onClose={() => setComparatorModalOpen(false)}
           onOpenFinancing={handleOpenFinancingFromModal}
         />
       )}

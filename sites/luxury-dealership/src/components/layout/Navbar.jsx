@@ -2,13 +2,20 @@
 import {
   Car, Shield, Sparkles, Calculator, ArrowLeftRight,
   Crown, Building2, Menu, X, ArrowLeft, MessageCircle, Sun, Moon,
-  Wrench, ChevronDown
+  Wrench, ChevronDown, Scale, Heart
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { dealershipInfo } from '../../data/dealershipInfo';
 import { buildGeneralWhatsappLink } from '../../utils/whatsapp';
 
-export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onToggleTheme }) {
+export function Navbar({
+  currentPage = 'home',
+  onNavigate,
+  favoritesCount = 0,
+  comparedCount = 0,
+  theme = 'dark',
+  onToggleTheme
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -44,10 +51,13 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
   const toolPages = [
     { id: 'simulador', label: 'Simulador Private', icon: Calculator },
     { id: 'troca', label: 'Avaliação de Troca', icon: ArrowLeftRight },
+    { id: 'comparador', label: 'Comparador', icon: Scale, count: comparedCount },
+    { id: 'favoritos', label: 'Favoritos', icon: Heart, count: favoritesCount },
     { id: 'concierge', label: 'Concierge', icon: Shield }
   ];
 
   const isToolPageActive = toolPages.some((p) => p.id === currentPage);
+  const toolsBadgeCount = comparedCount + favoritesCount;
 
   const handleNavClick = (pageId) => {
     if (onNavigate) {
@@ -127,6 +137,11 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
               >
                 <Wrench className="w-3.5 h-3.5" />
                 <span>Ferramentas</span>
+                {toolsBadgeCount > 0 && (
+                  <span className="w-4 h-4 rounded-full bg-amber-400 text-black text-[10px] font-bold flex items-center justify-center">
+                    {toolsBadgeCount}
+                  </span>
+                )}
                 <ChevronDown className={`w-3 h-3 transition-transform ${toolsMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -146,7 +161,12 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
                         }`}
                       >
                         <Icon className="w-4 h-4 shrink-0 text-amber-400" />
-                        <span>{link.label}</span>
+                        <span className="flex-1">{link.label}</span>
+                        {link.count !== undefined && link.count > 0 && (
+                          <span className="w-4 h-4 rounded-full bg-amber-400 text-black text-[10px] font-bold flex items-center justify-center">
+                            {link.count}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -227,14 +247,21 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-colors ${
+                    className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-colors ${
                       isActive
                         ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
                         : 'text-slate-300 hover:bg-ink/5 hover:text-ink'
                     }`}
                   >
-                    <Icon className="w-4 h-4 shrink-0 text-amber-400" />
-                    <span>{link.label}</span>
+                    <div className="flex items-center gap-3">
+                      <Icon className="w-4 h-4 shrink-0 text-amber-400" />
+                      <span>{link.label}</span>
+                    </div>
+                    {link.count !== undefined && link.count > 0 && (
+                      <span className="px-2 py-0.5 rounded-full bg-amber-400 text-black text-xs font-bold">
+                        {link.count}
+                      </span>
+                    )}
                   </button>
                 );
               })}

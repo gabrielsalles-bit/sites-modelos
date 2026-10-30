@@ -2,7 +2,14 @@
 import { VehicleCard } from '../components/vehicles/VehicleCard';
 import { Search, Filter, Shield, RotateCcw, Crown } from 'lucide-react';
 
-export function InventoryPage({ vehicles, onSelectVehicle }) {
+export function InventoryPage({
+  vehicles,
+  onSelectVehicle,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('todas');
   const [selectedBlindado, setSelectedBlindado] = useState('todos'); // 'todos' | 'sim' | 'nao'
@@ -135,7 +142,15 @@ export function InventoryPage({ vehicles, onSelectVehicle }) {
         {filteredVehicles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredVehicles.map(v => (
-              <VehicleCard key={v.id} vehicle={v} onSelect={onSelectVehicle} />
+              <VehicleCard
+                key={v.id}
+                vehicle={v}
+                onSelect={onSelectVehicle}
+                isFavorite={isFavorite ? isFavorite(v.id) : false}
+                onToggleFavorite={onToggleFavorite}
+                isComparing={isComparing ? isComparing(v.id) : false}
+                onToggleCompare={onToggleCompare}
+              />
             ))}
           </div>
         ) : (

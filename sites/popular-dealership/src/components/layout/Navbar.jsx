@@ -2,7 +2,7 @@
 import {
   Zap, Heart, Scale, Bot, Calculator, ArrowLeftRight,
   Sparkles, Building2, Grid, Menu, X, ArrowLeft, MessageCircle, Sun, Moon,
-  Home, Wrench, ChevronDown
+  Home, Wrench, ChevronDown, Headset
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { dealershipInfo } from '../../data/dealershipInfo';
@@ -53,7 +53,8 @@ export function Navbar({
     { id: 'simulador', label: 'Simulador', icon: Calculator },
     { id: 'troca', label: 'Troca Fácil', icon: ArrowLeftRight },
     { id: 'comparador', label: 'Comparador', icon: Scale, count: comparedCount },
-    { id: 'favoritos', label: 'Favoritos', icon: Heart, count: favoritesCount }
+    { id: 'favoritos', label: 'Favoritos', icon: Heart, count: favoritesCount },
+    { id: 'concierge', label: 'Consultor Dedicado', icon: Headset }
   ];
 
   const isToolPageActive = toolPages.some((p) => p.id === currentPage);

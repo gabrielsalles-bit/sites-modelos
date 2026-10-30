@@ -5,7 +5,15 @@ import { Sparkles, Award, ShieldCheck, MessageCircle } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { buildGeneralWhatsappLink } from '../utils/whatsapp';
 
-export function FeaturedPage({ vehicles, onSelectVehicle, onNavigate }) {
+export function FeaturedPage({
+  vehicles,
+  onSelectVehicle,
+  onNavigate,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const featuredVehicles = vehicles.filter(v => v.destaque);
   const mainFeatured = featuredVehicles[0] || vehicles[0];
   const secondaryFeatured = featuredVehicles.slice(1);
@@ -58,6 +66,10 @@ export function FeaturedPage({ vehicles, onSelectVehicle, onNavigate }) {
                 key={vehicle.id}
                 vehicle={vehicle}
                 onSelect={onSelectVehicle}
+                isFavorite={isFavorite ? isFavorite(vehicle.id) : false}
+                onToggleFavorite={onToggleFavorite}
+                isComparing={isComparing ? isComparing(vehicle.id) : false}
+                onToggleCompare={onToggleCompare}
               />
             ))}
           </div>

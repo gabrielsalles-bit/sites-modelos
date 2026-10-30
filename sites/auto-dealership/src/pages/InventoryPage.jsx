@@ -2,7 +2,16 @@ import React from 'react';
 import { InventorySection } from '../components/home/InventorySection';
 import { ShieldCheck, Car } from 'lucide-react';
 
-export function InventoryPage({ vehicles, searchFilter, onClearFilter, onSelectVehicle }) {
+export function InventoryPage({
+  vehicles,
+  searchFilter,
+  onClearFilter,
+  onSelectVehicle,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   return (
     <div className="pt-24 pb-16 space-y-8">
       {/* Page Header Compacto */}
@@ -28,6 +37,10 @@ export function InventoryPage({ vehicles, searchFilter, onClearFilter, onSelectV
         onClearFilter={onClearFilter}
         onSelectVehicle={onSelectVehicle}
         hideHeader={true}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+        isComparing={isComparing}
+        onToggleCompare={onToggleCompare}
       />
     </div>
   );

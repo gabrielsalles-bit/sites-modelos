@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Gauge, Fuel, Cog, MessageCircle, Eye } from 'lucide-react';
+import { Calendar, Gauge, Fuel, Cog, MessageCircle, Eye, Heart, Scale } from 'lucide-react';
 import { InspectionBadge } from './InspectionBadge';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -7,7 +7,14 @@ import { formatCurrency, formatKm } from '../../utils/formatters';
 import { withBase } from '../../utils/assetPath.js';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
-export function VehicleCard({ vehicle, onSelect }) {
+export function VehicleCard({
+  vehicle,
+  onSelect,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const [imgSrc, setImgSrc] = useState(vehicle.imagemPrincipal);
 
   const whatsappUrl = buildVehicleWhatsappLink(vehicle);
@@ -27,16 +34,46 @@ export function VehicleCard({ vehicle, onSelect }) {
         {/* Gradiente de sobreposição sutil */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/80 via-transparent to-[#080c14]/40 pointer-events-none" />
 
-        {/* Badge de Perícia Cautelar */}
-        <div className="absolute top-3 left-3 z-10">
-          <InspectionBadge text="Perícia Cautelar" compact={true} />
-        </div>
+        {/* Badges Superiores: Perícia à esquerda, ações rápidas à direita */}
+        <div className="absolute top-3 inset-x-3 z-10 flex items-start justify-between">
+          <div className="flex flex-col items-start gap-1.5">
+            <InspectionBadge text="Perícia Cautelar" compact={true} />
+            <Badge variant="default" size="xs" className="uppercase">
+              {vehicle.categoria}
+            </Badge>
+          </div>
 
-        {/* Badge de Categoria */}
-        <div className="absolute top-3 right-3 z-10">
-          <Badge variant="default" size="xs" className="uppercase">
-            {vehicle.categoria}
-          </Badge>
+          {(onToggleCompare || onToggleFavorite) && (
+            <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+              {onToggleCompare && (
+                <button
+                  onClick={() => onToggleCompare(vehicle.id)}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
+                    isComparing
+                      ? 'bg-blue-500 text-white shadow-md shadow-blue-500/30'
+                      : 'bg-black/60 text-slate-300 hover:text-white border border-white/10'
+                  }`}
+                  title={isComparing ? 'Remover da comparação' : 'Comparar este veículo'}
+                >
+                  <Scale className="w-4 h-4" />
+                </button>
+              )}
+
+              {onToggleFavorite && (
+                <button
+                  onClick={() => onToggleFavorite(vehicle.id)}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
+                    isFavorite
+                      ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30'
+                      : 'bg-black/60 text-slate-300 hover:text-rose-400 border border-white/10'
+                  }`}
+                  title={isFavorite ? 'Remover dos favoritos' : 'Salvar nos favoritos'}
+                >
+                  <Heart className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Ano e Km na base da imagem */}

@@ -17,3 +17,20 @@ export function formatPower(value) {
   if (!value) return '';
   return `${value} cv`;
 }
+
+export function calculateFipeDiff(price, fipe) {
+  if (!price || !fipe) return null;
+  const diff = price - fipe;
+  const pct = (diff / fipe) * 100;
+  return {
+    diff,
+    pct,
+    isBelow: diff < 0,
+    formattedDiff: formatCurrency(Math.abs(diff)),
+    label: diff < 0
+      ? `${formatCurrency(Math.abs(diff))} abaixo da FIPE`
+      : diff === 0
+        ? 'Na Tabela FIPE'
+        : `${formatCurrency(diff)} acima da FIPE`
+  };
+}

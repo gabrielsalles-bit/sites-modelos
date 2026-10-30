@@ -11,6 +11,7 @@ import { TradeInPage } from './pages/TradeInPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { ComparatorPage } from './pages/ComparatorPage';
 import { AIConsultantPage } from './pages/AIConsultantPage';
+import { ConciergePage } from './pages/ConciergePage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
 import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
@@ -155,6 +156,10 @@ export default function App() {
             onToggleCompare={toggleCompare}
             onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
           />
+        )}
+
+        {currentPage === 'concierge' && (
+          <ConciergePage />
         )}
 
         {currentPage === 'sobre-contato' && (

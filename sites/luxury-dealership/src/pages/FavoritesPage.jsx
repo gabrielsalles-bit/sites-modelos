@@ -1,0 +1,68 @@
+import React from 'react';
+import { VehicleCard } from '../components/vehicles/VehicleCard';
+import { Heart, ArrowRight } from 'lucide-react';
+import { Button } from '../components/ui/Button';
+
+export function FavoritesPage({
+  favoriteVehicles = [],
+  onNavigate,
+  onSelectVehicle,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
+  return (
+    <div className="pt-24 pb-20 space-y-10">
+      {/* Header */}
+      <div className="border-b border-ink/10 bg-gradient-to-b from-rose-500/10 via-surface-page to-transparent py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 mb-2">
+            <Heart className="w-3.5 h-3.5 fill-rose-400" />
+            <span>Garagem Virtual Private</span>
+          </div>
+          <h1 className="font-heading text-3xl sm:text-5xl font-extrabold text-ink tracking-tight">
+            Meus Veículos Salvos ({favoriteVehicles.length})
+          </h1>
+          <p className="text-slate-400 text-sm sm:text-base max-w-2xl mt-2 font-light">
+            Sua curadoria pessoal, salva para comparar com calma, acompanhar e simular financiamento quando decidir.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {favoriteVehicles.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {favoriteVehicles.map(v => (
+              <VehicleCard
+                key={v.id}
+                vehicle={v}
+                onSelect={onSelectVehicle}
+                isFavorite={isFavorite ? isFavorite(v.id) : true}
+                onToggleFavorite={onToggleFavorite}
+                isComparing={isComparing ? isComparing(v.id) : false}
+                onToggleCompare={onToggleCompare}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="p-12 rounded-3xl bg-surface-card-alt border border-ink/10 text-center space-y-4">
+            <Heart className="w-12 h-12 text-rose-500/40 mx-auto" />
+            <h3 className="font-heading text-xl font-bold text-ink">Nenhum veículo salvo nos favoritos ainda</h3>
+            <p className="text-xs text-slate-400 max-w-md mx-auto">
+              Clique no ícone de coração nos cards da coleção para salvá-los e acompanhar aqui.
+            </p>
+            <Button
+              variant="gold"
+              size="md"
+              icon={ArrowRight}
+              onClick={() => onNavigate('estoque')}
+            >
+              Explorar a Coleção
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

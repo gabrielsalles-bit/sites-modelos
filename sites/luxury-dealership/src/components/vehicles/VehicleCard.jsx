@@ -1,9 +1,16 @@
 ﻿import React from 'react';
-import { Shield, Sparkles, KeyRound, Zap, RotateCw, ArrowRight, MessageCircle } from 'lucide-react';
+import { Shield, Sparkles, KeyRound, Zap, RotateCw, ArrowRight, MessageCircle, Heart, Scale } from 'lucide-react';
 import { formatCurrency, formatKm } from '../../utils/formatters';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
-export function VehicleCard({ vehicle, onSelect }) {
+export function VehicleCard({
+  vehicle,
+  onSelect,
+  isFavorite,
+  onToggleFavorite,
+  isComparing,
+  onToggleCompare
+}) {
   const whatsappUrl = buildVehicleWhatsappLink(vehicle);
 
   return (
@@ -20,22 +27,56 @@ export function VehicleCard({ vehicle, onSelect }) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c0d14] via-transparent to-black/30 pointer-events-none" />
 
         {/* Badges Flutuantes */}
-        <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between">
+        <div className="absolute top-3.5 inset-x-3.5 flex items-start justify-between">
           <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/30 shadow-md">
             {vehicle.tag || vehicle.categoria}
           </span>
 
-          <div className="flex items-center gap-1.5">
-            {vehicle.blindado && (
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
-                <Shield className="w-3 h-3 text-emerald-400" />
-                Nível III-A
+          <div className="flex flex-col items-end gap-1.5">
+            <div className="flex items-center gap-1.5">
+              {vehicle.blindado && (
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                  <Shield className="w-3 h-3 text-emerald-400" />
+                  Nível III-A
+                </span>
+              )}
+              <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-black/70 backdrop-blur-md text-slate-300 border border-ink/10 flex items-center gap-1" title="Disponível em 360°">
+                <RotateCw className="w-3 h-3 text-amber-400" />
+                360°
               </span>
+            </div>
+
+            {(onToggleCompare || onToggleFavorite) && (
+              <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                {onToggleCompare && (
+                  <button
+                    onClick={() => onToggleCompare(vehicle.id)}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
+                      isComparing
+                        ? 'bg-amber-500 text-black shadow-md shadow-amber-500/30'
+                        : 'bg-black/60 text-slate-300 hover:text-white border border-white/10'
+                    }`}
+                    title={isComparing ? 'Remover da comparação' : 'Comparar este veículo'}
+                  >
+                    <Scale className="w-4 h-4" />
+                  </button>
+                )}
+
+                {onToggleFavorite && (
+                  <button
+                    onClick={() => onToggleFavorite(vehicle.id)}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
+                      isFavorite
+                        ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30'
+                        : 'bg-black/60 text-slate-300 hover:text-rose-400 border border-white/10'
+                    }`}
+                    title={isFavorite ? 'Remover dos favoritos' : 'Salvar nos favoritos'}
+                  >
+                    <Heart className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
+                  </button>
+                )}
+              </div>
             )}
-            <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-black/70 backdrop-blur-md text-slate-300 border border-ink/10 flex items-center gap-1" title="Disponível em 360°">
-              <RotateCw className="w-3 h-3 text-amber-400" />
-              360°
-            </span>
           </div>
         </div>
 

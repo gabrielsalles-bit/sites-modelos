@@ -2,13 +2,20 @@
 import {
   Car, ShieldCheck, MessageCircle, Menu, X,
   Home, Grid, Sparkles, Building2, ArrowLeft, Sun, Moon,
-  Calculator, ArrowLeftRight, Wrench, ChevronDown
+  Calculator, ArrowLeftRight, Wrench, ChevronDown, Headset, Scale, Heart
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { dealershipInfo } from '../../data/dealershipInfo';
 import { buildGeneralWhatsappLink } from '../../utils/whatsapp';
 
-export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onToggleTheme }) {
+export function Navbar({
+  currentPage = 'home',
+  onNavigate,
+  favoritesCount = 0,
+  comparedCount = 0,
+  theme = 'dark',
+  onToggleTheme
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -43,10 +50,14 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
   // Ferramentas: agrupadas num só menu para não poluir a barra principal
   const toolPages = [
     { id: 'simulador', label: 'Simulador de Financiamento', icon: Calculator },
-    { id: 'troca', label: 'Troca Fácil', icon: ArrowLeftRight }
+    { id: 'troca', label: 'Troca Fácil', icon: ArrowLeftRight },
+    { id: 'comparador', label: 'Comparador', icon: Scale, count: comparedCount },
+    { id: 'favoritos', label: 'Favoritos', icon: Heart, count: favoritesCount },
+    { id: 'concierge', label: 'Consultor Dedicado', icon: Headset }
   ];
 
   const isToolPageActive = toolPages.some((p) => p.id === currentPage);
+  const toolsBadgeCount = comparedCount + favoritesCount;
 
   const handleNavClick = (pageId) => {
     if (onNavigate) {
@@ -126,6 +137,11 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
               >
                 <Wrench className="w-3.5 h-3.5" />
                 <span>Ferramentas</span>
+                {toolsBadgeCount > 0 && (
+                  <span className="w-4 h-4 rounded-full bg-blue-400 text-black text-[10px] font-bold flex items-center justify-center">
+                    {toolsBadgeCount}
+                  </span>
+                )}
                 <ChevronDown className={`w-3 h-3 transition-transform ${toolsMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -145,7 +161,12 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
                         }`}
                       >
                         <Icon className="w-4 h-4 shrink-0 text-blue-400" />
-                        <span>{link.label}</span>
+                        <span className="flex-1">{link.label}</span>
+                        {link.count !== undefined && link.count > 0 && (
+                          <span className="w-4 h-4 rounded-full bg-blue-400 text-black text-[10px] font-bold flex items-center justify-center">
+                            {link.count}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -229,16 +250,22 @@ export function Navbar({ currentPage = 'home', onNavigate, theme = 'dark', onTog
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-colors ${
+                    className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-colors ${
                       isActive
                         ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40'
                         : 'text-slate-300 hover:bg-slate-900 hover:text-ink'
                     }`}
                   >
-                    <Icon className="w-4 h-4 shrink-0" />
-                    <span>{link.label}</span>
-                    {isActive && (
-                      <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-400" />
+                    <div className="flex items-center gap-3">
+                      <Icon className="w-4 h-4 shrink-0" />
+                      <span>{link.label}</span>
+                    </div>
+                    {link.count !== undefined && link.count > 0 ? (
+                      <span className="px-2 py-0.5 rounded-full bg-blue-400 text-black text-xs font-bold">
+                        {link.count}
+                      </span>
+                    ) : isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                     )}
                   </button>
                 );
