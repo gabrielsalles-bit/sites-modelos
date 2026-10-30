@@ -6,13 +6,14 @@ import {
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { Vehicle360Viewer } from './Vehicle360Viewer';
+import { TcoCalculatorCard } from './TcoCalculatorCard';
 import { formatCurrency, formatKm } from '../../utils/formatters';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
 export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
   const images = vehicle?.imagens && vehicle.imagens.length > 0 ? vehicle.imagens : [vehicle?.imagemPrincipal || ''];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState('360'); // '360' | 'galeria' | 'laudo' | 'ficha'
+  const [activeTab, setActiveTab] = useState('360'); // '360' | 'galeria' | 'laudo' | 'ficha' | 'tco'
 
   useEffect(() => {
     if (vehicle) {
@@ -124,11 +125,28 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
               >
                 <span>Galeria Expandida ({images.length})</span>
               </button>
+
+              <button
+                onClick={() => setActiveTab('tco')}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+                  activeTab === 'tco'
+                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 font-bold'
+                    : 'bg-ink/5 text-slate-400 hover:text-ink border border-ink/10'
+                }`}
+              >
+                <Calculator className="w-4 h-4" />
+                <span>Calculadora TCO</span>
+              </button>
             </div>
 
             {/* Visualizador 360° */}
             {activeTab === '360' && (
               <Vehicle360Viewer images={vehicle.imagens360} autoRotate={true} />
+            )}
+
+            {/* Calculadora de Custo Total de Posse */}
+            {activeTab === 'tco' && (
+              <TcoCalculatorCard vehicle={vehicle} />
             )}
 
             {/* Galeria Expandida com Miniaturas */}

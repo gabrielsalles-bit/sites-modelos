@@ -6,13 +6,14 @@ import {
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { InspectionBadge } from './InspectionBadge';
+import { TcoCalculatorCard } from './TcoCalculatorCard';
 import { formatCurrency, formatKm } from '../../utils/formatters';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
 export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancing }) {
   const images = vehicle?.imagens && vehicle.imagens.length > 0 ? vehicle.imagens : [vehicle?.imagemPrincipal || ''];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState('laudo'); // 'laudo' | 'ficha' | 'opcionais'
+  const [activeTab, setActiveTab] = useState('laudo'); // 'laudo' | 'ficha' | 'opcionais' | 'tco'
 
   useEffect(() => {
     if (vehicle) {
@@ -222,12 +223,24 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
               <button
                 onClick={() => setActiveTab('ficha')}
                 className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
-                  activeTab === 'ficha' 
-                    ? 'bg-blue-950 text-blue-300 border border-blue-500/40 shadow-sm' 
+                  activeTab === 'ficha'
+                    ? 'bg-blue-950 text-blue-300 border border-blue-500/40 shadow-sm'
                     : 'text-slate-400 hover:text-ink'
                 }`}
               >
                 Ficha Técnica
+              </button>
+
+              <button
+                onClick={() => setActiveTab('tco')}
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  activeTab === 'tco'
+                    ? 'bg-blue-950 text-blue-300 border border-blue-500/40 shadow-sm'
+                    : 'text-slate-400 hover:text-ink'
+                }`}
+              >
+                <Calculator className="w-4 h-4" />
+                Calculadora TCO
               </button>
             </div>
 
@@ -317,6 +330,11 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
                     <span className="font-semibold text-ink">{vehicle.potencia}</span>
                   </div>
                 </div>
+              )}
+
+              {/* Aba: Calculadora TCO */}
+              {activeTab === 'tco' && (
+                <TcoCalculatorCard vehicle={vehicle} />
               )}
             </div>
           </div>
