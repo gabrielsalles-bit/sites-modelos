@@ -7,3 +7,8 @@ midia_temp
 .env
 .env.local
 .env.*.local
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+*.log
