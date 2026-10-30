@@ -15,6 +15,8 @@ import { AIConsultantPage } from './pages/AIConsultantPage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
 import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
+import { OfficialDossierModal } from './components/vehicles/OfficialDossierModal';
+import { PriceAlertModal } from './components/vehicles/PriceAlertModal';
 import { vehiclesData } from './data/vehicles';
 import { useFavorites } from './hooks/useFavorites';
 import { useComparator } from './hooks/useComparator';
@@ -27,6 +29,8 @@ export default function App() {
   const [searchFilter, setSearchFilter] = useState({ term: '', category: 'todos' });
   const [financingPreselectedVehicle, setFinancingPreselectedVehicle] = useState(null);
   const [comparatorModalOpen, setComparatorModalOpen] = useState(false);
+  const [dossierVehicle, setDossierVehicle] = useState(null);
+  const [priceAlertVehicle, setPriceAlertVehicle] = useState(null);
   const { theme, toggleTheme } = useTheme();
 
   const {
@@ -193,6 +197,8 @@ export default function App() {
           onClose={() => setSelectedVehicleForModal(null)}
           onContact={handleOpenContactFromModal}
           onOpenFinancing={handleOpenFinancingFromModal}
+          onOpenDossier={(v) => setDossierVehicle(v)}
+          onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
         />
       )}
 
@@ -202,6 +208,22 @@ export default function App() {
           vehicles={comparedVehicles}
           onClose={() => setComparatorModalOpen(false)}
           onOpenFinancing={handleOpenFinancingFromModal}
+        />
+      )}
+
+      {/* Modal de Dossiê Oficial de Procedência */}
+      {dossierVehicle && (
+        <OfficialDossierModal
+          vehicle={dossierVehicle}
+          onClose={() => setDossierVehicle(null)}
+        />
+      )}
+
+      {/* Modal de Alerta de Preço */}
+      {priceAlertVehicle && (
+        <PriceAlertModal
+          vehicle={priceAlertVehicle}
+          onClose={() => setPriceAlertVehicle(null)}
         />
       )}
 

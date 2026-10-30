@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { 
-  X, Shield, CheckCircle2, MessageCircle, Calendar, 
-  Gauge, Zap, Fuel, Award, ChevronLeft, ChevronRight, RotateCw, Calculator, KeyRound 
+import {
+  X, Shield, CheckCircle2, MessageCircle, Calendar,
+  Gauge, Zap, Fuel, Award, ChevronLeft, ChevronRight, RotateCw, Calculator, KeyRound, Bell
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -10,7 +10,7 @@ import { TcoCalculatorCard } from './TcoCalculatorCard';
 import { formatCurrency, formatKm } from '../../utils/formatters';
 import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 
-export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
+export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing, onOpenDossier, onOpenPriceAlert }) {
   const images = vehicle?.imagens && vehicle.imagens.length > 0 ? vehicle.imagens : [vehicle?.imagemPrincipal || ''];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('360'); // '360' | 'galeria' | 'laudo' | 'ficha' | 'tco'
@@ -261,9 +261,19 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
                     <p className="text-xs text-amber-400">{vehicle.laudoCautelar?.perito} • {vehicle.laudoCautelar?.status}</p>
                   </div>
                 </div>
-                <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-500/30">
-                  Aprovado
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-500/30">
+                    Aprovado
+                  </span>
+                  {onOpenDossier && (
+                    <button
+                      onClick={() => onOpenDossier(vehicle)}
+                      className="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold border border-amber-500/40"
+                    >
+                      Abrir Dossiê Oficial
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -302,12 +312,25 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
 
         {/* Rodapé Fixo do Modal com CTAs */}
         <div className="p-4 sm:px-8 border-t border-ink/10 bg-surface-modal/90 flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20">
-          <div className="hidden sm:block">
-            <p className="text-xs text-slate-400">Atendimento privativo sob demanda</p>
-            <p className="text-xs font-semibold text-amber-400 flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-              Consultor Concierge VIP disponível
-            </p>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="hidden sm:block">
+              <p className="text-xs text-slate-400">Atendimento privativo sob demanda</p>
+              <p className="text-xs font-semibold text-amber-400 flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                Consultor Concierge VIP disponível
+              </p>
+            </div>
+
+            {onOpenPriceAlert && (
+              <button
+                onClick={() => onOpenPriceAlert(vehicle)}
+                className="px-3 py-2 rounded-xl bg-ink/5 border border-ink/10 text-slate-300 hover:text-amber-400 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                title="Avise-me se o valor cair"
+              >
+                <Bell className="w-3.5 h-3.5 text-amber-400" />
+                <span>Alerta de Preço</span>
+              </button>
+            )}
           </div>
 
           <div className="flex items-center gap-2.5 w-full sm:w-auto">

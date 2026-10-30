@@ -27,6 +27,18 @@ export function buildFinancingWhatsappLink({ vehicle, vehicleName, valor, entrad
   return `https://wa.me/${dealershipInfo.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
+export function buildPriceAlertWhatsappLink({ vehicle, targetPrice, nome, telefone }) {
+  const text =
+    `🔔 *Alerta de Queda de Investimento - ${dealershipInfo.nome}*\n\n` +
+    `• *Cliente:* ${nome}\n` +
+    `• *Telefone:* ${telefone}\n` +
+    `• *Veículo de Interesse:* ${vehicle.nome} (${vehicle.ano})\n` +
+    `• *Valor Atual:* ${formatCurrency(vehicle.preco)}\n` +
+    `• *Valor Alvo Desejado:* ${formatCurrency(targetPrice)}\n\n` +
+    `Por favor, me avise caso haja uma oportunidade ou condição especial para este modelo!`;
+  return `https://wa.me/${dealershipInfo.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
 export function buildTradeInWhatsappLink(dadosTroca) {
   const text = 
     `🔄 *Avaliação de Usado / Troca - ${dealershipInfo.nome}*\n\n` +

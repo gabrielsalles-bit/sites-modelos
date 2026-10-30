@@ -48,3 +48,15 @@ export function buildGeneralWhatsappLink(customMsg = '', phone = dealershipInfo.
   const text = customMsg || defaultText;
   return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 }
+
+export function buildPriceAlertWhatsappLink({ vehicle, targetPrice, nome, telefone, phone = dealershipInfo.whatsapp }) {
+  const text =
+    `🔔 *Alerta de Queda de Preço - AutoElite Motors*\n\n` +
+    `• *Cliente:* ${nome}\n` +
+    `• *Telefone:* ${telefone}\n` +
+    `• *Veículo de Interesse:* ${vehicle.nome} (${vehicle.ano})\n` +
+    `• *Preço Atual:* ${formatCurrency(vehicle.preco)}\n` +
+    `• *Preço Alvo Desejado:* ${formatCurrency(targetPrice)}\n\n` +
+    `Por favor, me avise caso haja uma oportunidade ou condição especial para este modelo!`;
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
