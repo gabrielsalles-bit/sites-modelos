@@ -2,7 +2,7 @@
 import {
   Car, ShieldCheck, MessageCircle, Menu, X,
   Home, Grid, Sparkles, Building2, ArrowLeft, Sun, Moon,
-  Calculator, ArrowLeftRight, Wrench, ChevronDown, Headset, Scale, Heart
+  Calculator, ArrowLeftRight, Wrench, ChevronDown, Headset, Scale, Heart, Bot
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { dealershipInfo } from '../../data/dealershipInfo';
@@ -49,6 +49,7 @@ export function Navbar({
 
   // Ferramentas: agrupadas num só menu para não poluir a barra principal
   const toolPages = [
+    { id: 'consultor-ia', label: 'Consultor IA', icon: Bot, badge: 'Novo' },
     { id: 'simulador', label: 'Simulador de Financiamento', icon: Calculator },
     { id: 'troca', label: 'Troca Fácil', icon: ArrowLeftRight },
     { id: 'comparador', label: 'Comparador', icon: Scale, count: comparedCount },
@@ -162,6 +163,11 @@ export function Navbar({
                       >
                         <Icon className="w-4 h-4 shrink-0 text-blue-400" />
                         <span className="flex-1">{link.label}</span>
+                        {link.badge && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">
+                            {link.badge}
+                          </span>
+                        )}
                         {link.count !== undefined && link.count > 0 && (
                           <span className="w-4 h-4 rounded-full bg-blue-400 text-black text-[10px] font-bold flex items-center justify-center">
                             {link.count}
@@ -259,6 +265,11 @@ export function Navbar({
                     <div className="flex items-center gap-3">
                       <Icon className="w-4 h-4 shrink-0" />
                       <span>{link.label}</span>
+                      {link.badge && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">
+                          {link.badge}
+                        </span>
+                      )}
                     </div>
                     {link.count !== undefined && link.count > 0 ? (
                       <span className="px-2 py-0.5 rounded-full bg-blue-400 text-black text-xs font-bold">

@@ -15,6 +15,7 @@ export function Footer({ onNavigate }) {
     { id: 'home', label: 'Página Inicial' },
     { id: 'estoque', label: 'Estoque Completo' },
     { id: 'destaques', label: 'Destaques da Semana' },
+    { id: 'consultor-ia', label: 'Consultor Automotivo IA' },
     { id: 'simulador', label: 'Simulador de Financiamento' },
     { id: 'troca', label: 'Troca Fácil' },
     { id: 'comparador', label: 'Comparador de Veículos' },

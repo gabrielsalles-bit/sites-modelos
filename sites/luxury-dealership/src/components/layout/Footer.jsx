@@ -15,6 +15,7 @@ export function Footer({ onNavigate }) {
     { id: 'home', label: 'Início & Experiência Cinematográfica' },
     { id: 'estoque', label: 'Showroom VIP & 360°' },
     { id: 'destaques', label: 'Acervo em Destaque' },
+    { id: 'consultor-ia', label: 'Consultor Automotivo IA' },
     { id: 'simulador', label: 'Simulador Private Banking' },
     { id: 'troca', label: 'Avaliação de Superesportivos' },
     { id: 'comparador', label: 'Comparador de Veículos' },

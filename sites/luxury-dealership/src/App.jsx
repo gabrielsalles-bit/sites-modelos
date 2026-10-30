@@ -11,6 +11,7 @@ import { TradeInPage } from './pages/TradeInPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { ComparatorPage } from './pages/ComparatorPage';
 import { ConciergePage } from './pages/ConciergePage';
+import { AIConsultantPage } from './pages/AIConsultantPage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
 import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
@@ -144,6 +145,13 @@ export default function App() {
 
         {currentPage === 'concierge' && (
           <ConciergePage />
+        )}
+
+        {currentPage === 'consultor-ia' && (
+          <AIConsultantPage
+            vehicles={vehiclesData}
+            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+          />
         )}
 
         {currentPage === 'sobre-contato' && (

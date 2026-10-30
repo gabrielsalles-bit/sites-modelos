@@ -2,7 +2,7 @@
 import {
   Car, Shield, Sparkles, Calculator, ArrowLeftRight,
   Crown, Building2, Menu, X, ArrowLeft, MessageCircle, Sun, Moon,
-  Wrench, ChevronDown, Scale, Heart
+  Wrench, ChevronDown, Scale, Heart, Bot
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { dealershipInfo } from '../../data/dealershipInfo';
@@ -49,6 +49,7 @@ export function Navbar({
 
   // Ferramentas: agrupadas num só menu para não poluir a barra principal
   const toolPages = [
+    { id: 'consultor-ia', label: 'Consultor IA', icon: Bot, badge: 'Novo' },
     { id: 'simulador', label: 'Simulador Private', icon: Calculator },
     { id: 'troca', label: 'Avaliação de Troca', icon: ArrowLeftRight },
     { id: 'comparador', label: 'Comparador', icon: Scale, count: comparedCount },
@@ -162,6 +163,11 @@ export function Navbar({
                       >
                         <Icon className="w-4 h-4 shrink-0 text-amber-400" />
                         <span className="flex-1">{link.label}</span>
+                        {link.badge && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                            {link.badge}
+                          </span>
+                        )}
                         {link.count !== undefined && link.count > 0 && (
                           <span className="w-4 h-4 rounded-full bg-amber-400 text-black text-[10px] font-bold flex items-center justify-center">
                             {link.count}
@@ -256,6 +262,11 @@ export function Navbar({
                     <div className="flex items-center gap-3">
                       <Icon className="w-4 h-4 shrink-0 text-amber-400" />
                       <span>{link.label}</span>
+                      {link.badge && (
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                          {link.badge}
+                        </span>
+                      )}
                     </div>
                     {link.count !== undefined && link.count > 0 && (
                       <span className="px-2 py-0.5 rounded-full bg-amber-400 text-black text-xs font-bold">
