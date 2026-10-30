@@ -44,10 +44,6 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         heading: ['Outfit', 'sans-serif']
-      },
-      boxShadow: {
-        'glow-blue': '0 0 25px -5px rgba(59, 130, 246, 0.4)',
-        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
       }
     },
   },
