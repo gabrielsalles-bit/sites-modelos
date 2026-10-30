@@ -190,7 +190,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
           {/* Grid de Especificações Rápidas */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-ink/[0.02] border border-ink/10">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 shrink-0 border border-amber-500/20">
+              <div className="w-9 h-9 rounded-xl bg-slate-800/50 flex items-center justify-center text-amber-400 shrink-0 border border-slate-700/40">
                 <Zap className="w-4 h-4" />
               </div>
               <div>
@@ -200,7 +200,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 shrink-0 border border-amber-500/20">
+              <div className="w-9 h-9 rounded-xl bg-slate-800/50 flex items-center justify-center text-amber-400 shrink-0 border border-slate-700/40">
                 <Gauge className="w-4 h-4" />
               </div>
               <div>
@@ -210,7 +210,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 shrink-0 border border-amber-500/20">
+              <div className="w-9 h-9 rounded-xl bg-slate-800/50 flex items-center justify-center text-amber-400 shrink-0 border border-slate-700/40">
                 <KeyRound className="w-4 h-4" />
               </div>
               <div>
@@ -220,7 +220,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing }) {
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 shrink-0 border border-amber-500/20">
+              <div className="w-9 h-9 rounded-xl bg-slate-800/50 flex items-center justify-center text-amber-400 shrink-0 border border-slate-700/40">
                 <Shield className="w-4 h-4" />
               </div>
               <div>

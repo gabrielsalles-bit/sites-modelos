@@ -153,7 +153,7 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
           {/* Grid de Especificações Rápidas */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-950/80 flex items-center justify-center text-blue-400 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-blue-400 shrink-0">
                 <Calendar className="w-4 h-4" />
               </div>
               <div>
@@ -163,7 +163,7 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-950/80 flex items-center justify-center text-blue-400 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-blue-400 shrink-0">
                 <Gauge className="w-4 h-4" />
               </div>
               <div>
@@ -173,7 +173,7 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-950/80 flex items-center justify-center text-blue-400 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-blue-400 shrink-0">
                 <Cog className="w-4 h-4" />
               </div>
               <div>
@@ -183,7 +183,7 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-950/80 flex items-center justify-center text-blue-400 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-blue-400 shrink-0">
                 <Fuel className="w-4 h-4" />
               </div>
               <div>

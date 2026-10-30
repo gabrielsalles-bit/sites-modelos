@@ -54,7 +54,7 @@ export function ConciergePage() {
             return (
               <div key={idx} className="p-8 rounded-3xl bg-surface-card border border-ink/10 flex flex-col justify-between space-y-4 hover:border-amber-500/40 transition-all">
                 <div className="space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-800/50 text-amber-400 flex items-center justify-center border border-slate-700/40">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h3 className="font-heading text-xl font-bold text-ink">{s.title}</h3>

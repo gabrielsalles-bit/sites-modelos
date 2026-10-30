@@ -43,7 +43,7 @@ export function WhyUsSection() {
           return (
             <div key={idx} className="p-6 rounded-3xl bg-surface-card border border-ink/10 hover:border-amber-500/40 transition-all flex flex-col justify-between group">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20 mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-slate-800/50 text-amber-400 flex items-center justify-center border border-slate-700/40 mb-4 group-hover:scale-110 group-hover:border-amber-500/30 transition-all">
                   <Icon className="w-6 h-6" />
                 </div>
                 <h3 className="font-heading text-lg font-bold text-ink mb-2 group-hover:text-amber-300 transition-colors">

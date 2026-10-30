@@ -14,9 +14,9 @@ export function StatsSection() {
             return (
               <div 
                 key={idx}
-                className="flex flex-col items-center text-center p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60 hover:border-blue-500/30 transition-colors"
+                className="flex flex-col items-center text-center p-4 rounded-2xl bg-slate-900/40 border border-slate-800/60 hover:border-slate-700 transition-colors"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-950/80 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-3">
+                <div className="w-10 h-10 rounded-xl bg-slate-800/60 border border-slate-700/50 text-blue-400 flex items-center justify-center mb-3">
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <span className="font-heading font-black text-2xl sm:text-3xl text-ink tracking-tight">

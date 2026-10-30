@@ -13,21 +13,21 @@ export function WhyUsSection() {
     {
       icon: Award,
       color: 'text-blue-400',
-      bgColor: 'bg-blue-950/60 border-blue-500/30',
+      bgColor: 'bg-slate-800/60 border-slate-700/50',
       title: '1 Ano de Garantia Completa',
       description: 'Cobertura mecânica para motor e transmissão com assistência 24h e guincho em todo o território nacional.'
     },
     {
       icon: Wrench,
       color: 'text-blue-400',
-      bgColor: 'bg-blue-950/60 border-blue-500/30',
+      bgColor: 'bg-slate-800/60 border-slate-700/50',
       title: 'Revisão Preventiva de 120 Itens',
       description: 'Troca preventiva de óleo, filtros, higienização de ar-condicionado, polimento e cristalização antes de cada entrega.'
     },
     {
       icon: Zap,
       color: 'text-blue-400',
-      bgColor: 'bg-blue-950/60 border-blue-500/30',
+      bgColor: 'bg-slate-800/60 border-slate-700/50',
       title: 'Aprovação de Crédito em 15 Minutos',
       description: 'Parceria com os principais bancos e financeiras garantindo taxas competitivas e até 60 dias para a primeira parcela.'
     }

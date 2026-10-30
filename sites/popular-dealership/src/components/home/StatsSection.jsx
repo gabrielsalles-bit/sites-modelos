@@ -17,7 +17,7 @@ export function StatsSection() {
             const Icon = s.icone;
             return (
               <div key={idx} className="space-y-1.5 p-4 rounded-2xl bg-slate-900/40 border border-slate-800/80">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 mx-auto flex items-center justify-center border border-cyan-500/20 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-slate-800/60 text-cyan-400 mx-auto flex items-center justify-center border border-slate-700/50 mb-2">
                   <Icon className="w-4 h-4" />
                 </div>
                 <div className="font-heading text-2xl sm:text-3xl font-black text-ink">

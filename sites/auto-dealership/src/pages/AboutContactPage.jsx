@@ -93,7 +93,7 @@ export function AboutContactPage() {
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-950/80 text-blue-400 flex items-center justify-center border border-blue-500/20">
+                <div className="w-8 h-8 rounded-lg bg-slate-800/60 text-blue-400 flex items-center justify-center border border-slate-700/50">
                   <Award className="w-4 h-4" />
                 </div>
                 <h4 className="font-bold text-sm text-ink">1 Ano de Garantia Completa</h4>
@@ -160,7 +160,7 @@ export function AboutContactPage() {
 
           {/* Card Horário de Funcionamento */}
           <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-950/80 text-blue-400 flex items-center justify-center border border-blue-500/20">
+            <div className="w-10 h-10 rounded-xl bg-slate-800/60 text-blue-400 flex items-center justify-center border border-slate-700/50">
               <Clock className="w-5 h-5" />
             </div>
             <h3 className="font-heading font-bold text-lg text-ink">Horário da Loja</h3>
@@ -174,7 +174,7 @@ export function AboutContactPage() {
 
           {/* Card Endereço Físico */}
           <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-950/80 text-blue-400 flex items-center justify-center border border-blue-500/20">
+            <div className="w-10 h-10 rounded-xl bg-slate-800/60 text-blue-400 flex items-center justify-center border border-slate-700/50">
               <MapPin className="w-5 h-5" />
             </div>
             <h3 className="font-heading font-bold text-lg text-ink">Endereço</h3>
