@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tema escuro (padrão) — valores idênticos ao visual atual */
+  --surface-page: 5 5 8;
+  --surface-card: 10 11 18;
+  --surface-band: 7 8 14;
+  --surface-card-alt: 12 13 20;
+  --surface-modal: 9 10 16;
+  --surface-footer: 3 3 6;
+
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 8 12 20;
+  --ink: 255 255 255;
+
+  --amber-200: 253 230 138;
+  --amber-300: 252 211 77;
+  --amber-400: 251 191 36;
+  --amber-500: 245 158 11;
+  --amber-600: 217 119 6;
+
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-950: 2 44 34;
+
+  --blue-300: 147 197 253;
+  --blue-500: 59 130 246;
+}
+
+:root.light {
+  /* Tema claro — mesma estrutura, papéis invertidos para manter contraste e hierarquia */
+  --surface-page: 255 255 255;
+  --surface-card: 247 246 244;
+  --surface-band: 243 241 237;
+  --surface-card-alt: 247 246 244;
+  --surface-modal: 255 255 255;
+  --surface-footer: 239 236 230;
+
+  --slate-50: 15 23 42;
+  --slate-100: 30 41 59;
+  --slate-200: 51 65 85;
+  --slate-300: 71 85 105;
+  --slate-400: 100 116 139;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 203 213 225;
+  --slate-800: 226 232 240;
+  --slate-900: 241 245 249;
+  --slate-950: 255 255 255;
+  --ink: 15 23 42;
+
+  --amber-200: 146 64 14;
+  --amber-300: 180 83 9;
+  --amber-400: 180 83 9;
+  --amber-500: 245 158 11;
+  --amber-600: 217 119 6;
+
+  --emerald-300: 4 120 87;
+  --emerald-400: 5 150 105;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-950: 236 253 245;
+
+  --blue-300: 29 78 216;
+  --blue-500: 59 130 246;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-page text-slate-100 transition-colors duration-300;
+  }
+}
+
+/* Escopo "sempre escuro": usado no conteúdo sobreposto ao vídeo/foto do Hero,
+   que precisa continuar legível (texto claro) mesmo com o resto do site no tema claro. */
+.theme-pinned-dark {
+  --surface-page: 5 5 8;
+  --surface-card: 10 11 18;
+  --surface-band: 7 8 14;
+  --surface-card-alt: 12 13 20;
+  --surface-modal: 9 10 16;
+  --surface-footer: 3 3 6;
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 8 12 20;
+  --ink: 255 255 255;
+  --amber-200: 253 230 138;
+  --amber-300: 252 211 77;
+  --amber-400: 251 191 36;
+  --amber-500: 245 158 11;
+  --amber-600: 217 119 6;
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-950: 2 44 34;
+  --blue-300: 147 197 253;
+  --blue-500: 59 130 246;
+}

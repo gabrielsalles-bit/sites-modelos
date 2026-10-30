@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tema escuro (padrão) — valores idênticos ao visual atual */
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 8 12 20;
+  --ink: 255 255 255;
+  --surface-footer: 5 8 15;
+
+  --blue-300: 147 197 253;
+  --blue-400: 96 165 250;
+  --blue-500: 59 130 246;
+  --blue-600: 37 99 235;
+  --blue-950: 23 37 84;
+
+  --emerald-200: 167 243 208;
+  --emerald-300: 110 231 183;
+  --emerald-400: 52 211 153;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-950: 2 44 34;
+}
+
+:root.light {
+  /* Tema claro — mesma estrutura, papéis invertidos para manter contraste e hierarquia */
+  --slate-50: 15 23 42;
+  --slate-100: 30 41 59;
+  --slate-200: 51 65 85;
+  --slate-300: 71 85 105;
+  --slate-400: 100 116 139;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 203 213 225;
+  --slate-800: 226 232 240;
+  --slate-900: 241 245 249;
+  --slate-950: 255 255 255;
+  --ink: 15 23 42;
+  --surface-footer: 241 245 249;
+
+  --blue-300: 29 78 216;
+  --blue-400: 37 99 235;
+  --blue-500: 59 130 246;
+  --blue-600: 37 99 235;
+  --blue-950: 239 246 255;
+
+  --emerald-200: 6 95 70;
+  --emerald-300: 4 120 87;
+  --emerald-400: 5 150 105;
+  --emerald-500: 16 185 129;
+  --emerald-600: 5 150 105;
+  --emerald-950: 236 253 245;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 overflow-x-hidden transition-colors duration-300;
+  }
+}
+
+/* Glassmorphism custom classes */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(59, 130, 246, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--slate-950));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--slate-800));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--blue-500));
+}

@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portal",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:portal"],
+      "port": 5173
+    },
+    {
+      "name": "auto-dealership",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:dealership"],
+      "port": 5174
+    },
+    {
+      "name": "luxury-dealership",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:luxury"],
+      "port": 5175
+    },
+    {
+      "name": "popular-dealership",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:popular"],
+      "port": 5176
+    }
+  ]
+}
