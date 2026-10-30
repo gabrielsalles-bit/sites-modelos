@@ -4,7 +4,7 @@
 1. Aceite o convite de colaborador (e-mail ou aba *Invitations* do repositório).
 2. Clone e instale:
    ```bash
-   git clone https://github.com/<dono>/sites-modelos.git
+   git clone https://github.com/gabrielsalles-bit/sites-modelos.git
    cd sites-modelos
    npm install
    ```

@@ -3,7 +3,7 @@
 > Repositório monorepo 100% modular contendo **3 modelos de sites especializados para o mercado automotivo** e uma **vitrine/portal central**.
 
 🌐 **Portal Hub Online (GitHub Pages):**  
-👉 **[https://<dono>.github.io/sites-modelos/](https://<dono>.github.io/sites-modelos/)**
+👉 **[https://gabrielsalles-bit.github.io/sites-modelos/](https://gabrielsalles-bit.github.io/sites-modelos/)**
 
 ---
 
@@ -11,10 +11,10 @@
 
 | Aplicação / Pasta | Nicho & Função | Link de Acesso |
 |---|---|---|
-| **`sites/portal/`** | **Vitrine Central / Portal Hub**: Catálogo responsivo com links e métricas dos 3 modelos. | [Acessar Vitrine](https://<dono>.github.io/sites-modelos/) |
-| **`sites/auto-dealership/`** | **Modelo 01: AutoElite Motors**: Concessionária de seminovos com vídeo interativo GSAP ScrollTrigger. | [Acessar Modelo 01](https://<dono>.github.io/sites-modelos/auto-dealership/) |
-| **`sites/luxury-dealership/`** | **Modelo 02: Apex Luxury Motors**: Superesportivos, blindados certificados e concierge VIP. | [Acessar Modelo 02](https://<dono>.github.io/sites-modelos/luxury-dealership/) |
-| **`sites/popular-dealership/`** | **Modelo 03: DriveNow Motors**: Multimarcas com simulador de crédito dinâmico e Troca com Troco. | [Acessar Modelo 03](https://<dono>.github.io/sites-modelos/popular-dealership/) |
+| **`sites/portal/`** | **Vitrine Central / Portal Hub**: Catálogo responsivo com links e métricas dos 3 modelos. | [Acessar Vitrine](https://gabrielsalles-bit.github.io/sites-modelos/) |
+| **`sites/auto-dealership/`** | **Modelo 01: AutoElite Motors**: Concessionária de seminovos com vídeo interativo GSAP ScrollTrigger. | [Acessar Modelo 01](https://gabrielsalles-bit.github.io/sites-modelos/auto-dealership/) |
+| **`sites/luxury-dealership/`** | **Modelo 02: Apex Luxury Motors**: Superesportivos, blindados certificados e concierge VIP. | [Acessar Modelo 02](https://gabrielsalles-bit.github.io/sites-modelos/luxury-dealership/) |
+| **`sites/popular-dealership/`** | **Modelo 03: DriveNow Motors**: Multimarcas com simulador de crédito dinâmico e Troca com Troco. | [Acessar Modelo 03](https://gabrielsalles-bit.github.io/sites-modelos/popular-dealership/) |
 
 ---
 
