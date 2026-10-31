@@ -24,7 +24,7 @@ export function HeroSection({ onSearch, onNavigate }) {
         {/* Título Principal */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-black font-heading text-ink tracking-tight leading-none">
           Seu Carro Novo com <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-300 to-emerald-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-300">
             Inteligência & Aprovação em 15 Min
           </span>
         </h1>

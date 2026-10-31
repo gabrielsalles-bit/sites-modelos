@@ -145,7 +145,7 @@ export function FinancingSimulator({ vehicles = [], preselectedVehicle = null })
             <span className="text-xs uppercase tracking-widest text-slate-400 font-semibold block">
               Mensalidade Estimada ({term}x)
             </span>
-            <div className="font-heading text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+            <div className="font-heading text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-cyan-300">
               {formatCurrency(monthlyPayment)}
               <span className="text-xs sm:text-sm text-slate-400 font-normal"> /mês</span>
             </div>

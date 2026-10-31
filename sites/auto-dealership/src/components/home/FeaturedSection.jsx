@@ -35,7 +35,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
                 <span className="bg-slate-900/80 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 font-semibold">
                   {vehicle.ano} • {formatKm(vehicle.km)}
                 </span>
-                <span className="bg-blue-600/90 px-3 py-1.5 rounded-lg backdrop-blur-md font-semibold">
+                <span className="bg-blue-600/90 px-3 py-1.5 rounded-lg backdrop-blur-md font-semibold text-white">
                   Clique para ver ficha completa
                 </span>
               </div>
