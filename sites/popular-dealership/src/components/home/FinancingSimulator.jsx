@@ -128,7 +128,7 @@ export function FinancingSimulator({ vehicles = [], preselectedVehicle = null })
                   onClick={() => setTerm(meses)}
                   className={`py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border ${
                     term === meses
-                      ? 'bg-cyan-500 text-black border-cyan-400 font-bold shadow-md shadow-cyan-500/20'
+                      ? 'bg-cyan-500 text-black border-cyan-400 font-bold shadow-sm'
                       : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-cyan-500/40'
                   }`}
                 >

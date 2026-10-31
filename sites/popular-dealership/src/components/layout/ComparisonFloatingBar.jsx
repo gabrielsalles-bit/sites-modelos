@@ -6,7 +6,7 @@ export function ComparisonFloatingBar({ comparedVehicles = [], onOpenComparator,
   if (!comparedVehicles || comparedVehicles.length === 0) return null;
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-2xl bg-slate-900/95 border border-cyan-500/40 backdrop-blur-xl rounded-2xl p-3 sm:px-5 sm:py-3.5 shadow-2xl shadow-cyan-950/60 flex items-center justify-between gap-3 animate-fade-in">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-2xl bg-slate-900/95 border border-cyan-500/40 rounded-2xl p-3 sm:px-5 sm:py-3.5 shadow-lg flex items-center justify-between gap-3 animate-fade-in">
       <div className="flex items-center gap-3 overflow-hidden">
         <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/30">
           <Scale className="w-5 h-5" />

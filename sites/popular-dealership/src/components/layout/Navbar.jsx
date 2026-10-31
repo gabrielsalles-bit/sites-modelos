@@ -92,7 +92,7 @@ export function Navbar({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-2.5 group text-left"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-emerald-400 flex items-center justify-center text-black shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-cyan-600 flex items-center justify-center text-black shadow-sm group-hover:scale-105 transition-transform">
                 <Zap className="w-6 h-6 fill-black" />
               </div>
               <div>
@@ -117,7 +117,7 @@ export function Navbar({
                   onClick={() => handleNavClick(link.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 ${
                     isActive
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm shadow-cyan-500/10'
+                      ? 'bg-cyan-500/10 text-cyan-500 border border-cyan-500/30'
                       : 'text-slate-400 hover:text-ink hover:bg-slate-800/60'
                   }`}
                 >
@@ -132,7 +132,7 @@ export function Navbar({
                 onClick={() => setToolsMenuOpen((v) => !v)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
                   isToolPageActive
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm shadow-cyan-500/10'
+                    ? 'bg-cyan-500/10 text-cyan-500 border border-cyan-500/30'
                     : 'text-slate-400 hover:text-ink hover:bg-slate-800/60'
                 }`}
               >

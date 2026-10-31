@@ -50,7 +50,7 @@ export function InventoryPage({
   return (
     <div className="pt-24 pb-20 space-y-10">
       {/* Header */}
-      <div className="border-b border-slate-800 bg-gradient-to-b from-cyan-950/20 via-surface-band to-transparent py-12">
+      <div className="border-b border-slate-800 bg-surface-band py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400"></span>

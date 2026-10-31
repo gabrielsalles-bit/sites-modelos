@@ -73,7 +73,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
       {/* Header do Chat */}
       <div className="p-4 sm:px-6 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-600 flex items-center justify-center text-white shadow-sm">
             <Bot className="w-5 h-5" />
           </div>
           <div>
@@ -101,14 +101,14 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
         {messages.map((msg) => (
           <div key={msg.id} className={`flex gap-3 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.sender === 'ai' && (
-              <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 rounded-xl bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-1">
                 <Bot className="w-4 h-4" />
               </div>
             )}
 
             <div className={`max-w-[85%] space-y-3 ${
               msg.sender === 'user'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-md'
+                ? 'bg-cyan-600 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-sm'
                 : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm leading-relaxed shadow-md'
             }`}>
               <p className="whitespace-pre-wrap">{msg.text}</p>
@@ -182,7 +182,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
         />
         <button
           type="submit"
-          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-black font-bold text-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md shadow-cyan-500/20"
+          className="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-sm flex items-center justify-center active:scale-95 transition-all shadow-sm"
         >
           <Send className="w-4 h-4" />
         </button>

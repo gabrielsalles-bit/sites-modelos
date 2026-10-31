@@ -134,7 +134,7 @@ export function VehicleDetailModal({
                 onClick={() => setActiveTab('tco')}
                 className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   activeTab === 'tco'
-                    ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/20 font-bold'
+                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
                     : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
                 }`}
               >
@@ -146,7 +146,7 @@ export function VehicleDetailModal({
                 onClick={() => setActiveTab('360')}
                 className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   activeTab === '360'
-                    ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/20 font-bold'
+                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
                     : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
                 }`}
               >
@@ -158,7 +158,7 @@ export function VehicleDetailModal({
                 onClick={() => setActiveTab('galeria')}
                 className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   activeTab === 'galeria'
-                    ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/20 font-bold'
+                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
                     : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
                 }`}
               >
@@ -169,7 +169,7 @@ export function VehicleDetailModal({
                 onClick={() => setActiveTab('laudo')}
                 className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   activeTab === 'laudo'
-                    ? 'bg-emerald-500 text-black shadow-md shadow-emerald-500/20 font-bold'
+                    ? 'bg-emerald-500 text-black shadow-sm font-bold'
                     : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
                 }`}
               >

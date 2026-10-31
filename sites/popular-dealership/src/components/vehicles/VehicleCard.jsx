@@ -16,7 +16,7 @@ export function VehicleCard({
   const fipe = calculateFipeDiff(vehicle.preco, vehicle.fipeReferencia);
 
   return (
-    <div className="group rounded-3xl bg-surface-page border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-950/20 relative">
+    <div className="group rounded-3xl bg-surface-page border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 flex flex-col overflow-hidden shadow-sm hover:shadow-md relative">
       {/* Imagem com Overlay */}
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-950 cursor-pointer" onClick={() => onSelect(vehicle)}>
         <img
@@ -25,7 +25,7 @@ export function VehicleCard({
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090d16] via-transparent to-black/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 pointer-events-none" />
 
         {/* Badges Superiores */}
         <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between">
@@ -47,7 +47,7 @@ export function VehicleCard({
               onClick={() => onToggleCompare && onToggleCompare(vehicle.id)}
               className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
                 isComparing
-                  ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/30'
+                  ? 'bg-cyan-500 text-black shadow-sm'
                   : 'bg-black/60 text-slate-300 hover:text-white border border-white/10'
               }`}
               title={isComparing ? 'Remover da comparação' : 'Comparar este veículo'}
@@ -59,7 +59,7 @@ export function VehicleCard({
               onClick={() => onToggleFavorite && onToggleFavorite(vehicle.id)}
               className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
                 isFavorite
-                  ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30'
+                  ? 'bg-rose-500 text-white shadow-sm'
                   : 'bg-black/60 text-slate-300 hover:text-rose-400 border border-white/10'
               }`}
               title={isFavorite ? 'Remover dos favoritos' : 'Salvar nos favoritos'}
@@ -138,7 +138,7 @@ export function VehicleCard({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black text-xs font-bold transition-all shadow-md shadow-emerald-500/20 flex items-center justify-center gap-1.5"
+              className="px-3 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5"
             >
               <MessageCircle className="w-3.5 h-3.5 fill-black" />
               <span>Negociar</span>

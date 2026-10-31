@@ -12,9 +12,7 @@ export function HeroSection({ onSearch, onNavigate }) {
   };
 
   return (
-    <section className="relative pt-24 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-surface-page via-surface-band to-surface-band">
-      {/* Luzes de fundo Tech */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-500/15 blur-[100px] pointer-events-none rounded-full" />
+    <section className="relative pt-24 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-surface-band">
 
       <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
         {/* Badge Inteligente */}
@@ -26,7 +24,7 @@ export function HeroSection({ onSearch, onNavigate }) {
         {/* Título Principal */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-black font-heading text-ink tracking-tight leading-none">
           Seu Carro Novo com <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-300 to-emerald-400">
             Inteligência & Aprovação em 15 Min
           </span>
         </h1>

@@ -87,10 +87,10 @@ export function HomePage({
 
       {/* Banner de Destaque: Consultor com IA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-violet-950/60 via-slate-900 to-surface-page border border-violet-500/30 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+        <div className="p-8 sm:p-12 rounded-3xl bg-slate-900 border border-cyan-500/30 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm relative overflow-hidden">
           <div className="space-y-4 max-w-xl text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">
-              <Bot className="w-4 h-4 text-violet-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+              <Bot className="w-4 h-4 text-cyan-400" />
               <span>Inteligência Artificial Exclusiva</span>
             </div>
             <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink">
@@ -118,7 +118,7 @@ export function HomePage({
       {/* Banners Duplos de Ação Rápida (Financiamento & Troca com Troco) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-cyan-950/60 via-slate-900 to-slate-900 border border-cyan-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-cyan-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center border border-cyan-500/30">
                 <Calculator className="w-6 h-6" />
@@ -141,7 +141,7 @@ export function HomePage({
             </Button>
           </div>
 
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                 <ArrowLeftRight className="w-6 h-6" />
