@@ -9,7 +9,7 @@ function getInitialTheme() {
   } catch {
     // localStorage indisponível (ex: navegação privada) — segue com o padrão
   }
-  return 'dark';
+  return 'light';
 }
 
 export function useTheme() {
