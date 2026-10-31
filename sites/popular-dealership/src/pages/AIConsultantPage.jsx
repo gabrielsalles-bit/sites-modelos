@@ -7,7 +7,7 @@ export function AIConsultantPage({ vehicles, onSelectVehicle }) {
     <div className="pt-24 pb-20 space-y-12">
       <div className="border-b border-slate-800 bg-surface-band py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-2">
             <Bot className="w-3.5 h-3.5" />
             <span>Consultoria Especializada por IA</span>
           </div>
@@ -38,7 +38,7 @@ export function AIConsultantPage({ vehicles, onSelectVehicle }) {
           </div>
           <div className="p-4 rounded-2xl bg-surface-page border border-slate-800 space-y-1">
             <span className="font-bold text-ink flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-violet-400" /> Perfil Customizado
+              <Sparkles className="w-4 h-4 text-cyan-400" /> Perfil Customizado
             </span>
             <p className="text-slate-400">Indicações para trabalho, família, viagens ou economia.</p>
           </div>
