@@ -140,7 +140,7 @@ export function VehicleDetailModal({ vehicle, onClose, onContact, onOpenFinancin
                     onClick={() => setCurrentIndex(idx)}
                     className={`relative w-20 sm:w-24 h-14 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                       currentIndex === idx 
-                        ? 'border-blue-500 ring-2 ring-blue-500/30 scale-105 shadow-md shadow-blue-500/20' 
+                        ? 'border-blue-500 ring-2 ring-blue-500/30 scale-105'
                         : 'border-slate-800 opacity-60 hover:opacity-100'
                     }`}
                   >

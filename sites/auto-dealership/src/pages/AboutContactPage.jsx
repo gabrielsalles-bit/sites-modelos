@@ -42,7 +42,7 @@ export function AboutContactPage() {
   return (
     <div className="pt-24 pb-20 space-y-20">
       {/* Page Header */}
-      <div className="border-b border-slate-800/80 bg-gradient-to-b from-blue-950/20 via-slate-950 to-transparent py-12">
+      <div className="border-b border-slate-800/80 bg-slate-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-2">
             <Building2 className="w-3.5 h-3.5" />
@@ -112,7 +112,7 @@ export function AboutContactPage() {
                 alt="Showroom AutoElite Motors"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080c14] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/10 text-xs">
                 <p className="font-bold text-ink">Showroom no SIA Trecho 3 — Brasília/DF</p>
                 <p className="text-slate-400 text-[11px] mt-0.5">Espaço climatizado com mais de 100 veículos em exposição</p>

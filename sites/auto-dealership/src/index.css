@@ -68,6 +68,28 @@
   }
 }
 
+/* Escopo "sempre escuro": usado no rodapé, que permanece escuro
+   independente do tema ativo (ver --surface-footer em :root / :root.light). */
+.theme-pinned-dark {
+  --slate-50: 250 250 249;
+  --slate-100: 243 242 240;
+  --slate-200: 229 227 224;
+  --slate-300: 205 202 197;
+  --slate-400: 158 154 148;
+  --slate-500: 120 116 111;
+  --slate-600: 87 84 80;
+  --slate-700: 62 60 57;
+  --slate-800: 42 41 39;
+  --slate-900: 26 25 24;
+  --slate-950: 16 16 15;
+  --ink: 245 245 244;
+  --blue-300: 148 171 201;
+  --blue-400: 109 136 170;
+  --blue-500: 82 110 148;
+  --blue-600: 60 85 117;
+  --blue-950: 26 35 48;
+}
+
 /* Glassmorphism custom classes */
 .glass-panel {
   background: rgba(15, 23, 42, 0.72);

@@ -20,7 +20,7 @@ export function VehicleCard({
   const whatsappUrl = buildVehicleWhatsappLink(vehicle);
 
   return (
-    <div className="group rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-blue-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-950/20 flex flex-col overflow-hidden backdrop-blur-md">
+    <div className="group rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-blue-500/40 transition-all duration-300 hover:shadow-md flex flex-col overflow-hidden">
       {/* Container de Imagem */}
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
         <img
@@ -32,7 +32,7 @@ export function VehicleCard({
         />
         
         {/* Gradiente de sobreposição sutil */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/80 via-transparent to-[#080c14]/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
 
         {/* Badges Superiores: Perícia à esquerda, ações rápidas à direita */}
         <div className="absolute top-3 inset-x-3 z-10 flex items-start justify-between">
@@ -50,7 +50,7 @@ export function VehicleCard({
                   onClick={() => onToggleCompare(vehicle.id)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
                     isComparing
-                      ? 'bg-blue-500 text-white shadow-md shadow-blue-500/30'
+                      ? 'bg-blue-500 text-white shadow-sm'
                       : 'bg-black/60 text-slate-300 hover:text-white border border-white/10'
                   }`}
                   title={isComparing ? 'Remover da comparação' : 'Comparar este veículo'}
@@ -64,7 +64,7 @@ export function VehicleCard({
                   onClick={() => onToggleFavorite(vehicle.id)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all ${
                     isFavorite
-                      ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30'
+                      ? 'bg-rose-500 text-white shadow-sm'
                       : 'bg-black/60 text-slate-300 hover:text-rose-400 border border-white/10'
                   }`}
                   title={isFavorite ? 'Remover dos favoritos' : 'Salvar nos favoritos'}

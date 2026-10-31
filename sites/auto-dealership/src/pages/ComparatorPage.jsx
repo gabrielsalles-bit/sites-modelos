@@ -11,7 +11,7 @@ export function ComparatorPage({
 }) {
   return (
     <div className="pt-24 pb-20 space-y-10">
-      <div className="border-b border-slate-800/80 bg-gradient-to-b from-blue-950/20 via-slate-950 to-transparent py-12">
+      <div className="border-b border-slate-800/80 bg-slate-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-2">
             <Scale className="w-3.5 h-3.5" />

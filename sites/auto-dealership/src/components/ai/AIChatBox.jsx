@@ -73,7 +73,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
       {/* Header do Chat */}
       <div className="p-4 sm:px-6 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+          <div className="w-10 h-10 rounded-2xl bg-blue-500 flex items-center justify-center text-white shadow-sm">
             <Bot className="w-5 h-5" />
           </div>
           <div>
@@ -108,7 +108,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
 
             <div className={`max-w-[85%] space-y-3 ${
               msg.sender === 'user'
-                ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-md'
+                ? 'bg-blue-500 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-sm'
                 : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm leading-relaxed shadow-md'
             }`}>
               <p className="whitespace-pre-wrap">{msg.text}</p>
@@ -182,7 +182,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
         />
         <button
           type="submit"
-          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold text-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md shadow-blue-500/20"
+          className="px-4 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm flex items-center justify-center active:scale-95 transition-all shadow-sm"
         >
           <Send className="w-4 h-4" />
         </button>

@@ -89,7 +89,7 @@ export function HomePage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card Destaques & Oportunidades */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-950/60 via-slate-900 to-slate-900 border border-blue-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-blue-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
                 <Sparkles className="w-6 h-6" />
@@ -113,7 +113,7 @@ export function HomePage({
           </div>
 
           {/* Card Atendimento & Agendamento */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                 <CalendarCheck className="w-6 h-6" />
@@ -153,7 +153,7 @@ export function HomePage({
       {/* Banners Duplos de Ação Rápida (Financiamento & Troca) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-500/10 via-slate-900 to-slate-900 border border-blue-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-blue-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
                 <Calculator className="w-6 h-6" />
@@ -176,7 +176,7 @@ export function HomePage({
             </Button>
           </div>
 
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-slate-900 to-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-slate-900 border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                 <ArrowLeftRight className="w-6 h-6" />

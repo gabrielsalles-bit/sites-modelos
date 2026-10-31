@@ -32,7 +32,7 @@ export function ConciergePage() {
   return (
     <div className="pt-24 pb-20 space-y-16">
       {/* Header */}
-      <div className="border-b border-slate-800/80 bg-gradient-to-b from-blue-950/20 via-slate-950 to-transparent py-12">
+      <div className="border-b border-slate-800/80 bg-slate-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-2">
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -66,7 +66,7 @@ export function ConciergePage() {
         </div>
 
         {/* CTA Banner */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-blue-500/10 via-slate-900 to-blue-500/5 border border-blue-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="p-8 sm:p-12 rounded-3xl bg-slate-900 border border-blue-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-2 text-center sm:text-left">
             <h3 className="font-heading text-2xl font-bold text-ink">Quer falar direto com um consultor?</h3>
             <p className="text-xs sm:text-sm text-slate-300 font-light">

@@ -92,7 +92,7 @@ export function Navbar({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 group text-left"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
                 <Car className="w-6 h-6" />
               </div>
               <div>
@@ -117,7 +117,7 @@ export function Navbar({
                   onClick={() => handleNavClick(link.id)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 shadow-sm shadow-blue-500/10'
+                      ? 'bg-blue-600/10 text-blue-500 border border-blue-500/30'
                       : 'text-slate-400 hover:text-ink hover:bg-slate-800/50'
                   }`}
                 >
@@ -132,7 +132,7 @@ export function Navbar({
                 onClick={() => setToolsMenuOpen((v) => !v)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${
                   isToolPageActive
-                    ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 shadow-sm shadow-blue-500/10'
+                    ? 'bg-blue-600/10 text-blue-500 border border-blue-500/30'
                     : 'text-slate-400 hover:text-ink hover:bg-slate-800/50'
                 }`}
               >

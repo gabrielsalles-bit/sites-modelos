@@ -12,10 +12,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
 
   return (
     <section id="destaques" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-blue-950/40 border border-slate-700/80 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
-        {/* Glow de fundo */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-
+      <div className="relative rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Coluna Visual (Imagem do Carro) */}
           <div className="lg:col-span-7 space-y-4">
@@ -33,7 +30,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
                 alt={vehicle.nome}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-ink">
                 <span className="bg-slate-900/80 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 font-semibold">
                   {vehicle.ano} • {formatKm(vehicle.km)}

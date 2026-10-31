@@ -122,7 +122,7 @@ export function InventorySection({
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-xs font-semibold shrink-0 transition-all duration-200 flex items-center gap-2 ${
                 selectedCategory === cat.id
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40'
+                  ? 'bg-blue-600 text-white shadow-sm border border-blue-400/40'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800'
               }`}
             >

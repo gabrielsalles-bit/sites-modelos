@@ -57,6 +57,8 @@ Tokens de superfície (`luxury-dealership` e `popular-dealership` têm `--surfac
 
 `--surface-footer` fica propositalmente escuro nos dois temas (igual à referência, que mantém o rodapé sempre escuro independente do resto da página).
 
+**Achado durante a execução da Task 2 (`auto-dealership`):** como `--surface-footer` é fixo escuro mas os tokens `--slate-*`/`--ink` usados dentro do rodapé invertem com o tema, o texto do rodapé ficava ilegível no tema claro. Correção: o elemento `<footer>` recebe a classe `theme-pinned-dark`, que repiná `--slate-*`/`--ink`/acento para os valores escuros independente do `.light` no `<html>` — mesmo padrão que `luxury-dealership` já tinha para o conteúdo sobre foto/vídeo do Hero. `auto-dealership` já ganhou essa classe (ver `src/index.css`); `luxury-dealership` só precisa atualizar os valores da classe que já existe (Task 4); `popular-dealership` precisa da classe criada do zero (Task 7), igual ao que foi feito em `auto-dealership`.
+
 ### Tabela de paleta — acento escuro por site
 
 Acento usado só em detalhes pontuais (CTA primário via fórmula abaixo, ícones, link ativo, badges) — nunca como cor de fundo dominante de seção.
@@ -222,7 +224,7 @@ Nenhum commit nesta task (é só verificação; se algo falhar, corrigir no Task
 
 - [ ] **Step 1: Atualizar os valores em `:root` (bloco escuro) de `sites/luxury-dealership/src/index.css`** com a coluna "Escuro" das tabelas neutra, superfície e acento âmbar.
 - [ ] **Step 2: Atualizar os valores em `:root.light` do mesmo arquivo** com a coluna "Claro" das mesmas tabelas.
-- [ ] **Step 3: Repetir os Steps 1-2 também no bloco `.theme-pinned-dark`** (usado para conteúdo sobreposto a foto/vídeo no Hero) **usando os valores da coluna "Escuro"** — esse bloco deve continuar sempre escuro independente do tema ativo, só os números mudam para bater com a nova paleta escura.
+- [ ] **Step 3: Repetir os Steps 1-2 também no bloco `.theme-pinned-dark`** (usado para conteúdo sobreposto a foto/vídeo no Hero, e para o rodapé — ver nota em "Tabela de paleta — escala neutra") **usando os valores da coluna "`:root` (escuro, toggle)"** — esse bloco deve continuar sempre escuro independente do tema ativo, só os números mudam para bater com a nova paleta escura. Conferir se o `<footer>` do site já tem a classe `theme-pinned-dark` aplicada; se não tiver, adicionar (igual ao que foi feito em `auto-dealership`).
 - [ ] **Step 4: Em `sites/luxury-dealership/src/hooks/useTheme.js:12`, trocar `return 'dark';` por `return 'light';`.**
 - [ ] **Step 5: Rodar `npm run dev` em `sites/luxury-dealership` (porta 5175), abrir no navegador, confirmar tema claro por padrão.**
 - [ ] **Step 6: Rodar `npm run build` em `sites/luxury-dealership` e confirmar que termina sem erro.**
@@ -290,8 +292,8 @@ Mesmos steps do Task 3, aplicados a `luxury-dealership`. Nenhum commit (task só
 
 - [ ] **Step 1: Atualizar os valores em `:root` (bloco escuro) de `sites/popular-dealership/src/index.css`** com a coluna "Escuro" das tabelas neutra, superfície e acento ciano/violeta.
 - [ ] **Step 2: Atualizar os valores em `:root.light` do mesmo arquivo** com a coluna "Claro" das mesmas tabelas.
-- [ ] **Step 3: Em `sites/popular-dealership/src/hooks/useTheme.js:12`, trocar `return 'dark';` por `return 'light';`.**
-- [ ] **Step 4: Rodar `npm run dev` em `sites/popular-dealership` (porta 5176), abrir no navegador, confirmar tema claro por padrão.**
+- [ ] **Step 3: Adicionar a classe `.theme-pinned-dark` em `sites/popular-dealership/src/index.css`** (não existe ainda nesse site — criar do zero, copiando a estrutura de `auto-dealership/src/index.css`, com os tokens `--slate-*`/`--ink`/`--cyan-*`/`--violet-*` usando os valores da coluna "`:root` (escuro, toggle)") **e aplicar a classe no elemento `<footer>`** de `sites/popular-dealership/src/components/layout/Footer.jsx` (mesmo motivo do achado na Task 2 de `auto-dealership`: `--surface-footer` fixo escuro, mas `--slate-*`/`--ink` sem pin ficam ilegíveis no tema claro).
+- [ ] **Step 4: Em `sites/popular-dealership/src/hooks/useTheme.js:12`, trocar `return 'dark';` por `return 'light';`.**
 - [ ] **Step 5: Rodar `npm run build` em `sites/popular-dealership` e confirmar que termina sem erro.**
 - [ ] **Step 6: Commit**
 
