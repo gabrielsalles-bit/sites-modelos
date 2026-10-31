@@ -15,12 +15,12 @@ export function Button({
   type = 'button',
   ...props 
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-heading font-semibold tracking-wide transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
+  const baseStyles = 'inline-flex items-center justify-center font-heading font-semibold tracking-wide transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
 
   const variants = {
-    gold: 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:via-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 border border-amber-300/40 font-bold',
-    outline: 'bg-ink/[0.03] hover:bg-ink/[0.08] text-amber-300 hover:text-ink border border-amber-500/30 hover:border-amber-400/60 shadow-sm backdrop-blur-sm',
-    dark: 'bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-ink border border-ink/10 shadow-sm backdrop-blur-sm',
+    gold: 'bg-ink text-surface-page hover:opacity-90 border border-ink/10 shadow-sm font-bold',
+    outline: 'bg-transparent hover:bg-ink/5 text-ink border border-ink/15',
+    dark: 'bg-surface-card-alt hover:bg-ink/5 text-slate-300 hover:text-ink border border-ink/10 shadow-sm',
     whatsapp: 'bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white shadow-lg shadow-emerald-950/60 hover:shadow-emerald-500/30 border border-emerald-400/30 font-bold'
   };
 

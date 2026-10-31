@@ -126,7 +126,7 @@ export function HomePage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card Simulador */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-amber-500/10 via-surface-card to-surface-card border border-amber-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-surface-card border border-amber-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/30">
                 <Calculator className="w-6 h-6" />
@@ -150,7 +150,7 @@ export function HomePage({
           </div>
 
           {/* Card Avaliação de Usado */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-surface-card to-surface-card border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-xl">
+          <div className="p-8 rounded-3xl bg-surface-card border border-emerald-500/30 flex flex-col justify-between space-y-6 shadow-sm">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                 <ArrowLeftRight className="w-6 h-6" />

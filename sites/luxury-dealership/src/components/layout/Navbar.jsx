@@ -92,7 +92,7 @@ export function Navbar({
               onClick={() => handleNavClick('home')}
               className="flex items-center gap-3 group text-left"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-amber-300 flex items-center justify-center text-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black shadow-sm group-hover:scale-105 transition-transform">
                 <Crown className="w-6 h-6 stroke-[2.2]" />
               </div>
               <div>
@@ -117,7 +117,7 @@ export function Navbar({
                   onClick={() => handleNavClick(link.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 ${
                     isActive
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-500/10'
+                      ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
                       : 'text-slate-400 hover:text-ink hover:bg-ink/5'
                   }`}
                 >
@@ -132,7 +132,7 @@ export function Navbar({
                 onClick={() => setToolsMenuOpen((v) => !v)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
                   isToolPageActive
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-500/10'
+                    ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
                     : 'text-slate-400 hover:text-ink hover:bg-ink/5'
                 }`}
               >

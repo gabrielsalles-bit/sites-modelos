@@ -107,7 +107,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing, onOpenDo
                 onClick={() => setActiveTab('360')}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
                   activeTab === '360'
-                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 font-bold'
+                    ? 'bg-amber-500 text-black shadow-sm font-bold'
                     : 'bg-ink/5 text-slate-400 hover:text-ink border border-ink/10'
                 }`}
               >
@@ -119,7 +119,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing, onOpenDo
                 onClick={() => setActiveTab('galeria')}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
                   activeTab === 'galeria'
-                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 font-bold'
+                    ? 'bg-amber-500 text-black shadow-sm font-bold'
                     : 'bg-ink/5 text-slate-400 hover:text-ink border border-ink/10'
                 }`}
               >
@@ -130,7 +130,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing, onOpenDo
                 onClick={() => setActiveTab('tco')}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
                   activeTab === 'tco'
-                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 font-bold'
+                    ? 'bg-amber-500 text-black shadow-sm font-bold'
                     : 'bg-ink/5 text-slate-400 hover:text-ink border border-ink/10'
                 }`}
               >
@@ -192,7 +192,7 @@ export function VehicleDetailModal({ vehicle, onClose, onOpenFinancing, onOpenDo
                         onClick={() => setCurrentIndex(idx)}
                         className={`relative w-20 sm:w-24 h-14 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                           currentIndex === idx 
-                            ? 'border-amber-400 ring-2 ring-amber-400/30 scale-105 shadow-md shadow-amber-500/20' 
+                            ? 'border-amber-400 ring-2 ring-amber-400/30 scale-105' 
                             : 'border-ink/10 opacity-60 hover:opacity-100'
                         }`}
                       >

@@ -31,7 +31,7 @@ export function Footer({ onNavigate }) {
           {/* Coluna 1: Sobre & Marca */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-amber-300 flex items-center justify-center text-black shadow-lg shadow-amber-500/20">
+              <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black shadow-sm">
                 <Crown className="w-6 h-6 stroke-[2.2]" />
               </div>
               <span className="font-heading font-black text-xl text-ink tracking-wider">

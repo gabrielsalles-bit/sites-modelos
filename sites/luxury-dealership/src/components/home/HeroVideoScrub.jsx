@@ -107,8 +107,7 @@ export const HeroVideoScrub = ({ children }) => {
             className="w-full h-full object-cover filter brightness-[0.3] contrast-125"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/80 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
         <div className="relative z-20 w-full pt-28 pb-20 px-4 sm:px-6 lg:px-8">
           {children}
@@ -160,8 +159,7 @@ export const HeroVideoScrub = ({ children }) => {
             />
           )}
 
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#050508] via-[#050508]/75 to-[#050508]/40 pointer-events-none" />
-          <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/20 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/75 to-black/40 pointer-events-none" />
         </div>
 
         <div className="relative z-20 w-full pt-28 pb-16 px-4 sm:px-6 lg:px-8">

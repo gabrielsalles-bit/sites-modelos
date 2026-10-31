@@ -216,7 +216,7 @@ export default function App() {
         href={floatingWhatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="sm:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-bold shadow-xl shadow-amber-950/80 border border-amber-300/50 transition-all duration-300 group"
+        className="sm:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold shadow-sm border border-amber-300/50 transition-all duration-300 group"
         title="Falar com o Concierge VIP"
       >
         <div className="relative">
