@@ -25,7 +25,7 @@ export function Footer({ onNavigate }) {
   ];
 
   return (
-    <footer className="bg-surface-footer border-t border-amber-500/20 pt-16 pb-10 text-slate-400">
+    <footer className="theme-pinned-dark bg-surface-footer border-t border-amber-500/20 pt-16 pb-10 text-slate-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Coluna 1: Sobre & Marca */}
