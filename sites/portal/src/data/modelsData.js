@@ -1,59 +1,68 @@
-﻿export const modelsList = [
+import enterpriseHome from '../assets/enterprise-home.jpg';
+
+export const modelsList = [
   {
     id: 'auto-dealership',
-    title: 'AutoElite Motors',
-    tagline: 'Concessionária de Seminovos Selecionados',
-    tier: 'Básico',
-    category: 'Tier 1 • Básico',
-    description: 'Site vitrine elegante e direto ao ponto. Hero rápida com busca, vitrine de seleção da semana, catálogo com modal de detalhes, galeria expandida com miniaturas e formulário de contato integrado com WhatsApp.',
+    title: 'AutoElite Seminovos (Modelo 1)',
+    tagline: 'Vitrine direta · Busca em primeiro plano',
+    tier: 'Basic',
+    category: 'Pacote Basic',
+    badge: 'Pacote Basic',
     status: 'available',
-    badge: 'Tier 1 • Básico',
     path: 'auto-dealership/',
-    previewImage: 'auto-dealership/images/FotoChevroletTracker.jpg',
+    previewImage: 'images/tracker.jpg',
+    presentation: 'catalog',
+    description: 'Uma loja objetiva, com abertura em duas colunas, busca rápida e uma vitrine de veículos em grade. Para quem quer levar o cliente da pesquisa ao anúncio com poucos passos.',
     features: [
-      'Vitrine de Destaques e Ofertas da Semana',
-      'Formulário de Contato Completo com WhatsApp',
-      'Galeria de Fotos Expandida com Miniaturas Clicáveis',
-      'Catálogo de Seminovos Periciados (4 Páginas)'
+      'Busca direta na abertura do site',
+      'Catálogo em grade e navegação compacta',
+      'Galeria e simulador dentro do anúncio',
+      'Atendimento no site e contato com a loja',
+      'Páginas de estoque e apresentação da empresa'
     ],
     techStack: ['React 18', 'Tailwind CSS', 'Vite', 'Lucide Icons']
   },
   {
     id: 'luxury-dealership',
-    title: 'Apex Luxury Motors',
-    tagline: 'Superesportivos, Exóticos & Blindados VIP',
-    tier: 'Intermediário',
-    category: 'Tier 2 • Intermediário',
-    description: 'Experiência imersiva com Hero Cinematográfica controlada por ScrollTrigger (GSAP), Visualizador 360° interativo com drag, filtros avançados no showroom, simulador de financiamento private, avaliação de troca e serviço de Concierge.',
+    title: 'DriveNow Multimarcas (Modelo 2)',
+    tagline: 'Showroom editorial · Fotografia em destaque',
+    tier: 'Expert',
+    category: 'Pacote Expert',
+    badge: 'Pacote Expert',
     status: 'available',
-    badge: 'Tier 2 • Intermediário',
     path: 'luxury-dealership/',
-    previewImage: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80',
+    previewImage: 'images/corolla.jpg',
+    presentation: 'editorial',
+    description: 'Uma experiência de showroom: abertura cinematográfica, marca centralizada e uma coleção de veículos com fotografias amplas. A apresentação convida o cliente a explorar cada escolha com calma.',
     features: [
-      'Tudo do Tier Básico + Hero Cinematográfica GSAP',
-      'Visualizador 360° Interativo com Rotação Drag',
-      'Filtros Avançados (Marca, Câmbio, Blindagem III-A)',
-      'Simulador Private Banking & Avaliação de Troca (7 Páginas)'
+      'Abertura com vídeo e apresentação editorial',
+      'Anúncios horizontais com fotos amplas',
+      'Simulação de financiamento no anúncio',
+      'Avaliação do usado na troca',
+      'Favoritos para o cliente salvar veículos',
+      'Concierge no anúncio e módulos de gestão'
     ],
-    techStack: ['React 18', 'GSAP ScrollTrigger', 'Tailwind CSS', 'Vite']
+    techStack: ['React 18', 'Tailwind CSS', 'Finance Engine', 'Vite']
   },
   {
     id: 'popular-dealership',
-    title: 'DriveNow Motors',
-    tagline: 'Plataforma Completa com IA & Comparador',
-    tier: 'Completo',
-    category: 'Tier 3 • Mais Completo',
-    description: 'O ecossistema definitivo de concessionária digital: Consultor Virtual com Inteligência Artificial, Comparador de Veículos lado a lado, Calculadora TCO (custo total de posse), Dossiê Oficial de histórico/leilão, sistema de Favoritos e Alertas de Preço.',
+    title: 'Enterprise Veículos',
+    tagline: 'Vitrine panorâmica · Escolhas lado a lado',
+    tier: 'Premium',
+    category: 'Pacote Premium',
+    badge: 'Pacote Premium',
     status: 'available',
-    badge: 'Tier 3 • Mais Completo',
     path: 'popular-dealership/',
-    previewImage: 'popular-dealership/images/FotoCorollaCross.jpg',
+    previewImage: enterpriseHome,
+    presentation: 'explorer',
+    description: 'Uma vitrine panorâmica com animação em destaque, espaço para reunir suas escolhas e filtros em uma faixa horizontal. Fotos amplas e comparação de veículos ajudam o cliente a explorar antes de decidir.',
     features: [
-      'Tudo dos Tiers Básico e Intermediário +',
-      'Consultor Virtual com Inteligência Artificial (Chatbot)',
-      'Comparador Técnico de Veículos Lado a Lado',
-      'Calculadora de TCO Anual, Dossiê & Favoritos (9 Páginas)'
+      'Vídeo panorâmico e filtros na página inicial',
+      'Comparação de até três veículos e favoritos',
+      'Visualizador 360° incluído nos anúncios compatíveis',
+      'Calculadora de custo total e dossiê do veículo',
+      'Atendimento e financiamento dentro do anúncio'
     ],
-    techStack: ['React 18', 'AI Engine', 'Local Storage', 'Tailwind CSS', 'Vite']
+    techStack: ['React 18', 'Local Storage', 'Tailwind CSS', 'Vite']
   }
 ];

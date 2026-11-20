@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Award, Zap, Wrench, FileCheck, ThumbsUp } from 'lucide-react';
+import { dealershipInfo } from '../../data/dealershipInfo';
 
 export function WhyUsSection() {
   const differentials = [
@@ -13,23 +14,23 @@ export function WhyUsSection() {
     {
       icon: Award,
       color: 'text-blue-400',
-      bgColor: 'bg-slate-800/60 border-slate-700/50',
+      bgColor: 'bg-blue-950/60 border-blue-500/30',
       title: '1 Ano de Garantia Completa',
       description: 'Cobertura mecânica para motor e transmissão com assistência 24h e guincho em todo o território nacional.'
     },
     {
       icon: Wrench,
-      color: 'text-blue-400',
-      bgColor: 'bg-slate-800/60 border-slate-700/50',
+      color: 'text-amber-400',
+      bgColor: 'bg-amber-950/60 border-amber-500/30',
       title: 'Revisão Preventiva de 120 Itens',
       description: 'Troca preventiva de óleo, filtros, higienização de ar-condicionado, polimento e cristalização antes de cada entrega.'
     },
     {
       icon: Zap,
-      color: 'text-blue-400',
-      bgColor: 'bg-slate-800/60 border-slate-700/50',
-      title: 'Aprovação de Crédito em 15 Minutos',
-      description: 'Parceria com os principais bancos e financeiras garantindo taxas competitivas e até 60 dias para a primeira parcela.'
+      color: 'text-purple-400',
+      bgColor: 'bg-purple-950/60 border-purple-500/30',
+      title: 'Simulação de Financiamento',
+      description: 'Estime entrada e parcelas no anúncio. A pré-aprovação e as condições finais dependem da análise de crédito pela instituição financeira.'
     }
   ];
 
@@ -39,8 +40,8 @@ export function WhyUsSection() {
         <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
           Transparência & Confiabilidade
         </span>
-        <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-ink">
-          Por que comprar na AutoElite Motors?
+        <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
+          Por que comprar na {dealershipInfo.nome}?
         </h2>
         <p className="text-slate-400 text-sm">
           Aliamos o padrão dos melhores showrooms do país à tecnologia de perícia automotiva digital para garantir uma compra 100% segura.
@@ -59,7 +60,7 @@ export function WhyUsSection() {
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${item.bgColor}`}>
                   <Icon className={`w-6 h-6 ${item.color}`} />
                 </div>
-                <h3 className="font-heading font-bold text-lg text-ink">
+                <h3 className="font-heading font-bold text-lg text-white">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">

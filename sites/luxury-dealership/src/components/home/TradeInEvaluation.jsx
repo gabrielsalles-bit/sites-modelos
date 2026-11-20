@@ -1,10 +1,14 @@
-﻿import React, { useState } from 'react';
+import { siteAnalytics } from '../../../../../packages/merchant-core/src/services/siteAnalytics.js';
+import React, { useState } from 'react';
 import { ArrowLeftRight, Shield, Send, CheckCircle2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { buildTradeInWhatsappLink } from '../../utils/whatsapp';
+import { storeSync } from '../../../../../packages/merchant-core/src';
 
 export function TradeInEvaluation({ vehicles = [] }) {
   const [formData, setFormData] = useState({
+    nome: '',
+    telefone: '',
     marca: '',
     modelo: '',
     ano: '2022',
@@ -24,19 +28,30 @@ export function TradeInEvaluation({ vehicles = [] }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    try {
+      Promise.resolve(storeSync.addLead('drivenow', {
+        name: formData.nome.trim(),
+        phone: formData.telefone.trim(),
+        vehicle_title: formData.interesse,
+        source: 'avaliacao_troca',
+        consent: true,
+        message: `Veículo na troca: ${formData.marca} ${formData.modelo} ${formData.ano} (${formData.km} km) - Blindado: ${formData.blindado ? 'Sim' : 'Não'}. Interesse: ${formData.interesse || 'Em aberto'}. Observações: ${formData.observacoes || 'Nenhuma'}`
+      })).catch(() => {});
+    } catch {}
     const url = buildTradeInWhatsappLink(formData);
+    siteAnalytics.track('drivenow', { type: 'whatsapp_click', page: 'troca' });
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section className="p-6 sm:p-10 rounded-3xl bg-surface-card border border-ink/10 shadow-xl relative overflow-hidden">
+    <section className="p-6 sm:p-10 rounded-3xl bg-[#0a0b12] border border-white/10 shadow-xl relative overflow-hidden">
       <div className="max-w-3xl mx-auto space-y-6 text-center sm:text-left">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-2">
             <ArrowLeftRight className="w-3.5 h-3.5" />
             <span>Avaliação de Alto Padrão</span>
           </div>
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink">
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white">
             Avalie seu Superesportivo ou Blindado na Troca
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-1">
@@ -45,6 +60,14 @@ export function TradeInEvaluation({ vehicles = [] }) {
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+          <label className="text-xs text-slate-300">
+            Nome completo *
+            <input name="nome" required minLength={2} autoComplete="name" value={formData.nome} onChange={handleChange} className="mt-1 w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white" />
+          </label>
+          <label className="text-xs text-slate-300">
+            Telefone / WhatsApp *
+            <input name="telefone" required type="tel" autoComplete="tel" pattern="[+0-9\(\) .\-]{10,20}" value={formData.telefone} onChange={handleChange} className="mt-1 w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white" />
+          </label>
           <div>
             <label className="text-xs text-slate-300 block mb-1">Marca do Veículo *</label>
             <input
@@ -54,7 +77,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: Porsche, BMW, Mercedes..."
               value={formData.marca}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-page/60 border border-ink/10 text-sm text-ink focus:outline-none focus:border-amber-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -67,7 +90,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: 911 Carrera S, M3 Competition..."
               value={formData.modelo}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-page/60 border border-ink/10 text-sm text-ink focus:outline-none focus:border-amber-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -79,7 +102,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: 2022/2023"
               value={formData.ano}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-page/60 border border-ink/10 text-sm text-ink focus:outline-none focus:border-amber-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -91,7 +114,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: 15.000 km"
               value={formData.km}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-page/60 border border-ink/10 text-sm text-ink focus:outline-none focus:border-amber-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
@@ -103,11 +126,15 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: Ferrari F8, Porsche GT3 RS..."
               value={formData.interesse}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-surface-page/60 border border-ink/10 text-sm text-ink focus:outline-none focus:border-amber-500"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white focus:outline-none focus:border-amber-500"
             />
           </div>
 
-          <div className="sm:col-span-2 flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-ink/10">
+          <label className="sm:col-span-2 text-xs text-slate-300">
+            Observações
+            <textarea name="observacoes" rows={3} value={formData.observacoes} onChange={handleChange} className="mt-1 w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/10 text-sm text-white" />
+          </label>
+          <div className="sm:col-span-2 flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/10">
             <input
               type="checkbox"
               id="blindado-check"
@@ -130,7 +157,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               icon={Send}
               className="w-full py-3.5"
             >
-              Solicitar Avaliação Expressa no WhatsApp
+              Tenho interesse
             </Button>
           </div>
         </form>

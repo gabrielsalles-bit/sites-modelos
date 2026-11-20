@@ -1,3 +1,4 @@
+import { siteAnalytics } from '../../../../../packages/merchant-core/src/services/siteAnalytics.js';
 ﻿import React, { useState } from 'react';
 import { ArrowLeftRight, Send, CheckCircle2 } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -28,18 +29,19 @@ export function TradeInEvaluation({ vehicles = [] }) {
       `• *Observações:* ${formData.observacoes || 'Nenhuma'}\n\n` +
       `Gostaria de uma pré-avaliação para troca com troco!`;
     const url = `https://wa.me/${dealershipInfo.whatsapp}?text=${encodeURIComponent(text)}`;
+    siteAnalytics.track('apexluxury', { type: 'whatsapp_click', page: 'troca' });
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section className="p-6 sm:p-10 rounded-3xl bg-surface-page border border-slate-800 shadow-xl relative overflow-hidden">
+    <section className="p-6 sm:p-10 rounded-3xl bg-[#090d16] border border-slate-800 shadow-xl relative overflow-hidden">
       <div className="max-w-3xl mx-auto space-y-6 text-center sm:text-left">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-2">
             <ArrowLeftRight className="w-3.5 h-3.5" />
             <span>Avaliação com Troca com Troco</span>
           </div>
-          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink">
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-white">
             Avalie seu Usado e Saia de Carro Novo
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-1">
@@ -57,7 +59,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: Chevrolet, Fiat, VW..."
               value={formData.marca}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"
             />
           </div>
 
@@ -70,7 +72,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: Onix 1.0, HB20, Gol..."
               value={formData.modelo}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"
             />
           </div>
 
@@ -82,7 +84,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: 2020/2021"
               value={formData.ano}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"
             />
           </div>
 
@@ -94,7 +96,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: 45.000 km"
               value={formData.km}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"
             />
           </div>
 
@@ -106,7 +108,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               placeholder="Ex: Tracker Premier, Pulse, Corolla Cross..."
               value={formData.interesse}
               onChange={handleChange}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400"
             />
           </div>
 
@@ -118,7 +120,7 @@ export function TradeInEvaluation({ vehicles = [] }) {
               icon={Send}
               className="w-full py-3.5 font-bold"
             >
-              Enviar Dados para Avaliação Expressa
+              Tenho interesse
             </Button>
           </div>
         </form>

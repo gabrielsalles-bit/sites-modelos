@@ -1,3 +1,4 @@
+import { VehicleImage } from '../../../../../packages/merchant-core/src/components/common/VehicleImage.jsx';
 import React from 'react';
 import { Sparkles, ShieldCheck, CheckCircle2, MessageCircle, ArrowRight, Gauge, Cog, Fuel } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -12,30 +13,33 @@ export function FeaturedSection({ vehicle, onSelect }) {
 
   return (
     <section id="destaques" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="relative rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-sm">
+      <div className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-blue-950/40 border border-slate-700/80 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+        {/* Glow de fundo */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Coluna Visual (Imagem do Carro) */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-300 border border-blue-500/30">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 <Sparkles className="w-3.5 h-3.5" />
                 Destaque da Semana
               </span>
-              <InspectionBadge text="Perícia Cautelar Aprovada" compact={true} />
+              <InspectionBadge text="Laudo informado pela loja" compact={true} />
             </div>
 
             <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl group cursor-pointer" onClick={() => onSelect(vehicle)}>
-              <img
+              <VehicleImage
                 src={vehicle.imagemPrincipal}
                 alt={vehicle.nome}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-ink">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white">
                 <span className="bg-slate-900/80 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 font-semibold">
                   {vehicle.ano} • {formatKm(vehicle.km)}
                 </span>
-                <span className="bg-blue-600/90 px-3 py-1.5 rounded-lg backdrop-blur-md font-semibold text-white">
+                <span className="bg-blue-600/90 px-3 py-1.5 rounded-lg backdrop-blur-md font-semibold">
                   Clique para ver ficha completa
                 </span>
               </div>
@@ -48,7 +52,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
               <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">
                 Categoria {vehicle.categoria}
               </span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-ink mt-1">
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-1">
                 {vehicle.nome}
               </h2>
               <p className="text-slate-400 text-sm mt-0.5">{vehicle.versao}</p>
@@ -69,7 +73,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
             <div className="pt-2">
               <span className="text-xs text-slate-400 uppercase tracking-wider block">Preço Especial</span>
               <div className="flex items-baseline gap-3">
-                <span className="font-heading text-3xl sm:text-4xl font-black text-ink">
+                <span className="font-heading text-3xl sm:text-4xl font-black text-white">
                   {formatCurrency(vehicle.preco)}
                 </span>
                 {vehicle.parcela && (
@@ -91,7 +95,7 @@ export function FeaturedSection({ vehicle, onSelect }) {
                 rel="noopener noreferrer"
                 className="flex-1"
               >
-                Negociar no WhatsApp
+                Tenho interesse
               </Button>
               <Button
                 variant="outline"

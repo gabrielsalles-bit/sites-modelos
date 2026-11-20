@@ -1,57 +1,49 @@
-﻿import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { useSiteAnalytics } from '../../../packages/merchant-core/src/hooks/useSiteAnalytics';
+import { dealershipInfo } from './data/dealershipInfo';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { ComparisonFloatingBar } from './components/layout/ComparisonFloatingBar';
 import { HomePage } from './pages/HomePage';
 import { InventoryPage } from './pages/InventoryPage';
 import { FeaturedPage } from './pages/FeaturedPage';
-import { FinancingPage } from './pages/FinancingPage';
-import { TradeInPage } from './pages/TradeInPage';
-import { FavoritesPage } from './pages/FavoritesPage';
-import { ComparatorPage } from './pages/ComparatorPage';
-import { ConciergePage } from './pages/ConciergePage';
-import { AIConsultantPage } from './pages/AIConsultantPage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
-import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
-import { OfficialDossierModal } from './components/vehicles/OfficialDossierModal';
-import { PriceAlertModal } from './components/vehicles/PriceAlertModal';
 import { vehiclesData } from './data/vehicles';
-import { useFavorites } from './hooks/useFavorites';
-import { useComparator } from './hooks/useComparator';
-import { buildGeneralWhatsappLink } from './utils/whatsapp';
-import { useTheme } from './hooks/useTheme';
+import { storeSync } from '../../../packages/merchant-core/src/services/storeSync';
+import { MerchantEntry } from '../../../packages/merchant-core/src/components/layout/MerchantEntry';
+import { isPublishedVehicle } from '../../../packages/merchant-core/src/utils/vehicles';
+
+
+import { StoreAccessProvider, useStoreAccess } from '../../../packages/merchant-core/src/context/StoreAccessContext';
+import { canAccessSitePage } from '../../../packages/merchant-core/src/utils/siteAccess';
+
+const StoreConciergePage = React.lazy(() => import('../../../packages/merchant-core/src/pages/StoreConciergePage').then(module => ({ default: module.StoreConciergePage })));
+
 
 export default function App() {
+  return <StoreAccessProvider storeKey="autoelite" storeName={dealershipInfo.nome}><StoreApp /></StoreAccessProvider>;
+}
+
+function StoreApp() {
+  const { user, authorizeNavigation } = useStoreAccess();
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedVehicleForModal, setSelectedVehicleForModal] = useState(null);
   const [searchFilter, setSearchFilter] = useState({ term: '', category: 'todos' });
-  const [financingPreselectedVehicle, setFinancingPreselectedVehicle] = useState(null);
-  const [comparatorModalOpen, setComparatorModalOpen] = useState(false);
-  const [dossierVehicle, setDossierVehicle] = useState(null);
-  const [priceAlertVehicle, setPriceAlertVehicle] = useState(null);
-  const { theme, toggleTheme } = useTheme();
+  const [vehicles, setVehicles] = useState(() => storeSync.getVehicles('autoelite', vehiclesData));
 
-  const {
-    favoriteIds,
-    toggleFavorite,
-    isFavorite,
-    favoritesCount,
-    favoriteVehicles
-  } = useFavorites(vehiclesData);
+  const publishedVehicles = vehicles.filter(isPublishedVehicle);
 
-  const {
-    comparedIds,
-    toggleCompare,
-    isComparing,
-    clearCompared,
-    comparedCount,
-    comparedVehicles
-  } = useComparator(vehiclesData);
+  useEffect(() => {
+    const unsub = storeSync.subscribe('autoelite', (detail) => {
+      if (detail.type === 'VEHICLES_UPDATED') {
+        setVehicles(detail.vehicles);
+      }
+    });
+    return unsub;
+  }, []);
 
-  const navigateTo = (page, params = {}) => {
-    setCurrentPage(page);
+  const navigateTo = (page, params = {}) => authorizeNavigation(page, () => {
+    setCurrentPage(page === 'visitas' ? 'sobre-contato' : page);
 
     if (params.term !== undefined || params.category !== undefined) {
       setSearchFilter({
@@ -60,115 +52,52 @@ export default function App() {
       });
     }
 
-    if (params.vehicle) {
-      setFinancingPreselectedVehicle(params.vehicle);
-    }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  });
 
-  const handleOpenContactFromModal = (vehicle) => {
-    setSelectedVehicleForModal(null);
-    navigateTo('sobre-contato');
-  };
 
-  const handleOpenFinancingFromModal = (vehicle) => {
-    setSelectedVehicleForModal(null);
-    navigateTo('simulador', { vehicle });
-  };
 
-  const floatingWhatsappUrl = buildGeneralWhatsappLink();
+  React.useEffect(() => {
+    if (!canAccessSitePage(currentPage, user)) setCurrentPage('home');
+  }, [currentPage, user]);
+
+  useSiteAnalytics('autoelite', currentPage, selectedVehicleForModal);
+
+  // Renderização Dedicada da Área Restrita do Lojista (Tier 1 Essential)
+  if (currentPage === 'painel-lojista') {
+    return (
+      <MerchantEntry tier={1} storeKey="autoelite" dealership={dealershipInfo} defaultVehicles={vehiclesData} onExitToSite={() => navigateTo('home')} />
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white relative">
-      {/* Barra de Navegação no Topo */}
-      <Navbar
-        currentPage={currentPage}
-        onNavigate={navigateTo}
-        favoritesCount={favoritesCount}
-        comparedCount={comparedCount}
-        theme={theme}
-        onToggleTheme={toggleTheme}
-      />
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white relative">
+      {/* Navegacao principal e atendimento da loja */}
+      <Navbar currentPage={currentPage} onNavigate={navigateTo} />
 
       {/* Conteúdo Dinâmico da Página Ativa */}
       <main className="flex-1">
         {currentPage === 'home' && (
           <HomePage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             onNavigate={navigateTo}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            isComparing={isComparing}
-            onToggleCompare={toggleCompare}
           />
         )}
 
         {currentPage === 'estoque' && (
           <InventoryPage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             searchFilter={searchFilter}
             onClearFilter={() => setSearchFilter({ term: '', category: 'todos' })}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            isComparing={isComparing}
-            onToggleCompare={toggleCompare}
           />
         )}
 
         {currentPage === 'destaques' && (
           <FeaturedPage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             onNavigate={navigateTo}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            isComparing={isComparing}
-            onToggleCompare={toggleCompare}
-          />
-        )}
-
-        {currentPage === 'simulador' && (
-          <FinancingPage
-            vehicles={vehiclesData}
-            preselectedVehicle={financingPreselectedVehicle}
-          />
-        )}
-
-        {currentPage === 'troca' && (
-          <TradeInPage />
-        )}
-
-        {currentPage === 'comparador' && (
-          <ComparatorPage
-            comparedVehicles={comparedVehicles}
-            onRemoveFromCompare={toggleCompare}
-            onNavigate={navigateTo}
-            onOpenFinancing={handleOpenFinancingFromModal}
-          />
-        )}
-
-        {currentPage === 'favoritos' && (
-          <FavoritesPage
-            favoriteVehicles={favoriteVehicles}
-            onNavigate={navigateTo}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
-            isFavorite={isFavorite}
-            onToggleFavorite={toggleFavorite}
-            isComparing={isComparing}
-            onToggleCompare={toggleCompare}
-          />
-        )}
-
-        {currentPage === 'concierge' && (
-          <ConciergePage />
-        )}
-
-        {currentPage === 'consultor-ia' && (
-          <AIConsultantPage
-            vehicles={vehiclesData}
             onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
           />
         )}
@@ -176,71 +105,20 @@ export default function App() {
         {currentPage === 'sobre-contato' && (
           <AboutContactPage />
         )}
+        {currentPage === 'concierge' && <React.Suspense fallback={<p role="status" className="p-6 text-slate-300">Carregando atendimento…</p>}><StoreConciergePage dealership={dealershipInfo} storeKey="autoelite" vehicles={publishedVehicles} onSelectVehicle={setSelectedVehicleForModal} onNavigate={navigateTo} title="Atendimento no site" /></React.Suspense>}
       </main>
 
       {/* Rodapé com Links entre Páginas */}
-      <Footer onNavigate={navigateTo} />
-
-      {/* Barra Flutuante de Comparação Ativa */}
-      {currentPage !== 'comparador' && (
-        <ComparisonFloatingBar
-          comparedVehicles={comparedVehicles}
-          onOpenComparator={() => setComparatorModalOpen(true)}
-          onClear={clearCompared}
-        />
-      )}
+      <Footer compact={currentPage === 'sobre-contato'} />
 
       {/* Modal Global de Detalhes & Galeria Expandida */}
       {selectedVehicleForModal && (
         <VehicleDetailModal
           vehicle={selectedVehicleForModal}
           onClose={() => setSelectedVehicleForModal(null)}
-          onContact={handleOpenContactFromModal}
-          onOpenFinancing={handleOpenFinancingFromModal}
-          onOpenDossier={(v) => setDossierVehicle(v)}
-          onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
         />
       )}
 
-      {/* Modal de Comparação Lado a Lado */}
-      {comparatorModalOpen && (
-        <VehicleComparatorModal
-          vehicles={comparedVehicles}
-          onClose={() => setComparatorModalOpen(false)}
-          onOpenFinancing={handleOpenFinancingFromModal}
-        />
-      )}
-
-      {/* Modal de Dossiê Oficial de Procedência */}
-      {dossierVehicle && (
-        <OfficialDossierModal
-          vehicle={dossierVehicle}
-          onClose={() => setDossierVehicle(null)}
-        />
-      )}
-
-      {/* Modal de Alerta de Preço */}
-      {priceAlertVehicle && (
-        <PriceAlertModal
-          vehicle={priceAlertVehicle}
-          onClose={() => setPriceAlertVehicle(null)}
-        />
-      )}
-
-      {/* Botão Flutuante de WhatsApp — só no mobile (no desktop o CTA já fica fixo no header) */}
-      <a
-        href={floatingWhatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="sm:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-950/60 border border-emerald-400/40 transition-all duration-300 group"
-        title="Falar com consultor no WhatsApp"
-      >
-        <div className="relative">
-          <MessageCircle className="w-5 h-5" />
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-300"></span>
-        </div>
-      </a>
     </div>
   );
 }

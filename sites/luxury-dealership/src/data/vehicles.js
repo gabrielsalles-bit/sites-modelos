@@ -1,5 +1,5 @@
-﻿import { withBase } from '../utils/assetPath.js';
-export const vehiclesData = [
+import { applyCatalogMedia } from '../../../../packages/merchant-core/src/utils/catalogMedia.js';
+﻿const catalogVehicles = [
   {
     id: 1,
     nome: "Porsche 911 GT3 RS",
@@ -27,14 +27,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-001/0.jpg'),
-      withBase('images/cars/sc-001/45.jpg'),
-      withBase('images/cars/sc-001/90.jpg'),
-      withBase('images/cars/sc-001/135.jpg'),
-      withBase('images/cars/sc-001/180.jpg'),
-      withBase('images/cars/sc-001/225.jpg'),
-      withBase('images/cars/sc-001/270.jpg'),
-      withBase('images/cars/sc-001/315.jpg')
+      "/images/cars/sc-001/0.jpg",
+      "/images/cars/sc-001/45.jpg",
+      "/images/cars/sc-001/90.jpg",
+      "/images/cars/sc-001/135.jpg",
+      "/images/cars/sc-001/180.jpg",
+      "/images/cars/sc-001/225.jpg",
+      "/images/cars/sc-001/270.jpg",
+      "/images/cars/sc-001/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado Sem Reparos",
@@ -89,14 +89,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-002/0.jpg'),
-      withBase('images/cars/sc-002/45.jpg'),
-      withBase('images/cars/sc-002/90.jpg'),
-      withBase('images/cars/sc-002/135.jpg'),
-      withBase('images/cars/sc-002/180.jpg'),
-      withBase('images/cars/sc-002/225.jpg'),
-      withBase('images/cars/sc-002/270.jpg'),
-      withBase('images/cars/sc-002/315.jpg')
+      "/images/cars/sc-002/0.jpg",
+      "/images/cars/sc-002/45.jpg",
+      "/images/cars/sc-002/90.jpg",
+      "/images/cars/sc-002/135.jpg",
+      "/images/cars/sc-002/180.jpg",
+      "/images/cars/sc-002/225.jpg",
+      "/images/cars/sc-002/270.jpg",
+      "/images/cars/sc-002/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado Impecável",
@@ -151,14 +151,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-003/0.jpg'),
-      withBase('images/cars/sc-003/45.jpg'),
-      withBase('images/cars/sc-003/90.jpg'),
-      withBase('images/cars/sc-003/135.jpg'),
-      withBase('images/cars/sc-003/180.jpg'),
-      withBase('images/cars/sc-003/225.jpg'),
-      withBase('images/cars/sc-003/270.jpg'),
-      withBase('images/cars/sc-003/315.jpg')
+      "/images/cars/sc-003/0.jpg",
+      "/images/cars/sc-003/45.jpg",
+      "/images/cars/sc-003/90.jpg",
+      "/images/cars/sc-003/135.jpg",
+      "/images/cars/sc-003/180.jpg",
+      "/images/cars/sc-003/225.jpg",
+      "/images/cars/sc-003/270.jpg",
+      "/images/cars/sc-003/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado",
@@ -213,14 +213,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-004/0.jpg'),
-      withBase('images/cars/sc-004/45.jpg'),
-      withBase('images/cars/sc-004/90.jpg'),
-      withBase('images/cars/sc-004/135.jpg'),
-      withBase('images/cars/sc-004/180.jpg'),
-      withBase('images/cars/sc-004/225.jpg'),
-      withBase('images/cars/sc-004/270.jpg'),
-      withBase('images/cars/sc-004/315.jpg')
+      "/images/cars/sc-004/0.jpg",
+      "/images/cars/sc-004/45.jpg",
+      "/images/cars/sc-004/90.jpg",
+      "/images/cars/sc-004/135.jpg",
+      "/images/cars/sc-004/180.jpg",
+      "/images/cars/sc-004/225.jpg",
+      "/images/cars/sc-004/270.jpg",
+      "/images/cars/sc-004/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado + Laudo Balístico",
@@ -275,14 +275,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-005/0.jpg'),
-      withBase('images/cars/sc-005/45.jpg'),
-      withBase('images/cars/sc-005/90.jpg'),
-      withBase('images/cars/sc-005/135.jpg'),
-      withBase('images/cars/sc-005/180.jpg'),
-      withBase('images/cars/sc-005/225.jpg'),
-      withBase('images/cars/sc-005/270.jpg'),
-      withBase('images/cars/sc-005/315.jpg')
+      "/images/cars/sc-005/0.jpg",
+      "/images/cars/sc-005/45.jpg",
+      "/images/cars/sc-005/90.jpg",
+      "/images/cars/sc-005/135.jpg",
+      "/images/cars/sc-005/180.jpg",
+      "/images/cars/sc-005/225.jpg",
+      "/images/cars/sc-005/270.jpg",
+      "/images/cars/sc-005/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado",
@@ -337,14 +337,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-001/0.jpg'),
-      withBase('images/cars/sc-001/45.jpg'),
-      withBase('images/cars/sc-001/90.jpg'),
-      withBase('images/cars/sc-001/135.jpg'),
-      withBase('images/cars/sc-001/180.jpg'),
-      withBase('images/cars/sc-001/225.jpg'),
-      withBase('images/cars/sc-001/270.jpg'),
-      withBase('images/cars/sc-001/315.jpg')
+      "/images/cars/sc-001/0.jpg",
+      "/images/cars/sc-001/45.jpg",
+      "/images/cars/sc-001/90.jpg",
+      "/images/cars/sc-001/135.jpg",
+      "/images/cars/sc-001/180.jpg",
+      "/images/cars/sc-001/225.jpg",
+      "/images/cars/sc-001/270.jpg",
+      "/images/cars/sc-001/315.jpg"
     ],
     laudoCautelar: {
       status: "100% Aprovado",
@@ -373,3 +373,5 @@ export const vehiclesData = [
     }
   }
 ];
+
+export const vehiclesData = catalogVehicles.map(applyCatalogMedia);

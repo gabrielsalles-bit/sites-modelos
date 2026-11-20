@@ -1,130 +1,25 @@
 import React, { useState } from 'react';
-import { Search, ShieldCheck, ArrowDown } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { ArrowRight, Search } from 'lucide-react';
+import { dealershipInfo } from '../../data/dealershipInfo';
+import { AnimatedStoreHero } from '../../../../../packages/merchant-core/src/components/layout/AnimatedStoreHero';
 
-export function HeroSection({ onSearch, categories }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('todos');
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (onSearch) {
-      onSearch({ term: searchTerm, category: selectedCategory });
-    }
-    const estoqueEl = document.getElementById('estoque');
-    if (estoqueEl) {
-      estoqueEl.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-950">
-      {/* Grid Pattern Sutil */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: 'radial-gradient(rgb(var(--ink)) 1px, transparent 1px)',
-          backgroundSize: '24px 24px'
-        }}
-      />
-
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-        {/* Badge Flutuante de Credibilidade */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-blue-500/30 text-blue-500 text-xs sm:text-sm font-semibold animate-fade-in">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Showroom Certificado com Perícia Cautelar Digital</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        </div>
-
-        {/* Título Principal de Alto Impacto */}
-        <div className="space-y-4">
-          <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold text-ink tracking-tight leading-[1.1]">
-            Encontre o seu próximo carro com{' '}
-            <span className="text-blue-400">
-              garantia e procedência total
-            </span>.
-          </h1>
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Mais de 100 veículos seminovos rigorosamente avaliados, 100% aprovados em laudo cautelar e prontos para rodar.
-          </p>
-        </div>
-
-        {/* Barra de Busca Rápida Integrada */}
-        <div className="max-w-3xl mx-auto">
-          <form 
-            onSubmit={handleSearchSubmit}
-            className="p-2 rounded-2xl bg-slate-900/90 border border-slate-700/80 shadow-2xl shadow-black/60 backdrop-blur-xl flex flex-col sm:flex-row gap-2"
-          >
-            {/* Input de Busca */}
-            <div className="flex-1 flex items-center px-4 py-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <Search className="w-5 h-5 text-slate-400 shrink-0 mr-3" />
-              <input
-                type="text"
-                placeholder="Qual modelo você procura? (ex: Tracker, Corolla, Polo...)"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-transparent text-sm text-ink placeholder-slate-400 focus:outline-none"
-              />
-            </div>
-
-            {/* Select de Categoria */}
-            <div className="sm:w-48 px-3 py-2.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-transparent text-sm text-slate-200 focus:outline-none cursor-pointer"
-              >
-                <option value="todos" className="bg-slate-900 text-ink">Todas Categorias</option>
-                <option value="suv" className="bg-slate-900 text-ink">SUVs</option>
-                <option value="sedan" className="bg-slate-900 text-ink">Sedans</option>
-                <option value="hatch" className="bg-slate-900 text-ink">Hatches</option>
-                <option value="pickup" className="bg-slate-900 text-ink">Picapes</option>
-                <option value="esportivo" className="bg-slate-900 text-ink">Esportivos</option>
-              </select>
-            </div>
-
-            {/* Botão de Envio */}
-            <Button
-              type="submit"
-              variant="primary"
-              size="md"
-              icon={Search}
-              className="sm:w-36 py-3"
-            >
-              Buscar
-            </Button>
-          </form>
-        </div>
-
-        {/* Badges de Confiança em Linha */}
-        <div className="pt-4 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-slate-300">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-            <span>Laudo Cautelar 100% Aprovado</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-            <span>1 Ano de Garantia Completa</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-            <span>Troca com Troco & Financiamento</span>
-          </div>
-        </div>
-
-        {/* Indicador de Rolagem */}
-        <div className="pt-4">
-          <a
-            href="#estoque"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-ink transition-colors"
-          >
-            <span>Ver nosso estoque completo</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-          </a>
-        </div>
+export function HeroSection({ onNavigate }) {
+  const [term, setTerm] = useState('');
+  return <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+    <div className="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-8 lg:gap-10 items-stretch">
+      <div className="order-2 lg:order-1 space-y-6 py-3 self-center">
+        <p className="text-sm font-semibold text-blue-300">{dealershipInfo.nome}</p>
+        <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">Seu próximo carro.<br /><span className="text-blue-300">Do seu jeito.</span></h1>
+        <p className="max-w-lg text-slate-300 leading-relaxed">Escolha, conheça os detalhes e converse com a loja. Uma busca simples para encontrar o veículo que combina com você.</p>
+        <form role="search" aria-label="Buscar no estoque" onSubmit={event => { event.preventDefault(); onNavigate('estoque', { term: term.trim() }); }} className="flex flex-col sm:flex-row gap-2 rounded-2xl bg-slate-900 border border-slate-700 p-2">
+          <label className="flex items-center flex-1 min-w-0 gap-3 px-3"><Search aria-hidden="true" className="w-5 h-5 text-slate-400 shrink-0" /><span className="sr-only">Modelo ou marca</span><input value={term} onChange={event => setTerm(event.target.value)} placeholder="Qual carro você procura?" className="w-full min-w-0 min-h-12 bg-transparent text-white outline-none placeholder:text-slate-400 focus-visible:ring-2 focus-visible:ring-blue-400 rounded-lg" /></label>
+          <button type="submit" className="min-h-12 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold inline-flex items-center justify-center gap-2">Buscar veículos<ArrowRight aria-hidden="true" className="w-4 h-4" /></button>
+        </form>
+        <button type="button" onClick={() => onNavigate('sobre-contato')} className="text-sm text-slate-300 underline underline-offset-4 min-h-11">Conheça nossa loja</button>
       </div>
-    </section>
-  );
+      <div className="order-1 lg:order-2 min-w-0"><AnimatedStoreHero tone="blue" layout="panel"><div className="flex items-end min-h-64 sm:min-h-96 lg:min-h-[26rem]"><p className="text-sm font-medium text-white drop-shadow-md">O próximo caminho começa aqui.</p></div></AnimatedStoreHero></div>
+    </div>
+  </section>;
 }
 
 export default HeroSection;

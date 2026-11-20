@@ -1,14 +1,57 @@
-node_modules
-dist
-.vite
-midia_temp
-.DS_Store
-*.local
+# ==============================================================================
+# .gitignore — Monorepo Sites-principal (Portal Hub + 3 Modelos de Concessionária)
+# ==============================================================================
+
+# Segurança e Variáveis de Ambiente
 .env
-.env.local
-.env.*.local
-# Editor / OS
-.vscode/
-.idea/
-Thumbs.db
+.env.*
+*.env
+*.env.*
+!.env.example
+
+# Dependências Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Builds e Compilações (Vite / React)
+dist/
+dist-ssr/
+build/
+*.local
+
+# Logs e Arquivos Temporários
 *.log
+logs/
+*.tmp
+*.bak
+
+# Bancos de Dados SQLite locais
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+*~
+
+# IDEs e Editores
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# Assistente e regras locais de agentes
+.agents/

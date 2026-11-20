@@ -12,7 +12,9 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
   const variants = {
     default: 'bg-slate-800/90 text-slate-300 border border-slate-700/60',
     blue: 'bg-blue-950/70 text-blue-300 border border-blue-500/30',
-    emerald: 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30'
+    emerald: 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/30',
+    amber: 'bg-amber-950/70 text-amber-300 border border-amber-500/30',
+    purple: 'bg-purple-950/70 text-purple-300 border border-purple-500/30'
   };
 
   return (

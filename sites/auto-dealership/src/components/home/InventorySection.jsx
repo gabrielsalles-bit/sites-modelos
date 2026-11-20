@@ -2,17 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, SlidersHorizontal, ArrowUpDown, Car, FilterX } from 'lucide-react';
 import { VehicleCard } from '../vehicles/VehicleCard';
 
-export function InventorySection({
-  vehicles,
-  onSelectVehicle,
-  searchFilter,
-  onClearFilter,
-  hideHeader = false,
-  isFavorite,
-  onToggleFavorite,
-  isComparing,
-  onToggleCompare
-}) {
+export function InventorySection({ vehicles, onSelectVehicle, searchFilter, onClearFilter, hideHeader = false }) {
   const [selectedCategory, setSelectedCategory] = useState(searchFilter?.category || 'todos');
   const [searchQuery, setSearchQuery] = useState(searchFilter?.term || '');
   const [sortBy, setSortBy] = useState('destaque'); // 'destaque' | 'preco-asc' | 'preco-desc' | 'ano-desc' | 'km-asc'
@@ -85,7 +75,7 @@ export function InventorySection({
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               <span className="text-xs uppercase font-bold text-blue-400 tracking-wider">Showroom Completo</span>
             </div>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-ink">
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
               Nosso Estoque de Seminovos
             </h2>
             <p className="text-slate-400 text-sm mt-1">
@@ -96,7 +86,7 @@ export function InventorySection({
           {/* Contador */}
           <div className="flex items-center gap-2 text-sm text-slate-400">
             <span>Mostrando</span>
-            <span className="font-bold text-ink bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">
+            <span className="font-bold text-white bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">
               {filteredVehicles.length} {filteredVehicles.length === 1 ? 'veículo' : 'veículos'}
             </span>
           </div>
@@ -105,7 +95,7 @@ export function InventorySection({
         <div className="flex justify-end mb-4 text-sm text-slate-400">
           <div className="flex items-center gap-2">
             <span>Total de ofertas encontradas:</span>
-            <span className="font-bold text-ink bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+            <span className="font-bold text-white bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
               {filteredVehicles.length} {filteredVehicles.length === 1 ? 'veículo' : 'veículos'}
             </span>
           </div>
@@ -122,7 +112,7 @@ export function InventorySection({
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-xs font-semibold shrink-0 transition-all duration-200 flex items-center gap-2 ${
                 selectedCategory === cat.id
-                  ? 'bg-blue-600 text-white shadow-sm border border-blue-400/40'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40'
                   : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800'
               }`}
             >
@@ -146,10 +136,10 @@ export function InventorySection({
               placeholder="Filtrar por nome ou versão..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-xs text-ink placeholder-slate-400 focus:outline-none"
+              className="w-full bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none"
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="text-slate-400 hover:text-ink text-xs">
+              <button onClick={() => setSearchQuery('')} className="text-slate-400 hover:text-white text-xs">
                 Limpar
               </button>
             )}
@@ -165,11 +155,11 @@ export function InventorySection({
                 onChange={(e) => setSortBy(e.target.value)}
                 className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer"
               >
-                <option value="destaque" className="bg-slate-900 text-ink">Destaques</option>
-                <option value="preco-asc" className="bg-slate-900 text-ink">Menor Preço</option>
-                <option value="preco-desc" className="bg-slate-900 text-ink">Maior Preço</option>
-                <option value="ano-desc" className="bg-slate-900 text-ink">Mais Novos (Ano)</option>
-                <option value="km-asc" className="bg-slate-900 text-ink">Menor Quilometragem</option>
+                <option value="destaque" className="bg-slate-900 text-white">Destaques</option>
+                <option value="preco-asc" className="bg-slate-900 text-white">Menor Preço</option>
+                <option value="preco-desc" className="bg-slate-900 text-white">Maior Preço</option>
+                <option value="ano-desc" className="bg-slate-900 text-white">Mais Novos (Ano)</option>
+                <option value="km-asc" className="bg-slate-900 text-white">Menor Quilometragem</option>
               </select>
             </div>
           </div>
@@ -184,10 +174,6 @@ export function InventorySection({
               key={vehicle.id}
               vehicle={vehicle}
               onSelect={onSelectVehicle}
-              isFavorite={isFavorite ? isFavorite(vehicle.id) : false}
-              onToggleFavorite={onToggleFavorite}
-              isComparing={isComparing ? isComparing(vehicle.id) : false}
-              onToggleCompare={onToggleCompare}
             />
           ))}
         </div>
@@ -197,7 +183,7 @@ export function InventorySection({
           <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-400 mx-auto">
             <FilterX className="w-6 h-6" />
           </div>
-          <h3 className="font-heading font-bold text-lg text-ink">Nenhum veículo encontrado</h3>
+          <h3 className="font-heading font-bold text-lg text-white">Nenhum veículo encontrado</h3>
           <p className="text-xs text-slate-400">
             Não encontramos nenhum veículo correspondente aos filtros selecionados.
           </p>

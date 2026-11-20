@@ -1,5 +1,5 @@
-import { withBase } from '../utils/assetPath.js';
-export const vehiclesData = [
+import { applyCatalogMedia } from '../../../../packages/merchant-core/src/utils/catalogMedia.js';
+const catalogVehicles = [
   {
     id: 1,
     nome: "Chevrolet Tracker",
@@ -17,9 +17,9 @@ export const vehiclesData = [
     parcela: { entrada: 35000, vezes: 48, valor: 2490 },
     destaque: true,
     periciado: true,
-    imagemPrincipal: withBase('images/FotoChevroletTracker.jpg'),
+    imagemPrincipal: "/images/FotoChevroletTracker.jpg",
     imagens: [
-      withBase('images/FotoChevroletTracker.jpg'),
+      "/images/FotoChevroletTracker.jpg",
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
     ],
@@ -66,9 +66,9 @@ export const vehiclesData = [
     parcela: { entrada: 45000, vezes: 48, valor: 2890 },
     destaque: true,
     periciado: true,
-    imagemPrincipal: withBase('images/FotoCorollaCross.jpg'),
+    imagemPrincipal: "/images/FotoCorollaCross.jpg",
     imagens: [
-      withBase('images/FotoCorollaCross.jpg'),
+      "/images/FotoCorollaCross.jpg",
       "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80"
     ],
     laudoCautelar: {
@@ -114,9 +114,9 @@ export const vehiclesData = [
     parcela: { entrada: 30000, vezes: 48, valor: 2090 },
     destaque: false,
     periciado: true,
-    imagemPrincipal: withBase('images/FotoPoloTSI.jpg'),
+    imagemPrincipal: "/images/FotoPoloTSI.jpg",
     imagens: [
-      withBase('images/FotoPoloTSI.jpg'),
+      "/images/FotoPoloTSI.jpg",
       "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80"
     ],
     laudoCautelar: {
@@ -162,9 +162,9 @@ export const vehiclesData = [
     parcela: { entrada: 28000, vezes: 48, valor: 1950 },
     destaque: false,
     periciado: true,
-    imagemPrincipal: withBase('images/FotoHyundaiHB20.jpg'),
+    imagemPrincipal: "/images/FotoHyundaiHB20.jpg",
     imagens: [
-      withBase('images/FotoHyundaiHB20.jpg'),
+      "/images/FotoHyundaiHB20.jpg",
       "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80"
     ],
     laudoCautelar: {
@@ -210,9 +210,9 @@ export const vehiclesData = [
     parcela: { entrada: 29000, vezes: 48, valor: 2050 },
     destaque: false,
     periciado: true,
-    imagemPrincipal: withBase('images/FotoFiatPulse.jpg'),
+    imagemPrincipal: "/images/FotoFiatPulse.jpg",
     imagens: [
-      withBase('images/FotoFiatPulse.jpg'),
+      "/images/FotoFiatPulse.jpg",
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
     ],
     laudoCautelar: {
@@ -386,3 +386,5 @@ export const vehiclesData = [
     }
   }
 ];
+
+export const vehiclesData = catalogVehicles.map(applyCatalogMedia);

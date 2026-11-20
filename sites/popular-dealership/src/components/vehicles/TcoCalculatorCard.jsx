@@ -22,14 +22,14 @@ export function TcoCalculatorCard({ vehicle }) {
   const tcoMensal = Math.round(tcoAnual / 12);
 
   return (
-    <div className="p-6 rounded-3xl bg-surface-page border border-cyan-500/30 space-y-6 shadow-xl">
+    <div className="p-6 rounded-3xl bg-[#090d16] border border-cyan-500/30 space-y-6 shadow-xl">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 mb-1">
             <Calculator className="w-3.5 h-3.5" />
             <span>TCO • Custo Total de Posse</span>
           </div>
-          <h3 className="font-heading text-lg font-bold text-ink">Previsão Real de Despesas Anuais</h3>
+          <h3 className="font-heading text-lg font-bold text-white">Previsão Real de Despesas Anuais</h3>
           <p className="text-xs text-slate-400">Quanto este carro custará por ano considerando IPVA, seguro, combustível e revisões.</p>
         </div>
 
@@ -44,7 +44,7 @@ export function TcoCalculatorCard({ vehicle }) {
         <div>
           <div className="flex justify-between text-xs mb-1.5 text-slate-300">
             <span>Uso Mensal Estimado:</span>
-            <span className="font-bold text-ink font-mono">{monthlyKm} km/mês</span>
+            <span className="font-bold text-white font-mono">{monthlyKm} km/mês</span>
           </div>
           <input
             type="range"
@@ -60,7 +60,7 @@ export function TcoCalculatorCard({ vehicle }) {
         <div>
           <div className="flex justify-between text-xs mb-1.5 text-slate-300">
             <span>Preço do Combustível (R$/L):</span>
-            <span className="font-bold text-ink font-mono">R$ {fuelPrice.toFixed(2)}</span>
+            <span className="font-bold text-white font-mono">R$ {fuelPrice.toFixed(2)}</span>
           </div>
           <input
             type="range"
@@ -81,7 +81,7 @@ export function TcoCalculatorCard({ vehicle }) {
             <Building2 className="w-3.5 h-3.5" />
             <span className="font-semibold text-slate-300">IPVA (3,5%)</span>
           </div>
-          <p className="font-heading text-base font-bold text-ink">{formatCurrency(ipvaAnual)}</p>
+          <p className="font-heading text-base font-bold text-white">{formatCurrency(ipvaAnual)}</p>
           <span className="text-[10px] text-slate-500 block">Base DF anual</span>
         </div>
 
@@ -90,7 +90,7 @@ export function TcoCalculatorCard({ vehicle }) {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span className="font-semibold text-slate-300">Seguro Anual</span>
           </div>
-          <p className="font-heading text-base font-bold text-ink">{formatCurrency(seguroAnual)}</p>
+          <p className="font-heading text-base font-bold text-white">{formatCurrency(seguroAnual)}</p>
           <span className="text-[10px] text-slate-500 block">Perfil médio</span>
         </div>
 
@@ -99,7 +99,7 @@ export function TcoCalculatorCard({ vehicle }) {
             <Fuel className="w-3.5 h-3.5" />
             <span className="font-semibold text-slate-300">Combustível</span>
           </div>
-          <p className="font-heading text-base font-bold text-ink">{formatCurrency(combustivelAnual)}</p>
+          <p className="font-heading text-base font-bold text-white">{formatCurrency(combustivelAnual)}</p>
           <span className="text-[10px] text-slate-500 block">{kmAnual.toLocaleString('pt-BR')} km/ano</span>
         </div>
 
@@ -108,7 +108,7 @@ export function TcoCalculatorCard({ vehicle }) {
             <Wrench className="w-3.5 h-3.5" />
             <span className="font-semibold text-slate-300">Revisões</span>
           </div>
-          <p className="font-heading text-base font-bold text-ink">{formatCurrency(revisoesAnual)}</p>
+          <p className="font-heading text-base font-bold text-white">{formatCurrency(revisoesAnual)}</p>
           <span className="text-[10px] text-slate-500 block">Troca de óleo e filtros</span>
         </div>
       </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Bot, Send, Sparkles, User, RotateCcw, ArrowRight } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';
 
@@ -7,7 +7,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
     {
       id: 1,
       sender: 'ai',
-      text: 'Olá! Sou o Consultor Virtual com Inteligência Artificial da DriveNow. Posso te ajudar a encontrar o veículo ideal pelo seu orçamento, tipo de uso ou comparar custos de manutenção. O que você procura hoje?'
+      text: 'Olá! Sou o consultor virtual da Enterprise Veículos. Respondo com base no estoque e nas informações cadastradas. Posso sugerir veículos pelo seu orçamento ou tipo de uso. O que você procura hoje?'
     }
   ]);
   const [input, setInput] = useState('');
@@ -52,7 +52,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
         responseText = `Todos os veículos da DriveNow possuem **Laudo Cautelar 100% Aprovado**, sem sinistro ou leilão, e contam com **1 ano de garantia total** de câmbio e motor válida em todo o Brasil.`;
       } else {
         recommendedCars = vehicles.slice(0, 2);
-        responseText = `Compreendi! Encontrei estas recomendações que combinam com alto índice de satisfação dos nossos clientes e laudo 100% aprovado:`;
+        responseText = `Encontrei estas opções do estoque que podem combinar com o que você busca:`;
       }
 
       setMessages(prev => [
@@ -69,27 +69,27 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
   };
 
   return (
-    <div className="flex flex-col h-[560px] rounded-3xl bg-surface-page border border-cyan-500/30 shadow-2xl overflow-hidden">
+    <div className="flex flex-col h-[560px] rounded-3xl bg-[#090d16] border border-cyan-500/30 shadow-2xl overflow-hidden">
       {/* Header do Chat */}
       <div className="p-4 sm:px-6 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-cyan-600 flex items-center justify-center text-white shadow-sm">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
             <Bot className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-heading text-sm sm:text-base font-bold text-ink">DriveNow AI Consultant</h3>
+              <h3 className="font-heading text-sm sm:text-base font-bold text-white">Consultor virtual</h3>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 font-semibold border border-cyan-500/30">
                 Online
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">Inteligência Artificial conectada ao estoque em tempo real</p>
+            <p className="text-[11px] text-slate-400">Respostas programadas com base no estoque cadastrado</p>
           </div>
         </div>
 
         <button
           onClick={() => setMessages([{ id: 1, sender: 'ai', text: 'Chat reiniciado! Como posso ajudar você a escolher o seu seminovo hoje?' }])}
-          className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-ink text-xs flex items-center gap-1 transition-colors"
+          className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs flex items-center gap-1 transition-colors"
           title="Reiniciar conversa"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -101,14 +101,14 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
         {messages.map((msg) => (
           <div key={msg.id} className={`flex gap-3 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.sender === 'ai' && (
-              <div className="w-8 h-8 rounded-xl bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0 mt-1">
                 <Bot className="w-4 h-4" />
               </div>
             )}
 
             <div className={`max-w-[85%] space-y-3 ${
               msg.sender === 'user'
-                ? 'bg-cyan-600 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-sm'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm shadow-md'
                 : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-2xl rounded-tl-sm p-4 text-xs sm:text-sm leading-relaxed shadow-md'
             }`}>
               <p className="whitespace-pre-wrap">{msg.text}</p>
@@ -127,7 +127,7 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
                           <span className="text-[10px] text-cyan-400 font-semibold uppercase">{c.categoria}</span>
                           <span className="text-[10px] text-slate-400 font-mono">{c.ano}</span>
                         </div>
-                        <h4 className="font-bold text-ink text-xs group-hover:text-cyan-300 transition-colors line-clamp-1">{c.nome}</h4>
+                        <h4 className="font-bold text-white text-xs group-hover:text-cyan-300 transition-colors line-clamp-1">{c.nome}</h4>
                         <p className="text-[11px] text-slate-400 font-mono mt-0.5">{formatCurrency(c.preco)}</p>
                       </div>
                       <span className="text-[10px] text-cyan-400 flex items-center gap-1 mt-2 pt-1 border-t border-slate-800">
@@ -178,11 +178,11 @@ export function AIChatBox({ vehicles = [], onSelectVehicle }) {
           placeholder="Pergunte sobre orçamento, consumo, TCO ou modelo..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-ink focus:outline-none focus:border-cyan-400 placeholder-slate-500"
+          className="flex-1 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder-slate-500"
         />
         <button
           type="submit"
-          className="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-sm flex items-center justify-center active:scale-95 transition-all shadow-sm"
+          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 text-black font-bold text-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md shadow-cyan-500/20"
         >
           <Send className="w-4 h-4" />
         </button>

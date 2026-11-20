@@ -1,5 +1,5 @@
-﻿import { withBase } from '../utils/assetPath.js';
-export const vehiclesData = [
+import { applyCatalogMedia } from '../../../../packages/merchant-core/src/utils/catalogMedia.js';
+﻿const catalogVehicles = [
   {
     id: 1,
     nome: "Chevrolet Tracker",
@@ -27,21 +27,21 @@ export const vehiclesData = [
       revisoes: 1250,
       total: 16341
     },
-    imagemPrincipal: withBase('images/FotoChevroletTracker.jpg'),
+    imagemPrincipal: "/images/FotoChevroletTracker.jpg",
     imagens: [
-      withBase('images/FotoChevroletTracker.jpg'),
+      "/images/FotoChevroletTracker.jpg",
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-001/0.jpg'),
-      withBase('images/cars/sc-001/45.jpg'),
-      withBase('images/cars/sc-001/90.jpg'),
-      withBase('images/cars/sc-001/135.jpg'),
-      withBase('images/cars/sc-001/180.jpg'),
-      withBase('images/cars/sc-001/225.jpg'),
-      withBase('images/cars/sc-001/270.jpg'),
-      withBase('images/cars/sc-001/315.jpg')
+      "/images/cars/sc-001/0.jpg",
+      "/images/cars/sc-001/45.jpg",
+      "/images/cars/sc-001/90.jpg",
+      "/images/cars/sc-001/135.jpg",
+      "/images/cars/sc-001/180.jpg",
+      "/images/cars/sc-001/225.jpg",
+      "/images/cars/sc-001/270.jpg",
+      "/images/cars/sc-001/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -56,7 +56,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-89214-DF",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Estrutura e longarinas originais e intocadas",
       pintura: "Pintura original de fábrica sem repinturas",
       mecanica: "Motor, injeção e transmissão revisados",
@@ -106,21 +106,21 @@ export const vehiclesData = [
       revisoes: 1100,
       total: 17751
     },
-    imagemPrincipal: withBase('images/FotoCorollaCross.jpg'),
+    imagemPrincipal: "/images/FotoCorollaCross.jpg",
     imagens: [
-      withBase('images/FotoCorollaCross.jpg'),
+      "/images/FotoCorollaCross.jpg",
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-002/0.jpg'),
-      withBase('images/cars/sc-002/45.jpg'),
-      withBase('images/cars/sc-002/90.jpg'),
-      withBase('images/cars/sc-002/135.jpg'),
-      withBase('images/cars/sc-002/180.jpg'),
-      withBase('images/cars/sc-002/225.jpg'),
-      withBase('images/cars/sc-002/270.jpg'),
-      withBase('images/cars/sc-002/315.jpg')
+      "/images/cars/sc-002/0.jpg",
+      "/images/cars/sc-002/45.jpg",
+      "/images/cars/sc-002/90.jpg",
+      "/images/cars/sc-002/135.jpg",
+      "/images/cars/sc-002/180.jpg",
+      "/images/cars/sc-002/225.jpg",
+      "/images/cars/sc-002/270.jpg",
+      "/images/cars/sc-002/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -135,7 +135,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-47102-DF",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Integridade total atestada",
       pintura: "Original sem retoques",
       mecanica: "Revisão dos 20.000 km antecipada",
@@ -185,21 +185,21 @@ export const vehiclesData = [
       revisoes: 950,
       total: 13927
     },
-    imagemPrincipal: withBase('images/FotoFiatPulse.jpg'),
+    imagemPrincipal: "/images/FotoFiatPulse.jpg",
     imagens: [
-      withBase('images/FotoFiatPulse.jpg'),
+      "/images/FotoFiatPulse.jpg",
       "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-003/0.jpg'),
-      withBase('images/cars/sc-003/45.jpg'),
-      withBase('images/cars/sc-003/90.jpg'),
-      withBase('images/cars/sc-003/135.jpg'),
-      withBase('images/cars/sc-003/180.jpg'),
-      withBase('images/cars/sc-003/225.jpg'),
-      withBase('images/cars/sc-003/270.jpg'),
-      withBase('images/cars/sc-003/315.jpg')
+      "/images/cars/sc-003/0.jpg",
+      "/images/cars/sc-003/45.jpg",
+      "/images/cars/sc-003/90.jpg",
+      "/images/cars/sc-003/135.jpg",
+      "/images/cars/sc-003/180.jpg",
+      "/images/cars/sc-003/225.jpg",
+      "/images/cars/sc-003/270.jpg",
+      "/images/cars/sc-003/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -214,7 +214,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-33190-GO",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Estrutura e torre dos amortecedores originais",
       pintura: "Original de fábrica",
       mecanica: "Turbina e injeção direta 100% calibradas",
@@ -264,21 +264,21 @@ export const vehiclesData = [
       revisoes: 990,
       total: 14076
     },
-    imagemPrincipal: withBase('images/FotoPoloTSI.jpg'),
+    imagemPrincipal: "/images/FotoPoloTSI.jpg",
     imagens: [
-      withBase('images/FotoPoloTSI.jpg'),
+      "/images/FotoPoloTSI.jpg",
       "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-004/0.jpg'),
-      withBase('images/cars/sc-004/45.jpg'),
-      withBase('images/cars/sc-004/90.jpg'),
-      withBase('images/cars/sc-004/135.jpg'),
-      withBase('images/cars/sc-004/180.jpg'),
-      withBase('images/cars/sc-004/225.jpg'),
-      withBase('images/cars/sc-004/270.jpg'),
-      withBase('images/cars/sc-004/315.jpg')
+      "/images/cars/sc-004/0.jpg",
+      "/images/cars/sc-004/45.jpg",
+      "/images/cars/sc-004/90.jpg",
+      "/images/cars/sc-004/135.jpg",
+      "/images/cars/sc-004/180.jpg",
+      "/images/cars/sc-004/225.jpg",
+      "/images/cars/sc-004/270.jpg",
+      "/images/cars/sc-004/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -293,7 +293,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-11928-DF",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Estrutura e assoalho intactos",
       pintura: "Original sem detalhes",
       mecanica: "Revisão dos 20 mil km carimbada",
@@ -343,21 +343,21 @@ export const vehiclesData = [
       revisoes: 890,
       total: 13901
     },
-    imagemPrincipal: withBase('images/FotoHyundaiHB20.jpg'),
+    imagemPrincipal: "/images/FotoHyundaiHB20.jpg",
     imagens: [
-      withBase('images/FotoHyundaiHB20.jpg'),
+      "/images/FotoHyundaiHB20.jpg",
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-005/0.jpg'),
-      withBase('images/cars/sc-005/45.jpg'),
-      withBase('images/cars/sc-005/90.jpg'),
-      withBase('images/cars/sc-005/135.jpg'),
-      withBase('images/cars/sc-005/180.jpg'),
-      withBase('images/cars/sc-005/225.jpg'),
-      withBase('images/cars/sc-005/270.jpg'),
-      withBase('images/cars/sc-005/315.jpg')
+      "/images/cars/sc-005/0.jpg",
+      "/images/cars/sc-005/45.jpg",
+      "/images/cars/sc-005/90.jpg",
+      "/images/cars/sc-005/135.jpg",
+      "/images/cars/sc-005/180.jpg",
+      "/images/cars/sc-005/225.jpg",
+      "/images/cars/sc-005/270.jpg",
+      "/images/cars/sc-005/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -372,7 +372,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-66201-DF",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Longarinas e teto originais",
       pintura: "Original Sapphire Blue",
       mecanica: "Garantia de fábrica de 5 anos até 2028",
@@ -429,14 +429,14 @@ export const vehiclesData = [
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
     ],
     imagens360: [
-      withBase('images/cars/sc-001/0.jpg'),
-      withBase('images/cars/sc-001/45.jpg'),
-      withBase('images/cars/sc-001/90.jpg'),
-      withBase('images/cars/sc-001/135.jpg'),
-      withBase('images/cars/sc-001/180.jpg'),
-      withBase('images/cars/sc-001/225.jpg'),
-      withBase('images/cars/sc-001/270.jpg'),
-      withBase('images/cars/sc-001/315.jpg')
+      "/images/cars/sc-001/0.jpg",
+      "/images/cars/sc-001/45.jpg",
+      "/images/cars/sc-001/90.jpg",
+      "/images/cars/sc-001/135.jpg",
+      "/images/cars/sc-001/180.jpg",
+      "/images/cars/sc-001/225.jpg",
+      "/images/cars/sc-001/270.jpg",
+      "/images/cars/sc-001/315.jpg"
     ],
     dossieOficial: {
       proprietarios: 1,
@@ -451,7 +451,7 @@ export const vehiclesData = [
     laudoCautelar: {
       status: "100% Aprovado",
       codigoLaudo: "DN-99410-GO",
-      perito: "Perícia Cautelar Certificada",
+      perito: "Informado pela loja",
       estrutura: "Estrutura intacta",
       pintura: "Original Preto Carbon",
       mecanica: "Motor T270 revisado com fluido e filtros novos",
@@ -475,3 +475,5 @@ export const vehiclesData = [
     }
   }
 ];
+
+export const vehiclesData = catalogVehicles.map(applyCatalogMedia);

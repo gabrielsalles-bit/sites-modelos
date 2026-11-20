@@ -1,5 +1,6 @@
-﻿import React, { useState } from 'react';
-import { MessageCircle, Bot } from 'lucide-react';
+import { useSiteAnalytics } from '../../../packages/merchant-core/src/hooks/useSiteAnalytics';
+import { dealershipInfo } from './data/dealershipInfo';
+import React, { useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ComparisonFloatingBar } from './components/layout/ComparisonFloatingBar';
@@ -9,195 +10,205 @@ import { FeaturedPage } from './pages/FeaturedPage';
 import { FinancingPage } from './pages/FinancingPage';
 import { TradeInPage } from './pages/TradeInPage';
 import { FavoritesPage } from './pages/FavoritesPage';
-import { ComparatorPage } from './pages/ComparatorPage';
 import { AIConsultantPage } from './pages/AIConsultantPage';
-import { ConciergePage } from './pages/ConciergePage';
 import { AboutContactPage } from './pages/AboutContactPage';
 import { VehicleDetailModal } from './components/vehicles/VehicleDetailModal';
-import { VehicleComparatorModal } from './components/vehicles/VehicleComparatorModal';
 import { OfficialDossierModal } from './components/vehicles/OfficialDossierModal';
 import { PriceAlertModal } from './components/vehicles/PriceAlertModal';
 import { vehiclesData } from './data/vehicles';
 import { useFavorites } from './hooks/useFavorites';
 import { useComparator } from './hooks/useComparator';
-import { useTheme } from './hooks/useTheme';
-import { buildGeneralWhatsappLink } from './utils/whatsapp';
+import { storeSync } from '../../../packages/merchant-core/src/services/storeSync';
+import { MerchantEntry } from '../../../packages/merchant-core/src/components/layout/MerchantEntry';
+import { isPublishedVehicle } from '../../../packages/merchant-core/src/utils/vehicles';
+import { StoreServicesPage } from '../../../packages/merchant-core/src/components/layout/StoreServicesPage';
+
+
+import { StoreAccessProvider, useStoreAccess } from '../../../packages/merchant-core/src/context/StoreAccessContext';
+import { canAccessSitePage } from '../../../packages/merchant-core/src/utils/siteAccess';
+
+const StoreConciergePage = React.lazy(() => import('../../../packages/merchant-core/src/pages/StoreConciergePage').then(module => ({ default: module.StoreConciergePage })));
+const VehicleComparatorModal = React.lazy(() => import('./components/vehicles/VehicleComparatorModal').then(module => ({ default: module.VehicleComparatorModal })));
+
 
 export default function App() {
+  return <StoreAccessProvider storeKey="apexluxury" storeName={dealershipInfo.nome}><StoreApp /></StoreAccessProvider>;
+}
+
+function StoreApp() {
+  const { user, isAuthenticated, authorizeNavigation, requireLogin } = useStoreAccess();
+  const [vehicles, setVehicles] = useState(() => storeSync.getVehicles('apexluxury', vehiclesData));
+  React.useEffect(() => storeSync.subscribe('apexluxury', detail => { if (detail.type === 'VEHICLES_UPDATED') setVehicles(detail.vehicles); }), []);
+  const publishedVehicles = vehicles.filter(isPublishedVehicle);
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedVehicleForModal, setSelectedVehicleForModal] = useState(null);
   const [financingPreselectedVehicle, setFinancingPreselectedVehicle] = useState(null);
   const [dossierVehicle, setDossierVehicle] = useState(null);
   const [priceAlertVehicle, setPriceAlertVehicle] = useState(null);
-  const [comparatorModalOpen, setComparatorModalOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const [comparisonOpen, setComparisonOpen] = useState(false);
 
   const { 
-    favoriteIds, 
     toggleFavorite, 
     isFavorite, 
     favoritesCount, 
     favoriteVehicles 
-  } = useFavorites(vehiclesData);
+  } = useFavorites(publishedVehicles);
 
   const { 
-    comparedIds, 
     toggleCompare, 
+    replaceCompared,
     isComparing, 
     clearCompared, 
+    comparisonNotice,
     comparedCount, 
     comparedVehicles 
-  } = useComparator(vehiclesData);
+  } = useComparator(publishedVehicles);
 
-  const navigateTo = (page, params = {}) => {
-    setCurrentPage(page);
+  const navigateTo = (page, params = {}) => authorizeNavigation(page, () => {
+    if (page === 'comparador') { setComparisonOpen(true); return; }
+    setCurrentPage(page === 'visitas' ? 'sobre-contato' : page);
 
     if (params.vehicle) {
       setFinancingPreselectedVehicle(params.vehicle);
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  });
 
-  const handleOpenFinancingFromModal = (vehicle) => {
-    setSelectedVehicleForModal(null);
-    navigateTo('simulador', { vehicle });
-  };
+  const openPriceAlert = vehicle => requireLogin(() => setPriceAlertVehicle(vehicle), 'Entre para solicitar um aviso de condição de preço.');
 
-  const floatingWhatsappUrl = buildGeneralWhatsappLink();
+  const openVehicle = vehicle => setSelectedVehicleForModal(vehicle);
+
+  React.useEffect(() => {
+    if (!canAccessSitePage(currentPage, user)) setCurrentPage('home');
+  }, [currentPage, user]);
+
+  useSiteAnalytics('apexluxury', currentPage, selectedVehicleForModal);
+
+  // Renderização Dedicada da Área Restrita do Lojista (Tier 3 Enterprise)
+  if (currentPage === 'painel-lojista') {
+    return (
+      <MerchantEntry tier={3} storeKey="apexluxury" dealership={dealershipInfo} defaultVehicles={vehiclesData} onExitToSite={() => navigateTo('home')} />
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-surface-band text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black relative">
-      {/* Barra de Navegação no Topo (9 Abas + Badges de Favoritos e Comparação) */}
-      <Navbar
-        currentPage={currentPage}
-        onNavigate={navigateTo}
+    <div className="min-h-screen bg-[#070a12] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black relative">
+      {/* Navegacao principal e atendimento da loja */}
+      <Navbar 
+        currentPage={currentPage} 
+        onNavigate={navigateTo} 
         favoritesCount={favoritesCount}
         comparedCount={comparedCount}
-        theme={theme}
-        onToggleTheme={toggleTheme}
       />
 
       {/* Conteúdo Dinâmico da Página Ativa */}
+      {comparisonNotice && <p role="status" className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-cyan-200">{comparisonNotice}</p>}
       <main className="flex-1">
         {currentPage === 'home' && (
           <HomePage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             onNavigate={navigateTo}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            onSelectVehicle={openVehicle}
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             isComparing={isComparing}
             onToggleCompare={toggleCompare}
-            onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
+            onOpenPriceAlert={openPriceAlert}
+            favoritesCount={favoritesCount}
+            comparedCount={comparedCount}
           />
         )}
 
         {currentPage === 'estoque' && (
           <InventoryPage
-            vehicles={vehiclesData}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            vehicles={publishedVehicles}
+            onNavigate={navigateTo}
+            favoritesCount={favoritesCount}
+            comparedCount={comparedCount}
+            onSelectVehicle={openVehicle}
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             isComparing={isComparing}
             onToggleCompare={toggleCompare}
-            onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
+            onOpenPriceAlert={openPriceAlert}
           />
         )}
 
         {currentPage === 'destaques' && (
           <FeaturedPage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             onNavigate={navigateTo}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            onSelectVehicle={openVehicle}
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             isComparing={isComparing}
             onToggleCompare={toggleCompare}
-            onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
+            onOpenPriceAlert={openPriceAlert}
           />
         )}
 
         {currentPage === 'consultor-ia' && (
           <AIConsultantPage
-            vehicles={vehiclesData}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            vehicles={publishedVehicles}
+            onSelectVehicle={openVehicle}
           />
         )}
 
-        {currentPage === 'simulador' && (
+        {currentPage === 'servicos' && <StoreServicesPage onNavigate={navigateTo} />}
+
+        {currentPage === 'simulador' && isAuthenticated && (
           <FinancingPage
-            vehicles={vehiclesData}
+            vehicles={publishedVehicles}
             preselectedVehicle={financingPreselectedVehicle}
           />
         )}
 
-        {currentPage === 'troca' && (
-          <TradeInPage vehicles={vehiclesData} />
+        {currentPage === 'troca' && isAuthenticated && (
+          <TradeInPage vehicles={publishedVehicles} />
         )}
 
-        {currentPage === 'comparador' && (
-          <ComparatorPage
-            comparedVehicles={comparedVehicles}
-            onRemoveFromCompare={toggleCompare}
-            onNavigate={navigateTo}
-            onOpenFinancing={handleOpenFinancingFromModal}
-          />
-        )}
-
-        {currentPage === 'favoritos' && (
+        {currentPage === 'favoritos' && isAuthenticated && (
           <FavoritesPage
             favoriteVehicles={favoriteVehicles}
             onNavigate={navigateTo}
-            onSelectVehicle={(v) => setSelectedVehicleForModal(v)}
+            onSelectVehicle={openVehicle}
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             isComparing={isComparing}
             onToggleCompare={toggleCompare}
-            onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
+            onOpenPriceAlert={openPriceAlert}
           />
-        )}
-
-        {currentPage === 'concierge' && (
-          <ConciergePage />
         )}
 
         {currentPage === 'sobre-contato' && (
           <AboutContactPage />
         )}
+        {currentPage === 'concierge' && <React.Suspense fallback={<p role="status" className="p-6 text-slate-300">Carregando atendimento…</p>}><StoreConciergePage dealership={dealershipInfo} storeKey="apexluxury" vehicles={publishedVehicles} onSelectVehicle={openVehicle} onNavigate={navigateTo} title="Atendimento no site" /></React.Suspense>}
       </main>
 
       {/* Rodapé Completo */}
-      <Footer onNavigate={navigateTo} />
+      <Footer compact={currentPage === 'sobre-contato'} />
 
       {/* Barra Flutuante de Comparação Ativa */}
-      {currentPage !== 'comparador' && (
+      {['destaques', 'favoritos'].includes(currentPage) && (
         <ComparisonFloatingBar
           comparedVehicles={comparedVehicles}
-          onOpenComparator={() => setComparatorModalOpen(true)}
+          onOpenComparator={() => navigateTo('comparador')}
           onClear={clearCompared}
         />
       )}
 
       {/* Modal Global de Detalhes com TCO, 360° e Galeria Expandida */}
+      {comparisonOpen && <React.Suspense fallback={<p role="status" className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-900 p-4 text-cyan-200">Abrindo comparação…</p>}><VehicleComparatorModal key={user ? `${user.role}:${user.id}` : 'guest'} vehicles={publishedVehicles} comparedVehicles={comparedVehicles} onConfirm={replaceCompared} onClose={() => setComparisonOpen(false)} onSelectVehicle={vehicle => { setComparisonOpen(false); openVehicle(vehicle); }} /></React.Suspense>}
       {selectedVehicleForModal && (
         <VehicleDetailModal
           vehicle={selectedVehicleForModal}
           onClose={() => setSelectedVehicleForModal(null)}
-          onOpenFinancing={handleOpenFinancingFromModal}
-          onOpenDossier={(v) => setDossierVehicle(v)}
-          onOpenPriceAlert={(v) => setPriceAlertVehicle(v)}
+          onOpenDossier={(v) => { setSelectedVehicleForModal(null); setDossierVehicle(v); }}
+          onOpenPriceAlert={openPriceAlert}
           isFavorite={isFavorite(selectedVehicleForModal.id)}
           onToggleFavorite={toggleFavorite}
-        />
-      )}
-
-      {/* Modal de Comparação Lado a Lado */}
-      {comparatorModalOpen && (
-        <VehicleComparatorModal
-          vehicles={comparedVehicles}
-          onClose={() => setComparatorModalOpen(false)}
-          onOpenFinancing={handleOpenFinancingFromModal}
         />
       )}
 
@@ -210,27 +221,13 @@ export default function App() {
       )}
 
       {/* Modal de Alerta de Preço */}
-      {priceAlertVehicle && (
+      {priceAlertVehicle && isAuthenticated && (
         <PriceAlertModal
           vehicle={priceAlertVehicle}
           onClose={() => setPriceAlertVehicle(null)}
         />
       )}
 
-      {/* Botão Flutuante de WhatsApp — só no mobile (no desktop o CTA já fica fixo no header) */}
-      <a
-        href={floatingWhatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="sm:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold shadow-xl shadow-emerald-950/80 border border-emerald-300/50 transition-all duration-300 group"
-        title="Plantão de Vendas no WhatsApp"
-      >
-        <div className="relative">
-          <MessageCircle className="w-5 h-5 fill-black" />
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-200"></span>
-        </div>
-      </a>
     </div>
   );
 }

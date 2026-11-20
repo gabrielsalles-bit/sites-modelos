@@ -7,7 +7,7 @@ export function Badge({ children, variant = 'gold', size = 'sm', className = '' 
     gold: 'bg-amber-500/10 text-amber-300 border border-amber-500/30',
     emerald: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30',
     blue: 'bg-blue-500/10 text-blue-300 border border-blue-500/30',
-    dark: 'bg-ink/5 text-slate-300 border border-ink/10'
+    dark: 'bg-white/5 text-slate-300 border border-white/10'
   };
 
   const sizes = {

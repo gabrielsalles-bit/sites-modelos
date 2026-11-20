@@ -8,7 +8,7 @@ export function Badge({ children, variant = 'cyan', size = 'sm', className = '' 
     emerald: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30',
     violet: 'bg-violet-500/10 text-violet-300 border border-violet-500/30',
     coral: 'bg-rose-500/10 text-rose-300 border border-rose-500/30',
-    dark: 'bg-ink/5 text-slate-300 border border-ink/10'
+    dark: 'bg-white/5 text-slate-300 border border-white/10'
   };
 
   const sizes = {

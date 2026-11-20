@@ -2,48 +2,40 @@
 export default {
   content: [
     "./index.html",
+    "../../packages/merchant-core/src/**/*.{js,jsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        // Reaproveita as classes slate/blue/emerald já usadas no app, mas resolvendo
-        // o valor via variável CSS — assim toda a cor do site responde ao tema
-        // claro/escuro (ver :root / :root.light em index.css) sem editar cada componente.
-        slate: {
-          50: 'rgb(var(--slate-50) / <alpha-value>)',
-          100: 'rgb(var(--slate-100) / <alpha-value>)',
-          200: 'rgb(var(--slate-200) / <alpha-value>)',
-          300: 'rgb(var(--slate-300) / <alpha-value>)',
-          400: 'rgb(var(--slate-400) / <alpha-value>)',
-          500: 'rgb(var(--slate-500) / <alpha-value>)',
-          600: 'rgb(var(--slate-600) / <alpha-value>)',
-          700: 'rgb(var(--slate-700) / <alpha-value>)',
-          800: 'rgb(var(--slate-800) / <alpha-value>)',
-          900: 'rgb(var(--slate-900) / <alpha-value>)',
-          950: 'rgb(var(--slate-950) / <alpha-value>)',
-        },
-        blue: {
-          300: 'rgb(var(--blue-300) / <alpha-value>)',
-          400: 'rgb(var(--blue-400) / <alpha-value>)',
-          500: 'rgb(var(--blue-500) / <alpha-value>)',
-          600: 'rgb(var(--blue-600) / <alpha-value>)',
-          950: 'rgb(var(--blue-950) / <alpha-value>)',
-        },
-        emerald: {
-          200: 'rgb(var(--emerald-200) / <alpha-value>)',
-          300: 'rgb(var(--emerald-300) / <alpha-value>)',
-          400: 'rgb(var(--emerald-400) / <alpha-value>)',
-          500: 'rgb(var(--emerald-500) / <alpha-value>)',
-          600: 'rgb(var(--emerald-600) / <alpha-value>)',
-          950: 'rgb(var(--emerald-950) / <alpha-value>)',
-        },
-        ink: 'rgb(var(--ink) / <alpha-value>)',
-        'surface-footer': 'rgb(var(--surface-footer) / <alpha-value>)',
+        brand: {
+          navy: '#0f172a',
+          blue: '#2563eb',
+          'blue-hover': '#1d4ed8',
+          'blue-subtle': '#eff6ff',
+          'blue-border': '#bfdbfe',
+          emerald: '#10b981',
+          amber: '#f59e0b',
+          rose: '#f43f5e',
+          dark: '#080c14',
+          surface: '#0f172a',
+          elevated: '#1e293b',
+          card: 'rgba(15, 23, 42, 0.75)',
+          border: 'rgba(255, 255, 255, 0.08)',
+          whatsapp: '#22c55e',
+          'whatsapp-hover': '#16a34a'
+        }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif']
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        heading: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+      },
+      boxShadow: {
+        'card': '0 4px 20px -2px rgb(0 0 0 / 0.05), 0 2px 6px -1px rgb(0 0 0 / 0.03)',
+        'card-hover': '0 14px 34px -4px rgb(37 99 235 / 0.12), 0 4px 12px -2px rgb(0 0 0 / 0.04)',
+        'glow-blue': '0 0 25px -5px rgba(37, 99, 235, 0.4)',
+        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
+        'glow-whatsapp': '0 0 25px -5px rgba(34, 197, 94, 0.4)',
       }
     },
   },

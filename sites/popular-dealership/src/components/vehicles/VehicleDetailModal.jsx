@@ -1,11 +1,19 @@
-﻿import React, { useState, useEffect } from 'react';
-import { 
-  X, ShieldCheck, CheckCircle2, MessageCircle, Calendar, 
-  Gauge, Cog, Fuel, Award, ChevronLeft, ChevronRight, RotateCw, 
-  Calculator, FileText, Bell, Heart, Scale 
-} from 'lucide-react';
+import { VehicleAdSections } from '../../../../../packages/merchant-core/src/components/common/VehicleAdSections';
+import { VehicleAdFacts, VehicleTechnicalSheet, VehicleEquipmentList, VehicleInspectionDetails } from '../../../../../packages/merchant-core/src/components/common/VehicleAdInformation';
+import { VehicleAdTools } from '../../../../../packages/merchant-core/src/components/common/VehicleAdTools';
+import { VehicleExpandedGallery } from '../../../../../packages/merchant-core/src/components/common/VehicleExpandedGallery';
+import { VehicleThumbnails } from '../../../../../packages/merchant-core/src/components/common/VehicleThumbnails';
+import { VehicleAdServices } from '../../../../../packages/merchant-core/src/components/common/VehicleAdServices';
+import { hasVehicle360 } from '../../../../../packages/merchant-core/src/utils/storeExperience';
+import { dealershipInfo } from '../../data/dealershipInfo';
+import { getVehicleGallery, getVehicle360Images, galleryIndex } from '../../../../../packages/merchant-core/src/utils/vehicleGallery';
+import { VehiclePhotoCredit } from '../../../../../packages/merchant-core/src/components/common/VehiclePhotoCredit';
+import { useDialog } from '../../../../../packages/merchant-core/src/components/common/useDialog';
+import { isTopDialog } from '../../../../../packages/merchant-core/src/utils/dialogActivity';
+import { VehicleImage } from '../../../../../packages/merchant-core/src/components/common/VehicleImage.jsx';
+import React, { useState, useEffect, useMemo } from 'react';
+import { X, ClipboardList, ShieldCheck, CheckCircle2, MessageCircle, ChevronLeft, ChevronRight, RotateCw, Camera, Calculator, Bell, Heart } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
 import { Vehicle360Viewer } from './Vehicle360Viewer';
 import { TcoCalculatorCard } from './TcoCalculatorCard';
 import { formatCurrency, formatKm, calculateFipeDiff } from '../../utils/formatters';
@@ -14,58 +22,64 @@ import { buildVehicleWhatsappLink } from '../../utils/whatsapp';
 export function VehicleDetailModal({ 
   vehicle, 
   onClose, 
-  onOpenFinancing, 
+  initialFinancing = false,
   onOpenDossier, 
   onOpenPriceAlert,
   isFavorite,
   onToggleFavorite 
 }) {
-  const images = vehicle?.imagens && vehicle.imagens.length > 0 ? vehicle.imagens : [vehicle?.imagemPrincipal || ''];
+  const dialogRef = useDialog(onClose);
+  const images = useMemo(() => getVehicleGallery(vehicle), [vehicle]);
+  const orbitalImages = useMemo(() => hasVehicle360(dealershipInfo) ? getVehicle360Images(vehicle) : [], [vehicle]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState('tco'); // 'tco' | '360' | 'galeria' | 'laudo' | 'ficha'
+  const imageIndex = galleryIndex(currentIndex, images.length);
+
+  useEffect(() => {
+    setCurrentIndex(previous => galleryIndex(previous, images.length));
+  }, [images.length]);
 
   useEffect(() => {
     if (vehicle) {
       setCurrentIndex(0);
-      setActiveTab('tco');
     }
   }, [vehicle]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight' && activeTab === 'galeria') handleNextImage();
-      if (e.key === 'ArrowLeft' && activeTab === 'galeria') handlePrevImage();
+      if (!isTopDialog(dialogRef.current)) return;
+      if (e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable], [data-vehicle-tools]')) return;
+      if (e.key === 'ArrowRight') handleNextImage();
+      if (e.key === 'ArrowLeft') handlePrevImage();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose, currentIndex, images.length, activeTab]);
+  }, [onClose, currentIndex, images.length]);
 
   if (!vehicle) return null;
 
   const handleNextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentIndex(previous => images.length ? (galleryIndex(previous, images.length) + 1) % images.length : 0);
   };
 
   const handlePrevImage = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentIndex(previous => images.length ? (galleryIndex(previous, images.length) - 1 + images.length) % images.length : 0);
   };
 
   const whatsappUrl = buildVehicleWhatsappLink(vehicle);
-  const currentImage = images[currentIndex] || vehicle.imagemPrincipal;
+  const currentImage = images[imageIndex] || '/images/placeholder-carro.jpg';
   const fipe = calculateFipeDiff(vehicle.preco, vehicle.fipeReferencia);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md animate-fade-in">
+    <div data-vehicle-id={vehicle.id} ref={dialogRef} role="dialog" aria-modal="true" aria-label={vehicle.nome} tabIndex={-1} onClick={event => { if (event.target === event.currentTarget) onClose(); }} className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/85 animate-fade-in">
       <div 
-        className="relative w-full max-w-4xl bg-slate-900 border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] my-auto"
+        className="relative w-full max-w-3xl bg-slate-900 border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[calc(100vh_-_1.5rem)] sm:max-h-[calc(100vh_-_3rem)] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header do Modal */}
-        <div className="flex items-center justify-between p-4 sm:px-6 border-b border-slate-800 bg-slate-950/80 sticky top-0 z-20 backdrop-blur-md">
-          <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center justify-between gap-3 px-3 py-2 sm:px-4 border-b border-slate-800 bg-slate-950/80 sticky top-0 z-20 ">
+          <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
             <span className="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 font-semibold border border-cyan-500/30">
-              Estoque Certificado
+              Estoque selecionado
             </span>
             {fipe && fipe.isBelow && (
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
@@ -75,7 +89,17 @@ export function VehicleDetailModal({
             <span className="text-xs text-slate-400 font-mono hidden sm:inline">Cód. {vehicle.laudoCautelar?.codigoLaudo}</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onOpenPriceAlert && onOpenPriceAlert(vehicle)}
+              title="Avise-me se o preço cair"
+              className="p-2 rounded-full border border-slate-700 bg-slate-800 text-cyan-400 hover:bg-slate-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400"
+            >
+              <Bell aria-hidden="true" className="w-4 h-4" />
+              <span className="sr-only">Alerta de Preço</span>
+            </button>
+
             <button
               onClick={() => onToggleFavorite && onToggleFavorite(vehicle.id)}
               className={`p-2 rounded-full border transition-colors ${
@@ -90,7 +114,7 @@ export function VehicleDetailModal({
 
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-ink flex items-center justify-center"
+              className="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center"
               title="Fechar (Esc)"
             >
               <X className="w-4 h-4" />
@@ -99,24 +123,19 @@ export function VehicleDetailModal({
         </div>
 
         {/* Conteúdo com Scroll */}
-        <div className="overflow-y-auto p-4 sm:p-6 space-y-6">
+        <div data-vehicle-ad-scroll className="min-h-0 overflow-y-auto overscroll-contain p-3 sm:p-4 space-y-3">
           {/* Topo: Nome, Ano e Preço */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-slate-800">
+          <div className="flex flex-col gap-2 pb-3 border-b border-slate-800">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs uppercase tracking-wider text-cyan-400 font-bold">{vehicle.marca}</span>
-                <span className="text-slate-600">•</span>
-                <span className="text-xs text-slate-400">{vehicle.ano}</span>
-              </div>
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink">
+              <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
                 {vehicle.nome}
               </h2>
               <p className="text-sm text-slate-400">{vehicle.versao}</p>
             </div>
 
-            <div className="sm:text-right">
+            <div className="text-left">
               <span className="text-xs text-slate-400 block">Preço à vista</span>
-              <span className="font-heading text-2xl sm:text-3xl font-black text-ink">
+              <span className="font-heading text-xl sm:text-2xl font-black text-white">
                 {formatCurrency(vehicle.preco)}
               </span>
               {vehicle.parcela && (
@@ -127,200 +146,67 @@ export function VehicleDetailModal({
             </div>
           </div>
 
-          {/* Abas de Mídia e Inteligência */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-              <button
-                onClick={() => setActiveTab('tco')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                  activeTab === 'tco'
-                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
-                    : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
-                }`}
-              >
-                <Calculator className="w-3.5 h-3.5" />
-                <span>Calculadora TCO</span>
-              </button>
+          {/* Galeria principal */}
+          <div data-vehicle-gallery className="space-y-1.5">
+            <div className="relative h-[clamp(11rem,34vh,22rem)] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group">
+              {currentImage && <VehicleImage src={currentImage} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40" />}
+              <VehicleImage
+                src={currentImage}
+              fetchPriority="high"
+                alt={images.length ? `${vehicle.nome} - Foto ${imageIndex + 1}` : `Foto de ${vehicle.nome} indisponível`}
+                className="relative w-full h-full object-contain"
+              />
 
-              <button
-                onClick={() => setActiveTab('360')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                  activeTab === '360'
-                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
-                    : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
-                }`}
-              >
-                <RotateCw className="w-3.5 h-3.5" />
-                <span>Giro 360°</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('galeria')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                  activeTab === 'galeria'
-                    ? 'bg-cyan-500 text-black shadow-sm font-bold'
-                    : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
-                }`}
-              >
-                <span>Galeria Expandida ({images.length})</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('laudo')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                  activeTab === 'laudo'
-                    ? 'bg-emerald-500 text-black shadow-sm font-bold'
-                    : 'bg-slate-900 text-slate-400 hover:text-ink border border-slate-800'
-                }`}
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Laudo Cautelar Digital</span>
-              </button>
-            </div>
-
-            {/* Conteúdo da Aba Ativa */}
-            {activeTab === 'tco' && (
-              <TcoCalculatorCard vehicle={vehicle} />
-            )}
-
-            {activeTab === '360' && (
-              <Vehicle360Viewer images={vehicle.imagens360} autoRotate={true} />
-            )}
-
-            {activeTab === 'galeria' && (
-              <div className="space-y-3">
-                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 group">
-                  <img
-                    src={currentImage}
-                    alt={`${vehicle.nome} - Foto ${currentIndex + 1}`}
-                    className="w-full h-full object-cover transition-all duration-300"
-                  />
-
-                  {images.length > 1 && (
-                    <>
-                      <button
-                        onClick={handlePrevImage}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/20 shadow-xl opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
-                        title="Foto anterior"
-                      >
-                        <ChevronLeft className="w-5 h-5" />
-                      </button>
-
-                      <button
-                        onClick={handleNextImage}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/20 shadow-xl opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
-                        title="Próxima foto"
-                      >
-                        <ChevronRight className="w-5 h-5" />
-                      </button>
-
-                      <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-semibold text-white">
-                        Foto {currentIndex + 1} de {images.length}
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                {images.length > 1 && (
-                  <div className="flex gap-2 overflow-x-auto pb-1 pt-0.5">
-                    {images.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentIndex(idx)}
-                        className={`relative w-20 sm:w-24 h-14 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
-                          currentIndex === idx 
-                            ? 'border-cyan-400 ring-2 ring-cyan-400/30 scale-105' 
-                            : 'border-slate-800 opacity-60 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={img} alt={`Miniatura ${idx + 1}`} className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'laudo' && (
-              <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20">
-                  <div className="flex items-center gap-2">
-                    <Award className="w-5 h-5 text-emerald-400" />
-                    <div>
-                      <h4 className="font-bold text-ink text-sm">Inspeção Cautelar 100% Aprovada</h4>
-                      <p className="text-xs text-emerald-400">{vehicle.laudoCautelar?.codigoLaudo} • Sem Sinistro/Leilão</p>
-                    </div>
-                  </div>
+              {images.length > 1 && (
+                <>
                   <button
-                    onClick={() => onOpenDossier && onOpenDossier(vehicle)}
-                    className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-xs font-semibold border border-emerald-500/40"
+                    onClick={handlePrevImage}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/20 shadow-xl opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
+                    title="Foto anterior"
                   >
-                    Abrir Dossiê Oficial
+                    <ChevronLeft className="w-5 h-5" />
                   </button>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                  <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-semibold text-ink block">Estrutura & Longarinas</span>
-                      <p className="text-slate-400">{vehicle.laudoCautelar?.estrutura}</p>
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-semibold text-ink block">Pintura & Monobloco</span>
-                      <p className="text-slate-400">{vehicle.laudoCautelar?.pintura}</p>
-                    </div>
-                  </div>
-                </div>
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/20 shadow-xl opacity-80 group-hover:opacity-100 transition-all hover:scale-110"
+                    title="Próxima foto"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </>
+              )}
+              <div role="status" aria-live="polite" className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/80 border border-white/10 text-xs font-semibold text-white">
+                {images.length ? `Foto ${imageIndex + 1} de ${images.length}` : 'Sem fotos cadastradas'}
               </div>
-            )}
+
+            </div>
+
+            <VehiclePhotoCredit src={currentImage} />
+            <VehicleThumbnails images={images} imageIndex={imageIndex} onSelect={setCurrentIndex} vehicleName={vehicle.nome} compact />
           </div>
 
-          {/* Opcionais e Ficha Técnica */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider text-slate-400 font-bold">Principais Itens de Série</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              {vehicle.opcionais?.map((op, i) => (
-                <div key={i} className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center gap-2 text-slate-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span>{op}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <VehicleAdFacts items={[
+            ['Ano/modelo', vehicle.ano], ['Quilometragem', formatKm(vehicle.km)],
+            ['Transmissão', vehicle.cambio], ['Combustível', vehicle.combustivel],
+          ]} />
+
+          <VehicleAdSections key={vehicle.id}>
+            <VehicleAdServices key={vehicle.id} vehicle={vehicle} dealership={dealershipInfo} storeKey="apexluxury" initialFinancing={initialFinancing} />
+            <VehicleAdTools key={`tools-${vehicle.id}`} theme="cyan" tools={[
+              { id: 'ficha', label: 'Ficha Técnica Completa', icon: ClipboardList, content: <VehicleTechnicalSheet vehicle={vehicle} /> },
+              { id: 'opcionais', label: 'Itens de Série & Opcionais', icon: CheckCircle2, content: <VehicleEquipmentList vehicle={vehicle} /> },
+              { id: 'laudo', label: 'Laudo informado pela loja', icon: ShieldCheck, content: <VehicleInspectionDetails vehicle={vehicle} onOpenDossier={onOpenDossier} /> },
+              { id: 'tco', label: 'Calculadora TCO', icon: Calculator, keepMounted: true, content: <TcoCalculatorCard vehicle={vehicle} /> },
+              { id: 'galeria', label: `Galeria Expandida (${images.length})`, icon: Camera, content: <VehicleExpandedGallery images={images} vehicleName={vehicle.nome} /> },
+              ...(hasVehicle360(dealershipInfo) ? [{ id: '360', label: 'Giro 360°', icon: RotateCw, feature: 'vehicle-360', content: orbitalImages.length ? <Vehicle360Viewer images={orbitalImages} autoRotate={true} /> : <p role="status" className="p-3 text-sm text-slate-300">Visualização 360° indisponível para este veículo. Consulte as fotos cadastradas na galeria.</p> }] : []),
+            ]} />
+          </VehicleAdSections>
         </div>
 
-        {/* Rodapé Fixo do Modal */}
-        <div className="p-4 sm:px-6 border-t border-slate-800 bg-slate-950/95 flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20">
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <button
-              onClick={() => onOpenPriceAlert && onOpenPriceAlert(vehicle)}
-              className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center gap-1.5 transition-colors"
-              title="Avise-me se o preço cair"
-            >
-              <Bell className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Alerta de Preço</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
-            <Button
-              variant="outline"
-              size="md"
-              icon={Calculator}
-              onClick={() => {
-                onClose();
-                if (onOpenFinancing) onOpenFinancing(vehicle);
-              }}
-              className="flex-1 sm:flex-none"
-            >
-              Simulador
-            </Button>
-
+        {/* Preço e contato sempre acessíveis */}
+        <div data-ad-contact className="shrink-0 border-t border-slate-700 bg-slate-950 px-3 py-2 sm:px-4 flex flex-wrap items-center justify-between gap-2">
+          <span className="text-base font-bold tabular-nums text-white">{formatCurrency(vehicle.preco)}</span>
             <Button
               variant="primary"
               size="md"
@@ -328,11 +214,10 @@ export function VehicleDetailModal({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none"
+              className="shrink-0"
             >
-              Negociar no WhatsApp
+              Tenho interesse
             </Button>
-          </div>
         </div>
       </div>
     </div>

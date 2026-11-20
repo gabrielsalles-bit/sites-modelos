@@ -1,11 +1,12 @@
 export const dealershipInfo = {
-  nome: "AutoElite Motors",
-  slogan: "Seminovos Premium com Perícia Cautelar 100% Aprovada",
+  features: { vehicle360: false },
+  nome: "AutoElite Seminovos",
+  slogan: "Seminovos selecionados com galeria de fotos e atendimento personalizado",
   cnpj: "12.345.678/0001-90",
   whatsapp: "5561999998888",
   whatsappFormatado: "(61) 99999-8888",
   telefone: "(61) 3333-4444",
-  email: "contato@autoelitemotors.com.br",
+  email: "contato@autodealership.com.br",
   endereco: {
     logradouro: "SIA Trecho 3, Lote 620/640",
     bairro: "Zona Industrial",
@@ -18,11 +19,5 @@ export const dealershipInfo = {
     semana: "Segunda a Sexta: 08:30 às 18:30",
     sabado: "Sábado: 08:30 às 15:00",
     domingo: "Domingo: Plantão Online via WhatsApp"
-  },
-  metricas: [
-    { valor: "+1.200", label: "Carros Entregues com Sucesso" },
-    { valor: "100%", label: "Perícia Cautelar Aprovada" },
-    { valor: "1 Ano", label: "Garantia Motor e Câmbio" },
-    { valor: "15 min", label: "Pré-Aprovação de Crédito" }
-  ]
+  }
 };

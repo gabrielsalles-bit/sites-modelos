@@ -1,11 +1,12 @@
-﻿export const dealershipInfo = {
-  nome: "DriveNow Motors",
-  slogan: "Financiamento Inteligente, Seminovos Periciados & IA Automotiva",
+export const dealershipInfo = {
+  features: { vehicle360: true },
+  nome: "Enterprise Veículos",
+  slogan: "A suíte mais completa: comparador, favoritos, 360° e dossiê do veículo",
   cnpj: "38.991.024/0001-55",
   telefone: "(61) 3361-8800",
   whatsapp: "5561999999999",
   whatsappFormatado: "(61) 99999-9999",
-  email: "contato@drivenowmotors.com.br",
+  email: "contato@autodealership.com.br",
   endereco: {
     logradouro: "SIA Trecho 3, Lotes 620/640",
     bairro: "Zona Industrial",
@@ -16,12 +17,12 @@
   horarios: {
     semana: "Seg a Sex: 08:00 às 19:00",
     sabado: "Sábado: 08:30 às 17:00",
-    domingo: "Domingo: 09:00 às 14:00 (Plantão de Vendas & Feirão)"
+    domingo: "Domingo: atendimento automático no site e WhatsApp"
   },
   beneficios: [
-    { titulo: "Aprovação em 15 Minutos", desc: "Integração direta com mais de 10 bancos e financeiras." },
-    { titulo: "Troca com Troco no Pix", desc: "Pagamos a diferença do seu usado na hora direto na sua conta." },
-    { titulo: "1 Ano de Garantia Completa", desc: "Câmbio, motor e mais de 100 itens cobertos em todo o Brasil." },
-    { titulo: "Entrada em até 18x no Cartão", desc: "Facilitamos sua entrada sem comprometer seu orçamento." }
+    { titulo: "Consultor virtual", desc: "Sugestões do estoque pelo seu orçamento e perfil de uso, com respostas programadas." },
+    { titulo: "Comparador Técnico Lado a Lado", desc: "Compare até 3 veículos simultaneamente em motor, consumo e TCO." },
+    { titulo: "Dossiê do veículo", desc: "Histórico, procedência e revisões conforme informado pela loja. Campos ausentes são indicados." },
+    { titulo: "Calculadora de Custo Total (TCO)", desc: "Projeção de gastos anuais com IPVA, seguro médio e revisões." }
   ]
 };
